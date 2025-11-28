@@ -1,0 +1,167 @@
+* {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: 0;
+}
+/* FONTE DE CORES */
+:root {
+  --vermelho: #b12b30;
+  --branco-cinza: #f3f3f3;
+  --cinza-escuro: #6c6c6b;
+}
+
+/* Estilos gerais do corpo da página para demonstração */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--branco-cinza);
+}
+/* Header */
+.main-nav {
+  background-color: var(--vermelho);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.logo img {
+  height: 60px;
+  margin-left: 20px;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  list-style: none;
+  gap: 80px;
+  margin: 0;
+  padding: 0;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--branco-cinza);
+}
+
+.nav-links a:hover {
+  color: #2b0606;
+}
+
+/* Main */
+.modular {
+  margin: 6px;
+  display: flex;
+  /* Garante que o container ocupe toda a altura da tela, 
+       ajuste conforme o restante do seu layout */
+  height: 600px;
+  width: 100%;
+  /* Posiciona os elementos internos (texto, imagem, vídeo) de forma relativa */
+  position: relative;
+  /* Garante que a imagem e o vídeo não ultrapassem o container */
+  overflow: hidden;
+}
+.text-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  flex-direction: column;
+  display: flex;
+  gap: 5px;
+
+  width: 30%; /* Define que o conteúdo de texto ocupa os 40% restantes */
+  align-items: center; /* Centraliza o título, imagem e botões */
+  justify-content: center; /* Centraliza verticalmente todo o bloco de texto */
+}
+
+.text-content a {
+  text-decoration: none;
+}
+
+.text-content h1 {
+  font-size: 36px;
+}
+
+.carac {
+  display: flex;
+  gap: 15px;
+  min-height: 80px;
+  position: relative;
+
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Estilo para as imagens dentro de .carac */
+.carac img {
+  height: 50px; /* Altura fixa para todas as imagens */
+  width: auto; /* Largura automática mantendo proporção */
+  object-fit: contain;
+}
+
+.btn {
+  background-color: var(--vermelho);
+  gap: 8px;
+  padding: 10px 20px;
+  height: 60px;
+  width: 350px;
+  border-radius: 8px;
+
+  color: var(--branco-cinza);
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: var(--vermelho);
+}
+.btn-secondary {
+  background-color: var(--cinza-escuro);
+}
+
+.modular img {
+  /* Tira a imagem do fluxo normal e a coloca no canto do .text-content */
+  position: absolute;
+
+  /* Altura e largura da imagem, ajuste conforme a proporção real */
+  height: 60%;
+  width: auto;
+  max-height: 90vh;
+  z-index: 3; /* Garante que o refletor fique por cima de tudo */
+
+  /* Remove o fundo preto do PNG para o fundo cinza claro aparecer */
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+  right: 52%;
+
+  /* Isso centraliza a imagem verticalmente na tela.
+  */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modular video {
+  border-radius: 8px;
+  margin-right: 30px;
+  position: absolute; /* Tira o vídeo do fluxo flex e permite posicionamento manual */
+  top: 0; /* Alinha o vídeo ao topo do container .modular */
+  right: 0; /* Alinha o vídeo à borda direita do container .modular */
+  height: 100%; /* Faz o vídeo ocupar a altura total do container (que tem 100vh) */
+  width: 60%; /* Mantém a largura de 60% */
+  object-fit: cover;
+  z-index: 1; /* Define a ordem de empilhamento (1 = mais ao fundo) */
+}
