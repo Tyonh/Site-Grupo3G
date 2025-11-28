@@ -30,52 +30,179 @@
       </nav>
     </header>
     <main>
-      <div class="modular">
-        <div class="text-content">
-          <h1 class="product-title">REFLETOR MODULAR 300W</h1>
-          <div class="carac">
-            <img src="/public/carac-modular.png" alt="" />
-          </div>
-          <a href="#" class="btn btn-primary">Fale com nossos especialistas</a>
-          <a href="#" class="btn btn-secondary">Informações Técnicas</a>
-        </div>
-        <img
-          src="/public/Refletor Modular 300W 3G 2025 Frente e Verso.png"
-          alt="" />
-        <video autoplay loop muted playsinline>
+      <div class="highlight-section">
+        <video autoplay loop muted playsinline class="bg-video">
           <source src="/public/sobral.mp4" type="video/mp4" />
-          <source src="/public/sobral.mp4" type="video/webm" />
         </video>
+
+        <div class="slider-container">
+          <div class="slide active">
+            <div class="text-content">
+              <h1 class="product-title">REFLETOR MODULAR 300W</h1>
+              <div class="carac">
+                <img src="/public/carac-modular.png" alt="Características" />
+              </div>
+              <a href="#" class="btn btn-primary"
+                >Fale com nossos especialistas</a
+              >
+              <a href="#" class="btn btn-secondary">Informações Técnicas</a>
+            </div>
+            <img
+              src="/public/Refletor Modular 300W 3G 2025 Frente e Verso.png"
+              class="product-img"
+              alt="Refletor Modular" />
+          </div>
+
+          <div class="slide">
+            <div class="text-content">
+              <h1 class="product-title">LUMINÁRIA SOLAR APOLLO</h1>
+              <div class="carac">
+                <img src="/public/carac-modular.png" alt="Características" />
+              </div>
+              <a href="#" class="btn btn-primary">Orçamento Rápido</a>
+              <a href="#" class="btn btn-secondary">Ver Detalhes</a>
+            </div>
+            <img
+              src="/public/Solar-sem-fundo.png"
+              class="product-img"
+              alt="Luminária Solar Helios" />
+          </div>
+
+          <div class="slide">
+            <div class="text-content">
+              <h1 class="product-title">LUMINÁRIA HOMOLOGADA</h1>
+              <div class="carac">
+                <img src="/public/carac-homo.png" alt="Características" />
+              </div>
+              <a href="#" class="btn btn-primary"
+                >Fale com nossos especialistas</a
+              >
+              <a href="#" class="btn btn-secondary">Certificações</a>
+            </div>
+            <img
+              src="/public/homo-sem-fundo.png"
+              class="product-img"
+              alt="Luminária Homologada" />
+          </div>
+
+          <div class="slide">
+            <div class="text-content">
+              <h1 class="product-title">LUMINÁRIA EBRON 50W</h1>
+              <div class="carac">
+                <img src="/public/carac-ebron.png" alt="Características" />
+              </div>
+              <a href="#" class="btn btn-primary">Comprar Agora</a>
+              <a href="#" class="btn btn-secondary">Ficha Técnica</a>
+            </div>
+            <img
+              src="/public/Ebron-sem-fundo.png"
+              class="product-img"
+              alt="Luminária Ebron" />
+          </div>
+
+          <div class="slide">
+            <div class="text-content">
+              <h1 class="product-title">ILUMINAÇÃO DECORATIVA</h1>
+              <p style="color: white; margin-bottom: 20px">
+                Projetos especiais para datas comemorativas.
+              </p>
+              <a href="#" class="btn btn-primary">Ver Catálogo de Natal</a>
+            </div>
+            <img
+              src="/public/3G VETOR branco.png"
+              class="product-img"
+              style="opacity: 0.8"
+              alt="Decoração" />
+          </div>
+        </div>
+
+        <div class="slider-indicators">
+          <span class="dot active" onclick="goToSlide(0)"></span>
+          <span class="dot" onclick="goToSlide(1)"></span>
+          <span class="dot" onclick="goToSlide(2)"></span>
+          <span class="dot" onclick="goToSlide(3)"></span>
+          <span class="dot" onclick="goToSlide(4)"></span>
+        </div>
       </div>
       <section class="solutions-section">
         <h2 class="section-title">Nossos Produtos</h2>
 
         <div class="solutions-grid">
           <div class="solution-item">
-            <img src="/public/Módulo 100W 2024.png" alt="Módulo" />
+            <img src="/public/modular-estrutura.png" alt="Módulo" />
             <button class="solution-btn">Módulo</button>
           </div>
 
           <div class="solution-item">
-            <img
-              src="/public/Luminária Solar 3G - Helios.png"
-              alt="Luminária Solar" />
+            <img src="/public/solar-estrutura.png" alt="Luminária Solar" />
             <button class="solution-btn">Luminária Solar</button>
           </div>
-
           <div class="solution-item">
-            <img src="/public/Refletor 500W 3G.png" alt="Refletor" />
-            <button class="solution-btn">Refletor</button>
+            <img src="/public/homo-estrutura.png" alt="Luminária Homologada" />
+            <button class="solution-btn">Luminária Homologada</button>
+          </div>
+          <div class="solution-item">
+            <img src="/public/ebron-estrutura.png" alt="Luminária Homologada" />
+            <button class="solution-btn">Luminária EBRON</button>
+          </div>
+        </div>
+      </section>
+      <section class="photo-gallery-section">
+        <h2 class="gallery-title">NOSSOS PROJETOS RECENTES</h2>
+
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <span class="item-title">Campo sobral</span>
+            <img src="/public/sobral-campo.png" alt="Projeto Natalino" />
           </div>
 
-          <div class="solution-item">
-            <img
-              src="/public/Luminária Homologada 01.png"
-              alt="Luminária Homologada" />
-            <button class="solution-btn">Luminária Homologada</button>
+          <div class="gallery-item">
+            <span class="item-title">Terra&Mar</span>
+            <img src="/public/terramar.JPG" alt="Mangueiras LED" />
+          </div>
+
+          <div class="gallery-item">
+            <span class="item-title">Quixeramobim</span>
+            <img src="/public/quixeramobim-camp.JPG" alt="Refletores" />
+          </div>
+
+          <div class="gallery-item">
+            <span class="item-title">Caucaia</span>
+            <img src="/public/caucaua-campo.png" alt="Linha Solar" />
+          </div>
+        </div>
+      </section>
+      <section class="video-feature-section">
+        <div class="feature-container">
+          <div class="video-wrapper">
+            <video controls>
+              <source src="/public/qualidade de produto.mov" type="video/mp4" />
+              Seu navegador não suporta vídeos.
+            </video>
+          </div>
+
+          <div class="text-wrapper">
+            <h2 class="feature-title">
+              ILUMINAÇÃO PÚBLICA DE ALTA PERFORMANCE
+            </h2>
+            <p class="feature-desc">
+              Nossos refletores modulares foram desenvolvidos para garantir
+              máxima eficiência energética e durabilidade. Com tecnologia LED de
+              ponta, oferecemos soluções que transformam a visibilidade urbana,
+              trazendo mais segurança e economia para o seu município.
+            </p>
+
+            <ul class="feature-list">
+              <li>Maior vida útil do mercado</li>
+              <li>Manutenção simplificada</li>
+              <li>Proteção IP66 contra chuva e poeira</li>
+            </ul>
+
+            <a href="#" class="btn btn-primary">Solicitar Orçamento</a>
           </div>
         </div>
       </section>
     </main>
+    <script src="index.js"></script>
   </body>
 </html>
