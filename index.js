@@ -27,7 +27,7 @@ function nextSlide() {
 
 // Inicia o carrossel automático (muda a cada 5 segundos)
 function startSlider() {
-  slideInterval = setInterval(nextSlide, 5000);
+  slideInterval = setInterval(nextSlide, 8000);
 }
 
 // Pausa quando o mouse passa por cima (opcional, boa prática de UX)
