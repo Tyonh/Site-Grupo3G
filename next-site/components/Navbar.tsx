@@ -13,7 +13,7 @@ const Navbar = () => {
     { href: "/", label: "INÍCIO" },
     { href: "https://grupo3giluminacao.com.br/pages/catalogo/catalogo.html", label: "PRODUTOS" },
     { href: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.", label: "CONTATO" },
-    { href: "https://www.3giluminacao.com.br/3g", label: "SOBRE" },
+    { href: "/sobre", label: "SOBRE" },
   ];
 
   return (

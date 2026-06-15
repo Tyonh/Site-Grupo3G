@@ -16,17 +16,17 @@ const products: Product[] = [
   {
     name: "Luminária Solar",
     image: "/solar-estrutura.png",
-    href: "https://grupo3giluminacao.com.br/pages/Solar/Solar.html",
+    href: "/produtos/luminaria-solar",
   },
   {
     name: "Luminária Homologada",
     image: "/homo-estrutura.png",
-    href: "https://grupo3giluminacao.com.br/pages/Homologada/Homologada.html",
+    href: "/produtos/luminaria-homologada",
   },
   {
     name: "Luminária EBRON",
     image: "/EBRON-FIEC.png",
-    href: "https://grupo3giluminacao.com.br/pages/Ebron/Ebron.html",
+    href: "/produtos/ebron",
   },
 ];
 
@@ -40,15 +40,14 @@ export default function ProductsSection() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 justify-items-center w-full">
         {products.map((product) => {
           const isInternal = product.href.startsWith("/");
-          
+
           return (
             <Link
               key={product.name}
               href={product.href}
               target={isInternal ? undefined : "_blank"}
               rel={isInternal ? undefined : "noopener noreferrer"}
-              className="group flex flex-col items-center justify-between gap-6 w-full max-w-[300px] sm:max-w-none p-6 bg-white rounded-2xl border border-gray-100/80 shadow-premium-glow hover:border-brand-red/30 cursor-pointer"
-            >
+              className="group flex flex-col items-center justify-between gap-6 w-full max-w-[300px] sm:max-w-none p-6 bg-white rounded-2xl border border-gray-100/80 shadow-premium-glow hover:border-brand-red/30 cursor-pointer">
               <div className="relative w-full h-[180px] flex items-center justify-center">
                 <Image
                   src={product.image}

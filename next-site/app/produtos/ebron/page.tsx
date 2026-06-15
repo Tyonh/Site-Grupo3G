@@ -5,31 +5,30 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// Lazy loading das cenas 3D com Next.js Dynamic Imports (Evita carregar o Three.js no bundle principal e melhora o LCP)
+// Lazy loading das cenas 3D para otimização extrema do LCP e TBT
 const Product3DScene = dynamic(
-  () => import("@/components/3d/Product3DScene").then((mod) => mod.Product3DScene),
-  { ssr: false }
+  () =>
+    import("@/components/3d/Product3DScene").then((mod) => mod.Product3DScene),
+  { ssr: false },
 );
 
 const LocalProduct3DScene = dynamic(
-  () => import("@/components/3d/LocalProduct3DScene").then((mod) => mod.LocalProduct3DScene),
-  { ssr: false }
+  () =>
+    import("@/components/3d/LocalProduct3DScene").then(
+      (mod) => mod.LocalProduct3DScene,
+    ),
+  { ssr: false },
 );
 
-// Cache-bust once per page load to prevent infinite React suspension loops while ensuring the latest export is loaded
+// Cache bust estável por carregamento de sessão para otimização de rede do arquivo GLB de 162MB
 const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
+const ebronModelUrl = `/models/Ebron 100.glb?v=${CACHE_BUST}`;
 
-export default function ModuloProductPage() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+export default function LuminariaEbronPage() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [selectedPower, setSelectedPower] = useState<"100w" | "200w" | "300w">(
-    "100w",
-  );
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Load light model (100W) for scroll background and heavy high-end model (300W) for final showcase
-  const backgroundModelUrl = `/models/moduloBackground.glb?v=${CACHE_BUST}`;
-
-  // Theme styling helpers for seamless transition animations
+  // ─── Theme styling helpers (consistent premium design system) ───
   const cardClass =
     theme === "dark"
       ? "w-full max-w-[500px] bg-black/85 p-8 sm:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
@@ -42,8 +41,8 @@ export default function ModuloProductPage() {
 
   const cardTableClass =
     theme === "dark"
-      ? "w-full max-w-[600px] bg-black/85 p-8 sm:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
-      : "w-full max-w-[600px] bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
+      ? "w-full max-w-[700px] bg-black/85 p-8 sm:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
+      : "w-full max-w-[700px] bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
 
   const titleClass =
     theme === "dark"
@@ -110,11 +109,18 @@ export default function ModuloProductPage() {
       ? "hover:bg-white/10 transition-colors"
       : "hover:bg-slate-50/80 transition-colors";
 
+  // Checkmark reusable element
+  const checkMark = (
+    <span className="flex items-center justify-center w-4 h-4 rounded-full bg-brand-red/20 text-brand-red text-[9px] font-bold">
+      ✔
+    </span>
+  );
+
   return (
     <>
       <Navbar />
 
-      {/* Floating Sleek Theme Switcher Button */}
+      {/* Floating Theme Switcher */}
       <button
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         className={`fixed top-24 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full border shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 pointer-events-auto ${
@@ -157,9 +163,9 @@ export default function ModuloProductPage() {
         )}
       </button>
 
-      {/* 3D Background Canvas with Dual-Model transition */}
+      {/* 3D Background Canvas with Ebron 3D model */}
       <Product3DScene
-        modelUrl={backgroundModelUrl}
+        modelUrl={ebronModelUrl}
         isInteractive={false}
         setIsInteractive={() => {}}
         scrollContainerRef={scrollContainerRef}
@@ -167,21 +173,23 @@ export default function ModuloProductPage() {
         theme={theme}
       />
 
-      {/* Main scrollable layout wrapper */}
+      {/* Main scrollable content */}
       <div
         ref={scrollContainerRef}
         className="relative z-10 w-full flex flex-col bg-transparent">
-        {/* SECTION 1: HERO */}
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 1: HERO
+        ═══════════════════════════════════════════════════════════════ */}
         <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              EFICIÊNCIA ABSOLUTA
+              EFICIÊNCIA URBANA
             </span>
-            <h1 className={titleClass}>REFLETOR MODULAR</h1>
+            <h1 className={titleClass}>LUMINÁRIA EBRON</h1>
             <p className={textMutedClass}>
-              Desenvolvido com tecnologia LED de alta performance e alumínio
-              injetado, garantindo o melhor gerenciamento térmico e durabilidade
-              do mercado.
+              Lançamento 2024. A união de excelente custo-benefício,
+              durabilidade e eficiência de 100 lm/W. Fabricada em corpo de
+              alumínio robusto para alto rendimento térmico.
             </p>
             <a
               href="https://wa.me/5585986559388"
@@ -193,223 +201,205 @@ export default function ModuloProductPage() {
           </div>
         </section>
 
-        {/* SECTION 2: ARCHITECTURE & STRUCTURE */}
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 2: ARCHITECTURE & BENEFITS
+        ═══════════════════════════════════════════════════════════════ */}
         <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              ENGENHARIA AVANÇADA
+              PROJETO MODERNO
             </span>
-            <h2 className={title2Class}>CONSTRUÇÃO MODULAR</h2>
+            <h2 className={title2Class}>DIFERENCIAIS EBRON</h2>
             <p className={textMutedClass}>
-              Design modular e flexível que permite manutenção rápida e ajuste
-              de potência sob medida para cada necessidade de iluminação pública
-              ou industrial.
+              Desenvolvida com corpo slim aerodinâmico e conjunto de lentes com
+              amplo ângulo de projeção lateral, otimizando a distribuição de luz
+              nas vias.
             </p>
             <ul className={listTextClass}>
               <li className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-brand-red/20 text-brand-red text-[9px] font-bold">
-                  ✔
-                </span>
-                Fácil acoplamento de novos módulos
+                {checkMark}
+                Corpo leve e resistente em liga de alumínio
               </li>
               <li className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-4 h-4 rounded-full bg-brand-red/20 text-brand-red text-[9px] font-bold">
-                  ✔
-                </span>
-                Alumínio com pintura eletrostática
+                {checkMark}
+                Projeção uniforme com ângulo de 120°
+              </li>
+              <li className="flex items-center gap-3">
+                {checkMark}
+                Excelente dissipação térmica integrada à carcaça
+              </li>
+              <li className="flex items-center gap-3">
+                {checkMark}
+                Protetor contra surtos elétricos (Opcional)
               </li>
             </ul>
           </div>
         </section>
 
-        {/* SECTION 3: SPECIFICATIONS */}
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 3: SPECIFICATIONS — KEY HIGHLIGHTS
+        ═══════════════════════════════════════════════════════════════ */}
         <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              ESPECIFICAÇÕES TÉCNICAS
+              ESPECIFICAÇÕES CHAVE
             </span>
-            <h2 className={title2Class}>DESEMPENHO MÁXIMO</h2>
+            <h2 className={title2Class}>DURABILIDADE E FOCO</h2>
             <div className="grid grid-cols-2 gap-4 mt-2">
+              <div className={subCardClass}>
+                <h3 className="text-brand-red text-2xl font-black">100 lm/W</h3>
+                <p className={subTextMutedClass}>Eficácia Luminosa</p>
+              </div>
               <div className={subCardClass}>
                 <h3 className="text-brand-red text-2xl font-black">IP66</h3>
                 <p className={subTextMutedClass}>Grau de Proteção</p>
               </div>
               <div className={subCardClass}>
-                <h3 className="text-brand-red text-2xl font-black">50.000h</h3>
-                <p className={subTextMutedClass}>Vida útil L70</p>
+                <h3 className="text-brand-red text-2xl font-black">120°</h3>
+                <p className={subTextMutedClass}>Projeção Óptica</p>
+              </div>
+              <div className={subCardClass}>
+                <h3 className="text-brand-red text-2xl font-black">25.000h</h3>
+                <p className={subTextMutedClass}>Vida Útil Nominal</p>
               </div>
               <div className={`${subCardClass} col-span-2`}>
-                <h3 className="text-brand-red text-xl font-black">150 lm/W</h3>
-                <p className={subTextMutedClass}>Eficiência Luminosa</p>
+                <h3 className="text-brand-red text-xl font-black">
+                  IRC &ge; 80
+                </h3>
+                <p className={subTextMutedClass}>
+                  Fidelidade de Cores Superior
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 4: DETAILED CHARACTERISTICS GRID (Aligned to the Right) */}
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 4: DETAILED CHARACTERISTICS GRID
+        ═══════════════════════════════════════════════════════════════ */}
         <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardWideClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              FICHA TÉCNICA
+              FICHA COMPLETA
             </span>
             <h2 className={title2Class}>CARACTERÍSTICAS</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mt-2 text-sm font-medium">
               <div className={detailItemClass}>
-                <span className={detailLabelClass}>Código</span>
-                <span className={detailValClass}>50611</span>
-              </div>
-              <div className={detailItemClass}>
                 <span className={detailLabelClass}>Temp. Cor</span>
-                <span className={detailValClass}>6500K</span>
+                <span className={detailValClass}>5000K</span>
               </div>
               <div className={detailItemClass}>
                 <span className={detailLabelClass}>Fator Potência</span>
-                <span className={detailValClass}>&gt;0.97</span>
+                <span className={detailValClass}>&ge;0.92</span>
               </div>
               <div className={detailItemClass}>
-                <span className={detailLabelClass}>Fluxo Luminoso</span>
-                <span className="font-bold text-brand-red">10.000 lm</span>
+                <span className={detailLabelClass}>Eficácia</span>
+                <span className="font-bold text-brand-red">100 lm/W</span>
               </div>
               <div className={detailItemClass}>
-                <span className={detailLabelClass}>Consumo</span>
-                <span className={detailValClass}>100~105W</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Cor da Luz</span>
-                <span className={detailValClass}>Branco Frio</span>
+                <span className={detailLabelClass}>Vida Útil</span>
+                <span className={detailValClass}>25.000h</span>
               </div>
               <div className={detailItemClass}>
                 <span className={detailLabelClass}>Ângulo Projeção</span>
-                <span className={detailValClass}>30°/60°/90°</span>
+                <span className={detailValClass}>120°</span>
               </div>
               <div className={detailItemClass}>
-                <span className={detailLabelClass}>Eficiência</span>
-                <span className={detailValClass}>100 lm/W</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Frequência</span>
-                <span className={detailValClass}>50/60 Hz</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Peso</span>
-                <span className={detailValClass}>1.25 Kg</span>
-              </div>
-              <div className={`${detailItemClass} col-span-1 sm:col-span-2`}>
-                <span className={detailLabelClass}>Dimensão</span>
-                <span className={detailValClass}>305 x 100 x 40 mm</span>
-              </div>
-              <div className={`${detailItemClass} col-span-1 sm:col-span-2`}>
-                <span className={detailLabelClass}>Material</span>
-                <span className={detailValClass}>
-                  Alumínio pintado em cinza
-                </span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Proteção</span>
+                <span className={detailLabelClass}>Grau Proteção</span>
                 <span className="font-bold text-brand-red">IP66</span>
               </div>
               <div className={detailItemClass}>
-                <span className={detailLabelClass}>Temp. Operação</span>
-                <span className={detailValClass}>-5°C a 50°C</span>
+                <span className={detailLabelClass}>IRC</span>
+                <span className={detailValClass}>&ge;80</span>
+              </div>
+              <div className={detailItemClass}>
+                <span className={detailLabelClass}>Material</span>
+                <span className={detailValClass}>Alumínio</span>
+              </div>
+              <div className={`${detailItemClass} col-span-1 sm:col-span-2`}>
+                <span className={detailLabelClass}>Protetor de Surto</span>
+                <span className={detailValClass}>Opcional</span>
+              </div>
+              <div className={`${detailItemClass} col-span-1 sm:col-span-2`}>
+                <span className={detailLabelClass}>Modelo Versão</span>
+                <span className={detailValClass}>EBRON 2024</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 5: MODULAR POWER & DIMENSIONS TABLE (Aligned to the Left) */}
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 5: MODELS & DIMENSIONS TABLE
+        ═══════════════════════════════════════════════════════════════ */}
         <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardTableClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              ESCALABILIDADE
+              POTÊNCIA & DIMENSÕES
             </span>
-            <h2 className={title2Class}>POTÊNCIAS E DIMENSÕES</h2>
+            <h2 className={title2Class}>MODELOS EBRON</h2>
             <p className={textMutedTableClass}>
-              Conheça as configurações modulares disponíveis. O sistema permite
-              combinar blocos para atingir potências extremas sob medida.
+              Consulte a tabela técnica de códigos e dimensões slim da linha
+              EBRON.
             </p>
             <div className={tableWrapperClass}>
               <table className="w-full text-left text-xs sm:text-sm">
                 <thead className={theadClass}>
                   <tr>
-                    <th className="p-3 sm:p-4 text-brand-red">Potência</th>
+                    <th className="p-3 sm:p-4 text-brand-red">Código</th>
+                    <th className="p-3 sm:p-4">Potência</th>
                     <th className="p-3 sm:p-4">Fluxo Luminoso</th>
-                    <th className="p-3 sm:p-4">Tamanho (mm)</th>
+                    <th className="p-3 sm:p-4">Dimensões (AxL)</th>
                   </tr>
                 </thead>
                 <tbody className={tbodyClass}>
-                  {/* 100W */}
                   <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold flex items-center gap-2">
-                      100W
+                    <td className="p-3 sm:p-4 font-mono opacity-80">50612</td>
+                    <td className="p-3 sm:p-4 font-bold">50W</td>
+                    <td className="p-3 sm:p-4 font-bold text-brand-red">
+                      5.000 lm
                     </td>
-                    <td className="p-3 sm:p-4">10.000 lm</td>
                     <td className="p-3 sm:p-4 font-mono opacity-80">
-                      305 x 100 x 40
-                    </td>
-                  </tr>
-
-                  {/* 200W */}
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold flex items-center gap-2">
-                      200W
-                    </td>
-                    <td className="p-3 sm:p-4">20.000 lm</td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      355 x 210 x 60
-                    </td>
-                  </tr>
-
-                  {/* 300W */}
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold flex items-center gap-2">
-                      300W
-                    </td>
-                    <td className="p-3 sm:p-4">30.000 lm</td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      350 x 310 x 60
-                    </td>
-                  </tr>
-
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold">400W</td>
-                    <td className="p-3 sm:p-4">40.000 lm</td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      350 x 310 x 60
+                      38.7 x 12.7 cm
                     </td>
                   </tr>
                   <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold">500W</td>
-                    <td className="p-3 sm:p-4">50.000 lm</td>
+                    <td className="p-3 sm:p-4 font-mono opacity-80">50613</td>
+                    <td className="p-3 sm:p-4 font-bold">100W</td>
+                    <td className="p-3 sm:p-4 font-bold text-brand-red">
+                      10.000 lm
+                    </td>
                     <td className="p-3 sm:p-4 font-mono opacity-80">
-                      350 x 520 x 60
+                      45.6 x 14.5 cm
                     </td>
                   </tr>
                   <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold">600W</td>
-                    <td className="p-3 sm:p-4">60.000 lm</td>
+                    <td className="p-3 sm:p-4 font-mono opacity-80">50614</td>
+                    <td className="p-3 sm:p-4 font-bold">150W</td>
+                    <td className="p-3 sm:p-4 font-bold text-brand-red">
+                      15.000 lm
+                    </td>
                     <td className="p-3 sm:p-4 font-mono opacity-80">
-                      350 x 620 x 60
+                      53.0 x 17.8 cm
                     </td>
                   </tr>
                   <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold">800W</td>
-                    <td className="p-3 sm:p-4">80.000 lm</td>
+                    <td className="p-3 sm:p-4 font-mono opacity-80">50615</td>
+                    <td className="p-3 sm:p-4 font-bold">200W</td>
+                    <td className="p-3 sm:p-4 font-bold text-brand-red">
+                      20.000 lm
+                    </td>
                     <td className="p-3 sm:p-4 font-mono opacity-80">
-                      780 x 420 x 60
+                      60.2 x 19.6 cm
                     </td>
                   </tr>
                   <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold">1000W</td>
-                    <td className="p-3 sm:p-4">100.000 lm</td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      780 x 520 x 60
+                    <td className="p-3 sm:p-4 font-mono opacity-80">50616</td>
+                    <td className="p-3 sm:p-4 font-bold">300W</td>
+                    <td className="p-3 sm:p-4 font-bold text-brand-red">
+                      30.000 lm
                     </td>
-                  </tr>
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-bold">1200W</td>
-                    <td className="p-3 sm:p-4">120.000 lm</td>
                     <td className="p-3 sm:p-4 font-mono opacity-80">
-                      780 x 620 x 60
+                      69.7 x 22.4 cm
                     </td>
                   </tr>
                 </tbody>
@@ -418,7 +408,9 @@ export default function ModuloProductPage() {
           </div>
         </section>
 
-        {/* SECTION 6: DEDICATED INTERACTIVE SIMULATOR (Only at the end of the page) */}
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 6: 3D PRODUCT SHOWCASE (Static presentation)
+        ═══════════════════════════════════════════════════════════════ */}
         <section className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div
             className={`relative w-full max-w-6xl h-[700px] lg:h-[650px] rounded-3xl overflow-hidden border shadow-2xl transition-all duration-500 flex flex-col lg:flex-row pointer-events-auto ${
@@ -426,68 +418,80 @@ export default function ModuloProductPage() {
                 ? "bg-zinc-950 border-white/10"
                 : "bg-slate-50 border-slate-200"
             }`}>
-            {/* Left Column: Local 3D Canvas rendering the heavyweight Modulo Prime.glb */}
+            {/* Left Column: 3D Canvas with Ebron model */}
             <div className="w-full lg:w-7/12 h-[350px] lg:h-full relative overflow-hidden">
               <LocalProduct3DScene
-                modelUrl="/models/moduloInterativo.glb"
-                selectedPower={selectedPower}
+                modelUrl={ebronModelUrl}
+                selectedPower="100w"
                 theme={theme}
               />
             </div>
 
-            {/* Right Column: Premium Control Overlay Panel */}
+            {/* Right Column: Product Info Panel */}
             <div
               className={`w-full lg:w-5/12 h-auto lg:h-full flex flex-col justify-center p-8 sm:p-12 gap-5 border-t lg:border-t-0 lg:border-l transition-all duration-500 ${
                 theme === "dark"
                   ? "bg-black/95 border-white/10 text-white"
                   : "bg-white/95 border-slate-200 text-slate-900"
               }`}>
-              <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase animate-pulse">
-                SIMULAÇÃO DE ENGENHARIA 3D
+              <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
+                APRESENTAÇÃO 3D
               </span>
               <h2 className="text-2xl sm:text-3xl font-black uppercase leading-tight">
-                Simulador Modular
+                Luminária Ebron
               </h2>
               <p
                 className={`text-sm sm:text-base font-normal leading-relaxed ${
                   theme === "dark" ? "text-gray-300" : "text-slate-600"
                 }`}>
-                Experimente a montagem dos módulos diretamente no modelo de
-                engenharia. Selecione a potência desejada para acoplar os blocos
-                de LED e observar as trajetórias dinâmicas de câmera desenhadas
-                originalmente no Blender.
+                Explore o modelo tridimensional de engenharia da luminária
+                EBRON. Visualize em detalhes o design slim aerodinâmico,
+                as aletas de dissipação térmica e o conjunto óptico de
+                projeção de 120°.
               </p>
-
-              {/* Styled Power Selection Buttons */}
-              <div className="flex flex-col gap-2.5 mt-4">
-                <span
-                  className={`text-[10px] font-extrabold tracking-widest uppercase ${
-                    theme === "dark" ? "text-gray-400" : "text-slate-500"
+              <div className="flex flex-col gap-3 mt-2">
+                <div
+                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 ${
+                    theme === "dark"
+                      ? "bg-white/5 border-white/10"
+                      : "bg-slate-50 border-slate-200"
                   }`}>
-                  Selecionar Potência do Refletor
-                </span>
-                <div className="flex gap-3">
-                  {(["100w", "200w", "300w"] as const).map((power) => (
-                    <button
-                      key={power}
-                      onClick={() => setSelectedPower(power)}
-                      className={`flex-1 h-12 rounded-xl flex items-center justify-center font-black text-sm transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 border ${
-                        selectedPower === power
-                          ? "bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/25"
-                          : theme === "dark"
-                            ? "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10 hover:text-white"
-                            : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900"
-                      }`}>
-                      {power.toUpperCase()}
-                    </button>
-                  ))}
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">IP</span>
+                  <div>
+                    <span className="font-bold text-sm">IP66</span>
+                    <p className={`text-xs ${theme === "dark" ? "text-gray-400" : "text-slate-500"}`}>Proteção contra poeira e jatos d'água</p>
+                  </div>
+                </div>
+                <div
+                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 ${
+                    theme === "dark"
+                      ? "bg-white/5 border-white/10"
+                      : "bg-slate-50 border-slate-200"
+                  }`}>
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">lm</span>
+                  <div>
+                    <span className="font-bold text-sm">100 lm/W</span>
+                    <p className={`text-xs ${theme === "dark" ? "text-gray-400" : "text-slate-500"}`}>Eficácia luminosa de alta performance</p>
+                  </div>
+                </div>
+                <div
+                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 ${
+                    theme === "dark"
+                      ? "bg-white/5 border-white/10"
+                      : "bg-slate-50 border-slate-200"
+                  }`}>
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">Al</span>
+                  <div>
+                    <span className="font-bold text-sm">Alumínio Premium</span>
+                    <p className={`text-xs ${theme === "dark" ? "text-gray-400" : "text-slate-500"}`}>Corpo slim com dissipação integrada</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Footer renders naturally at the bottom of the scroll container */}
+        {/* Footer */}
         <Footer />
       </div>
     </>
