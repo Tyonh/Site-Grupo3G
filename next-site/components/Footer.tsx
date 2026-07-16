@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#333333] text-white pt-12 pb-6 px-[5%] w-full relative z-10">
+    <footer className="bg-brand-charcoal text-white pt-12 pb-6 px-[5%] w-full relative z-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start flex-wrap gap-8">
         
         {/* Navigation Column */}

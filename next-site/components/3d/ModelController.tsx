@@ -14,12 +14,14 @@ interface ModelControllerProps {
   isInteractive: boolean;
   setIsInteractive?: (val: boolean) => void;
   scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
+  lightIntensityMultiplier?: number;
 }
 
 export const ModelController = ({
   isInteractive,
   setIsInteractive,
   scrollContainerRef,
+  lightIntensityMultiplier = 1.0,
 }: ModelControllerProps) => {
   useEffect(() => {
     if (!scrollContainerRef || !scrollContainerRef.current) return;
@@ -49,28 +51,28 @@ export const ModelController = ({
     <>
       {/* Balanced Premium Studio Lighting System to highlight textures and shapes */}
       {/* 1. Ambient Light - Strong baseline to fill all shadows */}
-      <ambientLight intensity={1.2} />
+      <ambientLight intensity={1.2 * lightIntensityMultiplier} />
 
       {/* 2. Main Key Light - Strong directional with shadows */}
       <directionalLight
         position={[8, 10, 8]}
-        intensity={3.0}
+        intensity={3.0 * lightIntensityMultiplier}
         castShadow
         shadow-mapSize={[2048, 2048]}
         shadow-bias={-0.0001}
       />
 
       {/* 3. Soft Fill Light - Illuminates opposing dark areas */}
-      <directionalLight position={[-8, -5, 5]} intensity={1.5} />
+      <directionalLight position={[-8, -5, 5]} intensity={1.5 * lightIntensityMultiplier} />
 
       {/* 4. Backlight / Rim - Crisp outer glow separating product from background */}
-      <directionalLight position={[0, 8, -8]} intensity={1.2} />
+      <directionalLight position={[0, 8, -8]} intensity={1.2 * lightIntensityMultiplier} />
 
       {/* 5. Top Light - Clean light onto top surfaces */}
-      <directionalLight position={[0, 15, 2]} intensity={2.0} />
+      <directionalLight position={[0, 15, 2]} intensity={2.0 * lightIntensityMultiplier} />
 
       {/* 6. Front Fill - Ensures no face of the product is in complete darkness */}
-      <directionalLight position={[0, 0, 10]} intensity={1.0} />
+      <directionalLight position={[0, 0, 10]} intensity={1.0 * lightIntensityMultiplier} />
     </>
   );
 };

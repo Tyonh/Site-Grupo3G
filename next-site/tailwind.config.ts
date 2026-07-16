@@ -7,11 +7,8 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        'brand-red': '#b12b30',
-        'brand-light': '#f3f3f3',
-        'brand-dark': '#6c6c6b',
-      },
+      // Brand colors are defined once via the `@theme` block in app/globals.css
+      // (Tailwind v4 CSS-first config). Do not redeclare them here.
       fontFamily: {
         sans: ['var(--font-poppins)', 'sans-serif'],
       },

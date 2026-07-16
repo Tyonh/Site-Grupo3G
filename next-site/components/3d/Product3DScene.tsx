@@ -4,7 +4,8 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { ProductModel } from "./ProductModel";
 import { ModelController } from "./ModelController";
-import { Html, Environment } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
+import { CanvasLoader } from "./CanvasLoader";
 
 interface Product3DSceneProps {
   modelUrl: string;
@@ -14,20 +15,9 @@ interface Product3DSceneProps {
   scrollContainerRef: React.RefObject<HTMLDivElement | null>;
   selectedPower: "100w" | "200w" | "300w";
   theme?: "light" | "dark";
+  environmentIntensity?: number;
+  lightIntensityMultiplier?: number;
 }
-
-// Custom Premium Loading Fallback (without useProgress to prevent React render-phase state warnings)
-const CanvasLoader = () => {
-  return (
-    <Html center>
-      <div className="flex flex-col items-center justify-center bg-black/80 backdrop-blur-md p-6 rounded-2xl border border-white/10 w-[240px] text-center shadow-2xl">
-        <div className="w-12 h-12 border-4 border-brand-red border-t-transparent rounded-full animate-spin mb-4" />
-        <span className="text-white font-bold tracking-widest uppercase text-xs mb-1">Carregando Refletor</span>
-        <span className="text-gray-400 font-medium text-[10px] uppercase tracking-wider">Aguarde um instante</span>
-      </div>
-    </Html>
-  );
-};
 
 export const Product3DScene = ({
   modelUrl,
@@ -36,7 +26,9 @@ export const Product3DScene = ({
   setIsInteractive,
   scrollContainerRef,
   selectedPower,
-  theme = "light"
+  theme = "light",
+  environmentIntensity = 3.5,
+  lightIntensityMultiplier = 1.0,
 }: Product3DSceneProps) => {
   // Dynamically switch models based on interaction state
   const activeModelUrl = isInteractive && interactiveModelUrl ? interactiveModelUrl : modelUrl;
@@ -57,8 +49,8 @@ export const Product3DScene = ({
           gl={{ antialias: true, preserveDrawingBuffer: true }}
         >
           {/* Environment maps and lights setup inside Suspense */}
-          <Suspense fallback={<CanvasLoader />}>
-            <Environment preset="studio" environmentIntensity={3.5} />
+          <Suspense fallback={<CanvasLoader label="Carregando Refletor" opacity="80" />}>
+            <Environment preset="studio" environmentIntensity={environmentIntensity} />
             <ProductModel 
               modelUrl={activeModelUrl} 
               isInteractive={isInteractive} 
@@ -70,6 +62,7 @@ export const Product3DScene = ({
               isInteractive={isInteractive}
               setIsInteractive={setIsInteractive}
               scrollContainerRef={scrollContainerRef}
+              lightIntensityMultiplier={lightIntensityMultiplier}
             />
           </Suspense>
         </Canvas>

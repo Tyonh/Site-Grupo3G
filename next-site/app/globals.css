@@ -4,7 +4,24 @@
   --color-brand-red: #b12b30;
   --color-brand-light: #f3f3f3;
   --color-brand-dark: #6c6c6b;
+  --color-brand-charcoal: #1f1f1f;
+
+  /* Paleta natalina (extraída do Catálogo Natal 2026) */
+  --color-natal-red: #a62024;
+  --color-natal-red-dark: #871c1f;
+  --color-natal-rose: #d33f55;
+  --color-natal-gold: #e3b84e;
+  --color-natal-gold-deep: #de981f;
+  --color-natal-amber: #ffbf00;
+  --color-natal-green: #386d24;
+  /* Fundo claro neutro, igual ao miolo do catálogo PDF (branco/cinza claro) */
+  --color-natal-cream: #f4f4f4;
+
   --font-poppins: 'Poppins', sans-serif;
+  --font-fredoka: 'Fredoka', sans-serif;
+
+  /* Extra breakpoint below `sm` (640px) for small phones (iPhone SE, etc.) */
+  --breakpoint-xs: 30rem;
 }
 
 body {
@@ -87,6 +104,19 @@ body {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+/* Flash de luz usado na troca de cor do showcase de vídeo do produto natalino */
+@keyframes color-flash {
+  0% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Custom transitions for the Hero Slider to achieve the same premium feel */

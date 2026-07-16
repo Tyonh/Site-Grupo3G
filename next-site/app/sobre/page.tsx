@@ -131,65 +131,65 @@ export default function SobrePage() {
 
               {/* Timeline Item 1 */}
               <div className="flex flex-col items-center text-center flex-1 z-10">
-                <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">
+                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
                   Origem
                 </div>
                 <div className="w-24 h-12 flex items-center justify-center font-black text-white bg-brand-red rounded-lg shadow-md mb-3 text-lg">
                   1995
                 </div>
-                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600 dark:text-gray-400">
+                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600">
                   <strong className="text-brand-red">Ramon Gomez</strong> veio da Espanha ao Brasil empreender no mercado, porém iniciou vendendo curativos adesivos.
                 </p>
               </div>
 
               {/* Timeline Item 2 */}
               <div className="flex flex-col items-center text-center flex-1 z-10">
-                <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">
+                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
                   Pioneirismo
                 </div>
                 <div className="w-24 h-12 flex items-center justify-center font-black text-white bg-brand-red rounded-lg shadow-md mb-3 text-lg">
                   2000
                 </div>
-                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600 dark:text-gray-400">
+                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600">
                   Foi criada a <strong className="text-brand-red">Crown</strong>, a pioneira em importação de lâmpadas fluorescentes no Brasil, atuando no Ceará.
                 </p>
               </div>
 
               {/* Timeline Item 3 */}
               <div className="flex flex-col items-center text-center flex-1 z-10">
-                <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">
+                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
                   Evolução LED
                 </div>
                 <div className="w-24 h-12 flex items-center justify-center font-black text-white bg-brand-red rounded-lg shadow-md mb-3 text-lg">
                   2015
                 </div>
-                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600 dark:text-gray-400">
+                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600">
                   A Crown se reinventou, passando a se chamar <strong className="text-brand-red">3G Iluminação</strong>, uma distribuidora com tecnologia LED.
                 </p>
               </div>
 
               {/* Timeline Item 4 */}
               <div className="flex flex-col items-center text-center flex-1 z-10">
-                <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">
+                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
                   Expansão
                 </div>
                 <div className="w-24 h-12 flex items-center justify-center font-black text-white bg-brand-red rounded-lg shadow-md mb-3 text-lg">
                   2020
                 </div>
-                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600 dark:text-gray-400">
+                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600">
                   Em expansão, nasce a <strong className="text-brand-red">EBRON</strong>, uma empresa 100% cearense, que complementa nossa atuação no mercado.
                 </p>
               </div>
 
               {/* Timeline Item 5 */}
               <div className="flex flex-col items-center text-center flex-1 z-10">
-                <div className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">
+                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">
                   Hoje
                 </div>
                 <div className="w-24 h-12 flex items-center justify-center font-black text-white bg-brand-red rounded-lg shadow-md mb-3 text-lg animate-pulse">
                   ATUAL
                 </div>
-                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600 dark:text-gray-400">
+                <p className="text-xs leading-relaxed max-w-[200px] text-gray-600">
                   Composto pela 3G Iluminação e EBRON, somos o <strong className="text-brand-red">Grupo 3G</strong>. Tradição e Inovação trabalhando juntos!
                 </p>
               </div>

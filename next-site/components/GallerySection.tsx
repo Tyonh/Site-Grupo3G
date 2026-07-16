@@ -52,8 +52,7 @@ export default function GallerySection() {
         {galleryItems.map((item, index) => (
           <div
             key={index}
-            className="relative w-full h-full overflow-hidden rounded-xl bg-gray-900 flex flex-col items-center justify-center transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl scroll-snap-align-center group border border-white/5"
-          >
+            className="relative w-full h-full overflow-hidden rounded-xl bg-gray-900 flex flex-col items-center justify-center transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl scroll-snap-align-center group border border-white/5">
             {/* Elegant overlay gradient for typography legibility */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent z-10 transition-opacity duration-300 opacity-80 group-hover:opacity-95" />
 
@@ -61,9 +60,6 @@ export default function GallerySection() {
             <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 z-20 flex flex-col text-left transform translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
               <span className="text-white font-extrabold text-xs sm:text-sm md:text-base uppercase tracking-wider line-clamp-2 drop-shadow-md">
                 {item.title}
-              </span>
-              <span className="text-brand-red font-medium text-[10px] sm:text-xs uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                Ver Projeto ↗
               </span>
             </div>
 

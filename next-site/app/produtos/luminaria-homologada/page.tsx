@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getProductTheme, productCheckMark } from "@/lib/productTheme";
 
 // Lazy loading das cenas 3D para otimização extrema do LCP e TBT
 const Product3DScene = dynamic(
@@ -28,93 +29,31 @@ export default function LuminariaHomologadaPage() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // ─── Theme styling helpers (same premium pattern as previous pages) ───
-  const cardClass =
-    theme === "dark"
-      ? "w-full max-w-[500px] bg-black/85 p-8 sm:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
-      : "w-full max-w-[500px] bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
+  // ─── Theme styling helpers (shared across all /produtos/* pages) ───
+  const {
+    cardClass,
+    cardWideClass,
+    cardTableClass,
+    titleClass,
+    title2Class,
+    textMutedClass,
+    textMutedTableClass,
+    subCardClass,
+    subTextMutedClass,
+    listTextClass,
+    detailItemClass,
+    detailLabelClass,
+    detailValClass,
+    tableWrapperClass,
+    theadClass,
+    tbodyClass,
+    trClass,
+    showcasePanelClass,
+    showcaseCanvasClass,
+    showcaseInfoPanelClass,
+  } = getProductTheme(theme);
 
-  const cardWideClass =
-    theme === "dark"
-      ? "w-full max-w-[550px] bg-black/85 p-8 sm:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
-      : "w-full max-w-[550px] bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
-
-  const cardTableClass =
-    theme === "dark"
-      ? "w-full max-w-[700px] bg-black/85 p-8 sm:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
-      : "w-full max-w-[700px] bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
-
-  const titleClass =
-    theme === "dark"
-      ? "text-3xl sm:text-4xl lg:text-5xl font-black leading-tight uppercase text-white transition-colors duration-500"
-      : "text-3xl sm:text-4xl lg:text-5xl font-black leading-tight uppercase text-slate-900 transition-colors duration-500";
-
-  const title2Class =
-    theme === "dark"
-      ? "text-2xl sm:text-3xl lg:text-4xl font-black uppercase text-white transition-colors duration-500"
-      : "text-2xl sm:text-3xl lg:text-4xl font-black uppercase text-slate-900 transition-colors duration-500";
-
-  const textMutedClass =
-    theme === "dark"
-      ? "text-gray-300 font-normal text-sm sm:text-base leading-relaxed transition-colors duration-500"
-      : "text-slate-600 font-normal text-sm sm:text-base leading-relaxed transition-colors duration-500";
-
-  const textMutedTableClass =
-    theme === "dark"
-      ? "text-gray-300 font-normal text-xs sm:text-sm leading-relaxed mb-1 transition-colors duration-500"
-      : "text-slate-600 font-normal text-xs sm:text-sm leading-relaxed mb-1 transition-colors duration-500";
-
-  const subCardClass =
-    theme === "dark"
-      ? "bg-white/5 p-4 rounded-2xl border border-white/10 shadow-sm text-center transition-all duration-500"
-      : "bg-slate-50 p-4 rounded-2xl border border-slate-200/60 shadow-sm text-center transition-all duration-500";
-
-  const subTextMutedClass =
-    theme === "dark"
-      ? "text-gray-400 text-xs mt-1 uppercase font-semibold tracking-wider transition-colors duration-500"
-      : "text-slate-500 text-xs mt-1 uppercase font-semibold tracking-wider transition-colors duration-500";
-
-  const listTextClass =
-    theme === "dark"
-      ? "flex flex-col gap-2.5 font-medium text-gray-300 mt-2 text-sm transition-colors duration-500"
-      : "flex flex-col gap-2.5 font-medium text-slate-700 mt-2 text-sm transition-colors duration-500";
-
-  const detailItemClass =
-    theme === "dark"
-      ? "flex justify-between border-b border-white/10 py-1.5 transition-all duration-500"
-      : "flex justify-between border-b border-slate-200 py-1.5 transition-all duration-500";
-
-  const detailLabelClass =
-    theme === "dark" ? "text-gray-400" : "text-slate-500";
-  const detailValClass =
-    theme === "dark" ? "font-bold text-slate-200" : "font-bold text-slate-800";
-
-  const tableWrapperClass =
-    theme === "dark"
-      ? "overflow-x-auto w-full border border-white/10 rounded-2xl bg-white/5 shadow-sm transition-all duration-500"
-      : "overflow-x-auto w-full border border-slate-200/80 rounded-2xl bg-slate-50 shadow-sm transition-all duration-500";
-
-  const theadClass =
-    theme === "dark"
-      ? "bg-white/10 text-white font-bold border-b border-white/10"
-      : "bg-slate-100 text-slate-600 font-bold border-b border-slate-200";
-
-  const tbodyClass =
-    theme === "dark"
-      ? "divide-y divide-white/5 text-gray-300"
-      : "divide-y divide-slate-100 text-slate-700";
-
-  const trClass =
-    theme === "dark"
-      ? "hover:bg-white/10 transition-colors"
-      : "hover:bg-slate-50/80 transition-colors";
-
-  // Checkmark reusable element
-  const checkMark = (
-    <span className="flex items-center justify-center w-4 h-4 rounded-full bg-brand-red/20 text-brand-red text-[9px] font-bold">
-      ✔
-    </span>
-  );
+  const checkMark = productCheckMark;
 
   return (
     <>
@@ -411,14 +350,9 @@ export default function LuminariaHomologadaPage() {
             SECTION 6: 3D PRODUCT SHOWCASE (Static presentation)
         ═══════════════════════════════════════════════════════════════ */}
         <section className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
-          <div
-            className={`relative w-full max-w-6xl h-[700px] lg:h-[650px] rounded-3xl overflow-hidden border shadow-2xl transition-all duration-500 flex flex-col lg:flex-row pointer-events-auto ${
-              theme === "dark"
-                ? "bg-zinc-950 border-white/10"
-                : "bg-slate-50 border-slate-200"
-            }`}>
+          <div className={showcasePanelClass}>
             {/* Left Column: 3D Canvas with Homologada model */}
-            <div className="w-full lg:w-7/12 h-[350px] lg:h-full relative overflow-hidden">
+            <div className={showcaseCanvasClass}>
               <LocalProduct3DScene
                 modelUrl={homologadaModelUrl}
                 selectedPower="100w"
@@ -427,12 +361,7 @@ export default function LuminariaHomologadaPage() {
             </div>
 
             {/* Right Column: Product Info Panel */}
-            <div
-              className={`w-full lg:w-5/12 h-auto lg:h-full flex flex-col justify-center p-8 sm:p-12 gap-5 border-t lg:border-t-0 lg:border-l transition-all duration-500 ${
-                theme === "dark"
-                  ? "bg-black/95 border-white/10 text-white"
-                  : "bg-white/95 border-slate-200 text-slate-900"
-              }`}>
+            <div className={showcaseInfoPanelClass}>
               <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
                 APRESENTAÇÃO 3D
               </span>

@@ -11,6 +11,7 @@ const Navbar = () => {
 
   const links = [
     { href: "/", label: "INÍCIO" },
+    { href: "/natal", label: "NATAL" },
     { href: "https://grupo3giluminacao.com.br/pages/catalogo/catalogo.html", label: "PRODUTOS" },
     { href: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.", label: "CONTATO" },
     { href: "/sobre", label: "SOBRE" },
