@@ -77,18 +77,15 @@ export default function ScrollScrubPanel({
       }`}
     >
       {isSplitLeft && video ? (
-        // Layout flex real: a coluna do vídeo tem a largura que o vídeo
-        // realmente ocupa (h-full, largura automática pela proporção), e o
-        // texto começa logo depois — em vez de uma largura fixa "chutada".
-        <div className="absolute inset-0 flex flex-col lg:flex-row">
+        // Mobile: vídeo full-bleed cobrindo o painel inteiro, texto
+        // sobreposto por cima com gradiente escuro pra legibilidade — sem
+        // área branca separada. Desktop: volta a ser a coluna esquerda
+        // (vídeo, do tamanho real dele) + coluna direita (texto), lado a lado.
+        <div className="absolute inset-0 lg:flex lg:flex-row">
           <motion.div
             style={{ scale: imageScale }}
-            className="relative aspect-video h-1/2 shrink-0 lg:h-full"
+            className="absolute inset-0 lg:relative lg:inset-auto lg:aspect-video lg:h-full lg:w-auto lg:max-w-none lg:shrink-0"
           >
-            {/* aspect-video (16:9) calcula a largura da coluna a partir da
-                altura do painel na mesma proporção do arquivo exportado —
-                o quadro bate exato com o vídeo, sem sobra (padding) nem
-                letterbox que criasse uma borda/emenda visível */}
             <video
               src={video}
               muted
@@ -99,9 +96,10 @@ export default function ScrollScrubPanel({
               className="h-full w-full object-cover"
             />
           </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent lg:hidden" />
           <motion.div
             style={{ x: textX, opacity: textOpacity }}
-            className="relative flex min-w-0 flex-1 flex-col justify-center items-start text-left px-4 sm:px-12 lg:px-16 pb-10 lg:pb-0"
+            className="absolute inset-0 flex min-w-0 flex-col justify-end px-4 pb-10 text-white sm:px-12 lg:static lg:flex-1 lg:justify-center lg:px-16 lg:pb-0 lg:text-black"
           >
             {children}
           </motion.div>

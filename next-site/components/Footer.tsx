@@ -17,12 +17,10 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://grupo3giluminacao.com.br/pages/catalogo/catalogo.html"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/natal"
                 className="hover:text-brand-red transition-colors duration-300"
               >
-                Catálogos
+                Natal
               </a>
             </li>
           </ul>

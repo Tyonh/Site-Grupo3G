@@ -101,7 +101,7 @@ export default function ProductVideoHero({
           initial={{ opacity: 0, scale: 0.92 }}
           animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative order-first w-full max-w-[460px] sm:max-w-[560px] lg:absolute lg:top-1/2 lg:left-1/2 lg:order-none lg:max-w-[760px] lg:-translate-x-1/2 lg:-translate-y-1/2 xl:max-w-[920px]"
+          className="relative w-full max-w-[460px] sm:max-w-[560px] lg:absolute lg:top-1/2 lg:left-1/2 lg:max-w-[760px] lg:-translate-x-1/2 lg:-translate-y-1/2 xl:max-w-[920px]"
         >
           <div className="relative aspect-square w-full">
             <video

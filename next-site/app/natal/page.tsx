@@ -54,6 +54,31 @@ export default function NatalHomePage() {
             // continuam a alternância a partir daí (par = direita).
             const isSplit = cat.mediaAlign === "left";
             const textOnRight = !isSplit && i % 2 === 0;
+            // Painéis split-left claros (isLight) sobrepõem o texto no
+            // vídeo com gradiente escuro no mobile, mas ficam ao lado do
+            // vídeo num fundo claro no desktop — a cor do texto precisa
+            // seguir essa troca de contexto por breakpoint.
+            const overlayOnDark = isSplit && isLight;
+            const kickerClass = overlayOnDark
+              ? "text-natal-gold lg:text-natal-red"
+              : isLight
+                ? "text-natal-red"
+                : "text-natal-gold";
+            const titleClass = overlayOnDark
+              ? "text-white lg:text-black"
+              : isLight
+                ? "text-black"
+                : "text-white";
+            const descClass = overlayOnDark
+              ? "text-white/70 lg:text-black/65"
+              : isLight
+                ? "text-black/65"
+                : "text-white/65";
+            const exploreClass = overlayOnDark
+              ? "text-white group-hover:text-natal-gold lg:text-black lg:group-hover:text-natal-red"
+              : isLight
+                ? "text-black group-hover:text-natal-red"
+                : "text-white group-hover:text-natal-gold";
             return (
               <ScrollScrubPanel
                 key={cat.slug}
@@ -65,30 +90,20 @@ export default function NatalHomePage() {
                 alt={cat.name}
                 index={i}>
                 <span
-                  className={`font-bold tracking-[0.3em] text-[10px] sm:text-xs uppercase mb-3 ${
-                    isLight ? "text-natal-red" : "text-natal-gold"
-                  }`}>
+                  className={`font-bold tracking-[0.3em] text-[10px] sm:text-xs uppercase mb-3 ${kickerClass}`}>
                   {String(i + 1).padStart(2, "0")} — Coleção Natal
                 </span>
                 <h2
-                  className={`text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none max-w-xl ${
-                    isLight ? "text-black" : "text-white"
-                  }`}>
+                  className={`text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none max-w-xl ${titleClass}`}>
                   {cat.name}
                 </h2>
                 <p
-                  className={`mt-4 max-w-md text-xs sm:text-sm font-light leading-relaxed ${
-                    isLight ? "text-black/65" : "text-white/65"
-                  } ${textOnRight ? "sm:ml-auto" : ""}`}>
+                  className={`mt-4 max-w-md text-xs sm:text-sm font-light leading-relaxed ${descClass} ${textOnRight ? "sm:ml-auto" : ""}`}>
                   {cat.whatIs}
                 </p>
                 <Magnetic strength={0.4} className="mt-6 inline-block">
                   <span
-                    className={`inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] transition-colors ${
-                      isLight
-                        ? "text-black group-hover:text-natal-red"
-                        : "text-white group-hover:text-natal-gold"
-                    }`}>
+                    className={`inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] transition-colors ${exploreClass}`}>
                     Explorar
                     <span className="inline-block w-10 h-[1px] bg-current transition-all group-hover:w-16" />
                   </span>

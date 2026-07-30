@@ -24,8 +24,8 @@ const Navbar = () => {
           <Image
             src="/3G VETOR branco.png"
             alt="3G Iluminação"
-            width={120}
-            height={60}
+            width={128}
+            height={181}
             className="h-[50px] sm:h-[60px] w-auto object-contain"
             priority
           />
