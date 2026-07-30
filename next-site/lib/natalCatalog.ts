@@ -44,8 +44,22 @@ export interface NatalCategory {
   name: string;
   /** Emoji decorativo de apoio */
   icon: string;
-  /** Foto de ambiente/aplicação da categoria (em /public/natal) */
+  /** Foto de ambiente/aplicação da categoria (em /public/natal) — usada quando não há vídeo */
   photo?: string;
+  /**
+   * Vídeo do produto da categoria (em /public/natal/videos), com o fundo
+   * exportado sólido na cor indicada por `mediaBg` — mesmo padrão dos
+   * vídeos de produto, pra se fundir com o painel. Tem prioridade sobre `photo`.
+   */
+  video?: string;
+  /**
+   * Cor de fundo do painel quando `video` está definido (o vídeo já nasce
+   * nessa cor). Preto é o padrão da seção; branco é usado quando o vídeo
+   * enviado veio com fundo branco. Ignorado se não houver `video`.
+   */
+  mediaBg?: "black" | "white";
+  /** "left" trava o vídeo na metade esquerda do painel e o texto na direita */
+  mediaAlign?: "center" | "left";
   /** Camada 1 — o que é, uma frase sem jargão */
   whatIs: string;
   /** Camada 2 — por que escolher esse e não o vizinho */
@@ -84,6 +98,9 @@ export const natalCategories: NatalCategory[] = [
   {
     slug: "cordoes-led",
     photo: "/natal/app-cordoes-led.jpg",
+    video: "/natal/videos/cordoes-entrada-branco.mp4",
+    mediaBg: "white",
+    mediaAlign: "left",
     name: "Cordões de LED",
     icon: "✨",
     whatIs:

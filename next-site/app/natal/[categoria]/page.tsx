@@ -158,7 +158,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                     productName={product.name}
                   />
                 ) : (
-                  <div className="relative w-full aspect-[4/3] bg-white border border-neutral-200 shadow-sm">
+                  <div className="relative w-full aspect-[4/3]">
                     {product.image ? (
                       <Image
                         src={product.image}

@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getProductTheme } from "@/lib/productTheme";
+import { useInView } from "@/hooks/useInView";
 
 // Lazy loading das cenas 3D com Next.js Dynamic Imports (Evita carregar o Three.js no bundle principal e melhora o LCP)
 const Product3DScene = dynamic(
@@ -22,10 +23,12 @@ const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
 
 export default function ModuloProductPage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const theme: "light" | "dark" = "light";
   const [selectedPower, setSelectedPower] = useState<"100w" | "200w" | "300w">(
     "100w",
   );
+  const { ref: showcaseRef, isInView: isShowcaseInView } =
+    useInView<HTMLElement>("300px");
 
   // Load light model (100W) for scroll background and heavy high-end model (300W) for final showcase
   const backgroundModelUrl = `/models/moduloBackground.glb?v=${CACHE_BUST}`;
@@ -57,49 +60,6 @@ export default function ModuloProductPage() {
   return (
     <>
       <Navbar />
-
-      {/* Floating Sleek Theme Switcher Button */}
-      <button
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className={`fixed top-24 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full border shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 pointer-events-auto ${
-          theme === "dark"
-            ? "bg-black/80 text-yellow-400 border-white/10 hover:border-yellow-400/50"
-            : "bg-white/80 text-indigo-950 border-slate-200 hover:border-indigo-500/50"
-        } backdrop-blur-md`}
-        title={
-          theme === "dark" ? "Mudar para Modo Claro" : "Mudar para Modo Escuro"
-        }
-        aria-label="Alternar Tema">
-        {theme === "dark" ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6 text-yellow-400">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 3v2.25m0 13.5V21M4.95 4.95l1.59 1.59m10.92 10.92l1.59 1.59M3 12h2.25m13.5 0H21M4.95 19.05l1.59-1.59m10.92-10.92l1.59-1.59M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"
-            />
-          </svg>
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-5 h-5 text-indigo-950">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
-            />
-          </svg>
-        )}
-      </button>
 
       {/* 3D Background Canvas with Dual-Model transition */}
       <Product3DScene
@@ -365,17 +325,21 @@ export default function ModuloProductPage() {
         </section>
 
         {/* SECTION 6: DEDICATED INTERACTIVE SIMULATOR (Only at the end of the page) */}
-        <section className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section
+          ref={showcaseRef}
+          className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={showcasePanelClass}>
-            {/* Left Column: Local 3D Canvas rendering the heavyweight Modulo Prime.glb */}
+            {/* Left Column: Local 3D Canvas rendering the heavyweight Modulo Prime.glb — deferred until the section nears the viewport to avoid running a second WebGL context for the whole scroll */}
             <div className={showcaseCanvasClass}>
-              <LocalProduct3DScene
-                modelUrl="/models/moduloInterativo.glb"
-                selectedPower={selectedPower}
-                theme={theme}
-                environmentIntensity={0.4}
-                lightIntensityMultiplier={0.3}
-              />
+              {isShowcaseInView && (
+                <LocalProduct3DScene
+                  modelUrl="/models/moduloInterativo.glb"
+                  selectedPower={selectedPower}
+                  theme={theme}
+                  environmentIntensity={0.4}
+                  lightIntensityMultiplier={0.3}
+                />
+              )}
             </div>
 
             {/* Right Column: Premium Control Overlay Panel */}
@@ -386,10 +350,7 @@ export default function ModuloProductPage() {
               <h2 className="text-2xl sm:text-3xl font-black uppercase leading-tight">
                 Simulador Modular
               </h2>
-              <p
-                className={`text-sm sm:text-base font-normal leading-relaxed ${
-                  theme === "dark" ? "text-gray-300" : "text-slate-600"
-                }`}>
+              <p className="text-sm sm:text-base font-normal leading-relaxed text-slate-600">
                 Experimente a montagem dos módulos diretamente no modelo de
                 engenharia. Selecione a potência desejada para acoplar os blocos
                 de LED e observar as trajetórias dinâmicas de câmera desenhadas
@@ -398,10 +359,7 @@ export default function ModuloProductPage() {
 
               {/* Styled Power Selection Buttons */}
               <div className="flex flex-col gap-2.5 mt-4">
-                <span
-                  className={`text-[10px] font-extrabold tracking-widest uppercase ${
-                    theme === "dark" ? "text-gray-400" : "text-slate-500"
-                  }`}>
+                <span className="text-[10px] font-extrabold tracking-widest uppercase text-slate-500">
                   Selecionar Potência do Refletor
                 </span>
                 <div className="flex gap-3">
@@ -412,9 +370,7 @@ export default function ModuloProductPage() {
                       className={`flex-1 h-12 rounded-xl flex items-center justify-center font-black text-sm transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 border ${
                         selectedPower === power
                           ? "bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/25"
-                          : theme === "dark"
-                            ? "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10 hover:text-white"
-                            : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900"
+                          : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900"
                       }`}>
                       {power.toUpperCase()}
                     </button>

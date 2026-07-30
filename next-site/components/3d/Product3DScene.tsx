@@ -45,8 +45,9 @@ export const Product3DScene = ({
       }`}>
         <Canvas
           shadows="percentage"
+          dpr={[1, 1.75]}
           camera={{ position: [0, 0, 5], fov: 45 }}
-          gl={{ antialias: true, preserveDrawingBuffer: true }}
+          gl={{ antialias: true }}
         >
           {/* Environment maps and lights setup inside Suspense */}
           <Suspense fallback={<CanvasLoader label="Carregando Refletor" opacity="80" />}>

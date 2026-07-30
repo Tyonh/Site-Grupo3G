@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getProductTheme, productCheckMark } from "@/lib/productTheme";
+import { useInView } from "@/hooks/useInView";
 
 // Lazy loading das cenas 3D para otimização extrema do LCP e TBT
 const Product3DScene = dynamic(
@@ -26,8 +27,10 @@ const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
 const homologadaModelUrl = `/models/Homologada.glb?v=${CACHE_BUST}`;
 
 export default function LuminariaHomologadaPage() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const theme: "light" | "dark" = "light";
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { ref: showcaseRef, isInView: isShowcaseInView } =
+    useInView<HTMLElement>("300px");
 
   // ─── Theme styling helpers (shared across all /produtos/* pages) ───
   const {
@@ -58,49 +61,6 @@ export default function LuminariaHomologadaPage() {
   return (
     <>
       <Navbar />
-
-      {/* Floating Theme Switcher */}
-      <button
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className={`fixed top-24 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full border shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 pointer-events-auto ${
-          theme === "dark"
-            ? "bg-black/80 text-yellow-400 border-white/10 hover:border-yellow-400/50"
-            : "bg-white/80 text-indigo-950 border-slate-200 hover:border-indigo-500/50"
-        } backdrop-blur-md`}
-        title={
-          theme === "dark" ? "Mudar para Modo Claro" : "Mudar para Modo Escuro"
-        }
-        aria-label="Alternar Tema">
-        {theme === "dark" ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6 text-yellow-400">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 3v2.25m0 13.5V21M4.95 4.95l1.59 1.59m10.92 10.92l1.59 1.59M3 12h2.25m13.5 0H21M4.95 19.05l1.59-1.59m10.92-10.92l1.59-1.59M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"
-            />
-          </svg>
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-5 h-5 text-indigo-950">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
-            />
-          </svg>
-        )}
-      </button>
 
       {/* 3D Background Canvas with Homologada 3D model */}
       <Product3DScene
@@ -349,15 +309,19 @@ export default function LuminariaHomologadaPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 6: 3D PRODUCT SHOWCASE (Static presentation)
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section
+          ref={showcaseRef}
+          className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={showcasePanelClass}>
-            {/* Left Column: 3D Canvas with Homologada model */}
+            {/* Left Column: 3D Canvas with Homologada model — deferred until the section nears the viewport to avoid a second live WebGL context for the whole scroll */}
             <div className={showcaseCanvasClass}>
-              <LocalProduct3DScene
-                modelUrl={homologadaModelUrl}
-                selectedPower="100w"
-                theme={theme}
-              />
+              {isShowcaseInView && (
+                <LocalProduct3DScene
+                  modelUrl={homologadaModelUrl}
+                  selectedPower="100w"
+                  theme={theme}
+                />
+              )}
             </div>
 
             {/* Right Column: Product Info Panel */}
@@ -368,38 +332,25 @@ export default function LuminariaHomologadaPage() {
               <h2 className="text-2xl sm:text-3xl font-black uppercase leading-tight">
                 Luminária Homologada
               </h2>
-              <p
-                className={`text-sm sm:text-base font-normal leading-relaxed ${
-                  theme === "dark" ? "text-gray-300" : "text-slate-600"
-                }`}>
+              <p className="text-sm sm:text-base font-normal leading-relaxed text-slate-600">
                 Explore o modelo tridimensional de engenharia da luminária
                 HOMOLOGADA. Rotacione o modelo com o mouse para inspecionar em detalhes
                 o corpo robusto de alumínio injetado, as lentes de PMMA de alto rendimento
                 e a base de sete pinos.
               </p>
               <div className="flex flex-col gap-3 mt-2">
-                <div
-                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 ${
-                    theme === "dark"
-                      ? "bg-white/5 border-white/10"
-                      : "bg-slate-50 border-slate-200"
-                  }`}>
+                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">7P</span>
                   <div>
                     <span className="font-bold text-sm">Base NBR IEC 61610</span>
-                    <p className={`text-xs ${theme === "dark" ? "text-gray-400" : "text-slate-500"}`}>Equipada com base de 7 pinos para telegestão</p>
+                    <p className="text-xs text-slate-500">Equipada com base de 7 pinos para telegestão</p>
                   </div>
                 </div>
-                <div
-                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 ${
-                    theme === "dark"
-                      ? "bg-white/5 border-white/10"
-                      : "bg-slate-50 border-slate-200"
-                  }`}>
+                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">160</span>
                   <div>
                     <span className="font-bold text-sm">160 lm/W</span>
-                    <p className={`text-xs ${theme === "dark" ? "text-gray-400" : "text-slate-500"}`}>Máxima eficiência em iluminação pública</p>
+                    <p className="text-xs text-slate-500">Máxima eficiência em iluminação pública</p>
                   </div>
                 </div>
               </div>

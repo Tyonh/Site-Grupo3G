@@ -30,8 +30,9 @@ export const LocalProduct3DScene = ({
     }`}>
       <Canvas
         shadows="percentage"
+        dpr={[1, 1.75]}
         camera={{ position: [0, 0, 5], fov: 45 }}
-        gl={{ antialias: true, preserveDrawingBuffer: true }}
+        gl={{ antialias: true }}
       >
         <Suspense fallback={<CanvasLoader label="Carregando Modelo 3D" opacity="85" />}>
             <Environment preset="studio" environmentIntensity={environmentIntensity} />

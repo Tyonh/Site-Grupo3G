@@ -19,24 +19,6 @@ interface ProductModelProps {
   isScrollControlled?: boolean;
 }
 
-// Preload models with Draco decoder via Google CDN
-useGLTF.preload(
-  "/models/moduloBackground.glb",
-  "https://www.gstatic.com/draco/versioned/decoders/1.5.5/",
-);
-useGLTF.preload(
-  "/models/moduloInterativo.glb",
-  "https://www.gstatic.com/draco/versioned/decoders/1.5.5/",
-);
-useGLTF.preload(
-  "/models/Ebron 100.glb",
-  "https://www.gstatic.com/draco/versioned/decoders/1.5.5/",
-);
-useGLTF.preload(
-  "/models/Homologada.glb",
-  "https://www.gstatic.com/draco/versioned/decoders/1.5.5/",
-);
-
 // ─── Helper: detect if the model is the modular reflector (only product that uses Blender camera + timeline) ───
 const isModuloModel = (url: string): boolean =>
   url.toLowerCase().includes("modulo");
