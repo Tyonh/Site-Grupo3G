@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# mídia estática — imagens, vídeos e modelos 3D ficam só localmente
+# (enviados direto pra VPS via FileZilla/rsync), não versionados aqui.
+# Evita estourar o limite de 100MB do GitHub e mantém o clone rápido.
+/public/
