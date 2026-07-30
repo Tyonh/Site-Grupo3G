@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${cat.name} — Natal 3G`,
     description: cat.whatIs,
+    alternates: { canonical: `/natal/${cat.slug}` },
   };
 }
 

@@ -36,7 +36,7 @@ export default function Footer() {
             Praia de Iracema - Fortaleza - Ceará, Brasil
           </p>
           <p className="leading-relaxed font-normal text-white">
-            85 3025.0339 | 85 98655-9388
+            85 3077.3323 | 85 98655-9388
           </p>
         </div>
 

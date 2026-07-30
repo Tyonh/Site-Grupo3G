@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Natal 3G — Iluminação e Decoração Natalina",
   description:
     "Cordões, mangueiras, fitas de LED, árvores gigantes, figuras 3D e infláveis. A linha natalina completa do Grupo 3G.",
+  alternates: { canonical: "/natal" },
 };
 
 export default function NatalHomePage() {
