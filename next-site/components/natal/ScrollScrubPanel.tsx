@@ -84,7 +84,7 @@ export default function ScrollScrubPanel({
         <div className="absolute inset-0 lg:flex lg:flex-row">
           <motion.div
             style={{ scale: imageScale }}
-            className="absolute inset-0 lg:relative lg:inset-auto lg:aspect-video lg:h-full lg:w-auto lg:max-w-none lg:shrink-0"
+            className="absolute inset-0 lg:relative lg:inset-auto lg:z-10 lg:mr-[-1px] lg:aspect-video lg:h-full lg:w-auto lg:max-w-none lg:shrink-0"
           >
             <video
               src={video}

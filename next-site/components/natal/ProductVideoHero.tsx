@@ -50,7 +50,7 @@ export default function ProductVideoHero({
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#f1f1f1] text-black lg:h-[94vh] lg:min-h-[680px]">
+    <section className="relative w-full overflow-hidden bg-[#f3f3f3] text-black lg:h-[94vh] lg:min-h-[680px]">
       <div
         aria-hidden
         className="absolute inset-0 select-none pointer-events-none text-natal-gold-deep/50"
@@ -72,6 +72,31 @@ export default function ProductVideoHero({
           </motion.span>
         ))}
       </div>
+
+      {/* Produto — vídeo integrado diretamente ao fundo do site */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-0 z-0 flex items-center justify-center p-4 sm:p-6 lg:p-8 pointer-events-none"
+      >
+        <video
+          src={videoSrc}
+          poster={posterSrc}
+          muted
+          loop
+          playsInline
+          autoPlay
+          aria-hidden
+          className="h-full w-full max-h-[94vh] max-w-[1120px] object-contain mix-blend-multiply"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+          }}
+        />
+      </motion.div>
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col items-center gap-10 px-6 py-16 sm:px-10 sm:py-20 lg:block lg:px-16 lg:py-0">
         {/* Kicker — canto superior esquerdo */}
@@ -95,32 +120,6 @@ export default function ProductVideoHero({
             {tagline}
           </motion.p>
         )}
-
-        {/* Produto — vídeo centralizado, flutuando sobre o fundo branco */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-[460px] sm:max-w-[560px] lg:absolute lg:top-1/2 lg:left-1/2 lg:max-w-[760px] lg:-translate-x-1/2 lg:-translate-y-1/2 xl:max-w-[920px]"
-        >
-          <div className="relative aspect-square w-full">
-            <video
-              src={videoSrc}
-              poster={posterSrc}
-              muted
-              loop
-              playsInline
-              autoPlay
-              aria-hidden
-              className="h-full w-full object-contain"
-            />
-          </div>
-          {/* Sombra de chão — ancora o produto no branco, em vez de deixá-lo boiando sem peso */}
-          <div
-            aria-hidden
-            className="absolute -bottom-2 left-1/2 h-6 w-3/5 -translate-x-1/2 rounded-[100%] bg-black/10 blur-xl"
-          />
-        </motion.div>
 
         {/* Título + descrição — canto inferior esquerdo */}
         <motion.div

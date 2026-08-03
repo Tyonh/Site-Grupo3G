@@ -23,7 +23,7 @@ export default function NatalHomePage() {
       <main className="w-full bg-black text-white">
         {/* ═══════════ ABERTURA — PRODUTO EM VÍDEO SOBRE FUNDO BRANCO ═══════════ */}
         <ProductVideoHero
-          videoSrc="/natal/videos/hero-cordao-branco.mp4"
+          videoSrc="/natal/videos/arvore.mp4"
           posterSrc="/natal/hero-cordao-poster.jpg"
           kicker="Catálogo Natal 2026 — Grupo 3G"
           title={
