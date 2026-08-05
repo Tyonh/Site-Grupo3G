@@ -68,7 +68,7 @@ export default function ProductColorVideo({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="relative w-full aspect-video overflow-visible">
+      <div className="relative w-full aspect-video overflow-hidden">
         <div className="absolute inset-0 scale-125 overflow-hidden">
           {videos.map((v, i) => (
             <video
