@@ -19,11 +19,30 @@ export function useAutoplayVideo<T extends HTMLVideoElement>() {
 
     video.muted = true;
     video.defaultMuted = true;
-    video.play().catch(() => {
-      // Pode ser bloqueado mesmo assim (ex.: modo de economia de bateria
-      // no iOS) — sem interface de fallback, o vídeo só fica parado no
-      // poster/primeiro frame.
-    });
+
+    const tryPlay = () => video.play().catch(() => undefined);
+    tryPlay();
+
+    // iOS bloqueia autoplay em várias situações (Modo de Baixo Consumo,
+    // Economia de Dados, primeira carga sem gesto do usuário na página
+    // inteira). Em vez de deixar o vídeo parado esperando um clique nele
+    // mesmo, qualquer primeiro toque/scroll na página tenta iniciar de
+    // novo — silencioso, sem exibir nenhum botão de play.
+    const retryOnce = () => {
+      if (video.paused) tryPlay();
+      window.removeEventListener("touchstart", retryOnce);
+      window.removeEventListener("pointerdown", retryOnce);
+      window.removeEventListener("scroll", retryOnce);
+    };
+    window.addEventListener("touchstart", retryOnce, { passive: true });
+    window.addEventListener("pointerdown", retryOnce, { passive: true });
+    window.addEventListener("scroll", retryOnce, { passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", retryOnce);
+      window.removeEventListener("pointerdown", retryOnce);
+      window.removeEventListener("scroll", retryOnce);
+    };
   }, []);
 
   return ref;

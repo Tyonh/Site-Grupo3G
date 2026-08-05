@@ -52,7 +52,7 @@ export default function ProductVideoHero({
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#f3f3f3] text-black lg:h-[94vh] lg:min-h-[680px]">
+    <section className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#f3f3f3] text-black lg:h-[94vh] lg:min-h-[680px]">
       <div
         aria-hidden
         className="absolute inset-0 select-none pointer-events-none text-natal-gold-deep/50"
@@ -91,7 +91,7 @@ export default function ProductVideoHero({
           playsInline
           autoPlay
           aria-hidden
-          className="h-full w-full max-h-[94vh] max-w-[1120px] object-contain mix-blend-multiply"
+          className="h-full w-full max-h-[94vh] max-w-[1120px] object-cover mix-blend-multiply pointer-events-auto lg:object-contain"
           style={{
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
@@ -101,7 +101,7 @@ export default function ProductVideoHero({
         />
       </motion.div>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-col items-center gap-10 px-6 py-16 sm:px-10 sm:py-20 lg:block lg:px-16 lg:py-0">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-1 flex-col items-center justify-start gap-16 px-6 pb-16 pt-20 sm:px-10 sm:pt-24 lg:block lg:h-full lg:flex-none lg:gap-0 lg:px-16 lg:py-0">
         {/* Kicker — canto superior esquerdo */}
         <motion.span
           initial={{ opacity: 0, y: -10 }}
@@ -124,17 +124,29 @@ export default function ProductVideoHero({
           </motion.p>
         )}
 
+        {/* Descrição no mobile — entre a tagline e o título, só nessa ordem
+            no fluxo empilhado; no desktop ela some daqui e reaparece dentro
+            do bloco do título (canto inferior esquerdo), como sempre foi. */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-md rounded-2xl bg-white/60 px-5 py-3 text-center text-sm text-black font-light leading-relaxed backdrop-blur-sm lg:hidden"
+        >
+          {description}
+        </motion.p>
+
         {/* Título + descrição — canto inferior esquerdo */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="flex max-w-md flex-col gap-4 text-center lg:absolute lg:bottom-14 lg:left-16 lg:text-left"
+          className="flex max-w-md flex-col gap-6 text-center lg:absolute lg:bottom-14 lg:left-16 lg:text-left"
         >
           <h1 className="text-4xl xs:text-5xl sm:text-6xl font-black uppercase leading-[0.95] tracking-tight text-black">
             {title}
           </h1>
-          <p className="text-sm sm:text-base text-black/60 font-light leading-relaxed">
+          <p className="hidden text-sm sm:text-base text-black/70 font-light leading-relaxed lg:block lg:text-black/60">
             {description}
           </p>
         </motion.div>
@@ -144,7 +156,7 @@ export default function ProductVideoHero({
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-col gap-3 xs:flex-row lg:absolute lg:bottom-14 lg:right-16"
+          className="flex flex-col gap-4 xs:flex-row lg:absolute lg:bottom-14 lg:right-16"
         >
           <Magnetic strength={0.3} className="inline-block">
             <a
