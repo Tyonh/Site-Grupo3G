@@ -68,27 +68,29 @@ export default function ProductColorVideo({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="relative w-full aspect-video overflow-hidden">
-        {videos.map((v, i) => (
-          <video
-            key={v.code}
-            ref={(el) => {
-              videoRefs.current[i] = el;
-            }}
-            src={v.src}
-            muted
-            loop
-            playsInline
-            autoPlay={i === 0}
-            preload={i === 0 ? "auto" : "metadata"}
-            aria-label={`${productName} — cor ${v.color}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-[opacity,transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-              i === active
-                ? "opacity-100 scale-100 motion-safe:blur-none"
-                : "opacity-0 pointer-events-none motion-safe:scale-105 motion-safe:blur-[2px]"
-            }`}
-          />
-        ))}
+      <div className="relative w-full aspect-video overflow-visible">
+        <div className="absolute inset-0 scale-125 overflow-hidden">
+          {videos.map((v, i) => (
+            <video
+              key={v.code}
+              ref={(el) => {
+                videoRefs.current[i] = el;
+              }}
+              src={v.src}
+              muted
+              loop
+              playsInline
+              autoPlay={i === 0}
+              preload={i === 0 ? "auto" : "metadata"}
+              aria-label={`${productName} — cor ${v.color}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-[opacity,transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                i === active
+                  ? "opacity-100 scale-100 motion-safe:blur-none"
+                  : "opacity-0 pointer-events-none motion-safe:scale-105 motion-safe:blur-[2px]"
+              }`}
+            />
+          ))}
+        </div>
 
         {/* Flash sutil de luz cruzando a tela a cada troca — reforça a
             sensação de "religar" o cordão na nova cor. Ignorado com
