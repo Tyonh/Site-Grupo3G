@@ -4,6 +4,7 @@ import { useRef, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
 
 interface ScrollScrubPanelProps {
   href: string;
@@ -46,6 +47,7 @@ export default function ScrollScrubPanel({
   const isLight = Boolean(video) && mediaBg === "white";
   const isSplitLeft = mediaAlign === "left";
   const ref = useRef<HTMLAnchorElement>(null);
+  const videoRef = useAutoplayVideo<HTMLVideoElement>();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -87,6 +89,7 @@ export default function ScrollScrubPanel({
             className="absolute inset-0 lg:relative lg:inset-auto lg:z-10 lg:mr-[-1px] lg:aspect-video lg:h-full lg:w-auto lg:max-w-none lg:shrink-0"
           >
             <video
+              ref={videoRef}
               src={video}
               muted
               loop
@@ -109,6 +112,7 @@ export default function ScrollScrubPanel({
           {video ? (
             <motion.div style={{ scale: imageScale }} className="absolute inset-0">
               <video
+                ref={videoRef}
                 src={video}
                 muted
                 loop

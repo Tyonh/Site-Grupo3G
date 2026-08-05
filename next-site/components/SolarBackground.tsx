@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
 
 interface SolarBackgroundProps {
   theme: "light" | "dark";
@@ -8,6 +9,8 @@ interface SolarBackgroundProps {
 
 const SolarBackground = ({ theme }: SolarBackgroundProps) => {
   const [scrollPercent, setScrollPercent] = useState<number>(0);
+  const dayVideoRef = useAutoplayVideo<HTMLVideoElement>();
+  const nightVideoRef = useAutoplayVideo<HTMLVideoElement>();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +44,7 @@ const SolarBackground = ({ theme }: SolarBackgroundProps) => {
     <div className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none overflow-hidden">
       {/* Base video: Solar Day */}
       <video
+        ref={dayVideoRef}
         autoPlay
         loop
         muted
@@ -52,6 +56,7 @@ const SolarBackground = ({ theme }: SolarBackgroundProps) => {
 
       {/* Overlaid video with mask: Solar Night */}
       <video
+        ref={nightVideoRef}
         autoPlay
         loop
         muted

@@ -125,14 +125,6 @@ export const natalCategories: NatalCategory[] = [
       {
         name: "Cordão de LED com Drive — 50L (2,5m)",
         image: "/natal/cordao-drive.png",
-        videos: [
-          { code: "50701", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/cordao-50l-branco.mp4" },
-          { code: "50702", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/cordao-50l-branco-quente.mp4" },
-          { code: "50703", color: "Multicolorido", swatch: SWATCH["Multicolorido"], src: "/natal/videos/cordao-50l-multicolorido.mp4" },
-          { code: "50704", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/videos/cordao-50l-azul.mp4" },
-          { code: "50705", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/videos/cordao-50l-vermelho.mp4" },
-          { code: "50706", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/videos/cordao-50l-verde.mp4" },
-        ],
         description:
           "Cordão curto com plugue e controlador de 8 funções. Ideal para árvores e molduras pequenas.",
         specs: [
@@ -158,6 +150,14 @@ export const natalCategories: NatalCategory[] = [
       {
         name: "Cordão de LED com Drive — 100L (5m)",
         image: "/natal/cordao-drive.png",
+        videos: [
+          { code: "50707", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/cordao-50l-branco.mp4" },
+          { code: "50708", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/cordao-50l-branco-quente.mp4" },
+          { code: "50709", color: "Multicolorido", swatch: SWATCH["Multicolorido"], src: "/natal/videos/cordao-50l-multicolorido.mp4" },
+          { code: "50710", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/videos/cordao-50l-azul.mp4" },
+          { code: "50711", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/videos/cordao-50l-vermelho.mp4" },
+          { code: "50712", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/videos/cordao-50l-verde.mp4" },
+        ],
         description:
           "O dobro do comprimento e densidade de 10 LEDs por metro, com as mesmas 8 funções.",
         specs: [

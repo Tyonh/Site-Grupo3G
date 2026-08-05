@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Magnetic from "@/components/natal/Magnetic";
+import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
 
 interface ProductVideoHeroProps {
   videoSrc: string;
@@ -44,6 +45,7 @@ export default function ProductVideoHero({
 }: ProductVideoHeroProps) {
   const prefersReducedMotion = useReducedMotion();
   const [isLoaded, setIsLoaded] = useState(false);
+  const videoRef = useAutoplayVideo<HTMLVideoElement>();
 
   useEffect(() => {
     setIsLoaded(true);
@@ -81,6 +83,7 @@ export default function ProductVideoHero({
         className="absolute inset-0 z-0 flex items-center justify-center p-4 sm:p-6 lg:p-8 pointer-events-none"
       >
         <video
+          ref={videoRef}
           src={videoSrc}
           poster={posterSrc}
           muted
@@ -146,7 +149,7 @@ export default function ProductVideoHero({
           <Magnetic strength={0.3} className="inline-block">
             <a
               href={primaryCta.href}
-              className="inline-flex h-13 min-h-12 items-center justify-center whitespace-nowrap bg-natal-red px-10 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-black"
+              className="inline-flex h-13 min-h-12 w-60 items-center justify-center whitespace-nowrap bg-natal-red px-10 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-black"
             >
               {primaryCta.label}
             </a>
@@ -154,7 +157,7 @@ export default function ProductVideoHero({
           <Magnetic strength={0.3} className="inline-block">
             <a
               href={secondaryCta.href}
-              className="inline-flex min-h-12 items-center justify-center whitespace-nowrap border border-black/25 px-10 text-xs font-bold uppercase tracking-[0.2em] text-black transition-colors hover:border-natal-red hover:text-natal-red"
+              className="inline-flex h-13 min-h-12 w-60 items-center justify-center whitespace-nowrap border border-black/25 bg-white/90 px-10 text-xs font-bold uppercase tracking-[0.2em] text-black backdrop-blur-sm transition-colors hover:border-natal-red hover:bg-white hover:text-natal-red"
             >
               {secondaryCta.label}
             </a>

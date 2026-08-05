@@ -38,6 +38,8 @@ export default function ProductColorVideo({
     videoRefs.current.forEach((video, i) => {
       if (!video) return;
       if (i === active) {
+        video.muted = true;
+        video.defaultMuted = true;
         video.play().catch(() => {
           /* autoplay pode ser bloqueado até interação — silencioso */
         });

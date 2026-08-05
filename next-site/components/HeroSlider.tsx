@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
 
 interface Slide {
   title: string;
@@ -65,6 +66,7 @@ export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const videoRef = useAutoplayVideo<HTMLVideoElement>();
 
   const startSlider = () => {
     stopSlider();
@@ -104,6 +106,7 @@ export default function HeroSlider() {
     >
       {/* Background Video */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
