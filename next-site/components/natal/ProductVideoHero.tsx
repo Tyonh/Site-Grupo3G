@@ -52,7 +52,7 @@ export default function ProductVideoHero({
   }, []);
 
   return (
-    <section className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#f3f3f3] text-black lg:h-[94vh] lg:min-h-[680px]">
+    <section className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#f3f3f3] text-black lg:h-[100svh] lg:min-h-[min(680px,100svh)]">
       <div
         aria-hidden
         className="absolute inset-0 select-none pointer-events-none text-natal-gold-deep/50"
@@ -101,7 +101,7 @@ export default function ProductVideoHero({
         />
       </motion.div>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-1 flex-col items-center justify-start gap-16 px-6 pb-16 pt-20 sm:px-10 sm:pt-24 lg:block lg:h-full lg:flex-none lg:gap-0 lg:px-16 lg:py-0">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-1 flex-col items-center justify-start gap-6 overflow-y-auto px-6 pb-8 pt-8 sm:gap-8 sm:px-10 sm:pt-10 lg:block lg:h-full lg:flex-none lg:gap-0 lg:overflow-visible lg:px-16 lg:py-0">
         {/* Kicker — canto superior esquerdo */}
         <motion.span
           initial={{ opacity: 0, y: -10 }}
