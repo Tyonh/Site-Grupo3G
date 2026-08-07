@@ -31,7 +31,7 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
     products: [
       {
         name: "Árvore de LED — 2,5m",
-        image: "/natal/arvores-gigantes.png",
+        image: "/natal/arvore-25m.png",
         description:
           "Árvore de 2,5m de altura e 1,4m de diâmetro, com 3.120 LEDs.",
         specs: [
@@ -59,7 +59,7 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
       },
       {
         name: "Árvore de LED — 5,6m",
-        image: "/natal/arvores-gigantes.png",
+        image: "/natal/arvore-56m.png",
         description:
           "Árvore de 5,6m de altura e 4,2m de diâmetro, com 7.560 LEDs.",
         specs: [
@@ -73,7 +73,7 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
       },
       {
         name: "Árvore de LED — 8,6m",
-        image: "/natal/arvores-gigantes.png",
+        image: "/natal/arvore-86m.png",
         description:
           "A maior da linha: 8,6m de altura, 4,2m de diâmetro e 8.040 LEDs.",
         specs: [
@@ -102,7 +102,7 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
       },
       {
         name: "Rena 3D",
-        image: "/natal/arvores-gigantes.png",
+        image: "/natal/rena-3d.png",
         description:
           "Rena com trenó em armação 3D iluminada, de 4,2m de largura por 1,6m de altura.",
         specs: [

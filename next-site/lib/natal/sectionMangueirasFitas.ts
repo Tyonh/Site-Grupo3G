@@ -175,7 +175,7 @@ export const mangueirasFitasCategories: NatalCategory[] = [
     products: [
       {
         name: "Fita de LED SMD — 50m",
-        image: "/natal/fita-smd.png",
+        image: "/natal/fita-smd-50.png",
         description:
           "Rolo de 50m com 250 LEDs por metro, em 7 cores. Cortável de metro em metro.",
         specs: [
@@ -198,7 +198,7 @@ export const mangueirasFitasCategories: NatalCategory[] = [
       },
       {
         name: "Fita de LED SMD — 100m",
-        image: "/natal/fita-smd.png",
+        image: "/natal/fita-smd-100.png",
         description:
           "Rolo dobrado de 100m em branco quente, para obras e projetos de metragem longa.",
         specs: [

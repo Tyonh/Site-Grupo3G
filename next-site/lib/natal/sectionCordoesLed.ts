@@ -262,6 +262,7 @@ export const cordoesLedCategories: NatalCategory[] = [
       },
       {
         name: "Cordão tubo de LED — 100L (10m)",
+        image: "/natal/cordao-tubo-led.png",
         description:
           "Versão em tubo fino com fio de cobre interno: dobra e mantém a forma, ótimo para desenhar letras e contornos.",
         specs: [

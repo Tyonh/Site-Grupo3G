@@ -126,6 +126,7 @@ export const enfeites3gCategories: NatalCategory[] = [
     products: [
       {
         name: "Bola LED — 50cm",
+        image: "/natal/bola-led-50.png",
         description:
           "Esfera de 50cm com 280 LEDs, disponível em cinco cores. Para árvore de porte e composição de praça.",
         specs: [
@@ -145,6 +146,7 @@ export const enfeites3gCategories: NatalCategory[] = [
       },
       {
         name: "Bola LED — 30cm",
+        image: "/natal/bola-led-30.png",
         description:
           "Versão menor da esfera, em branco quente, para composições com várias bolas.",
         specs: [
@@ -244,7 +246,7 @@ export const enfeites3gCategories: NatalCategory[] = [
       },
       {
         name: "Cordão de Festão LED — 300L (2m)",
-        image: "/natal/festao-led.png",
+        image: "/natal/festao-led-300l.png",
         description:
           "Festão verde com 300 LEDs embutidos, emendável por conector macho/fêmea.",
         specs: [
