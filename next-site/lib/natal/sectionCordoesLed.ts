@@ -430,8 +430,8 @@ export const cordoesLedCategories: NatalCategory[] = [
         name: "Luz LED — Fio de cobre 200L (20m)",
         image: "/natal/fio-cobre.png",
         videos: [
-          { code: "50714", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/Branco hd.MP4" },
-          { code: "50715", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/branco quente hd.MP4" },
+          { code: "50714", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/fio-cobre-200l-branco.mp4" },
+          { code: "50715", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/fio-cobre-200l-branco-quente.mp4" },
           { code: "50716", color: "Multicolorido", swatch: SWATCH["Multicolorido"], src: "/natal/videos/fio-cobre-200l-multicolorido.mp4" },
         ],
         description:
@@ -453,9 +453,9 @@ export const cordoesLedCategories: NatalCategory[] = [
         name: "Luz LED — Fio de cobre 500L (50m)",
         image: "/natal/fio-cobre.png",
         videos: [
-          { code: "50717", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/Branco hd.MP4" },
+          { code: "50717", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/fio-cobre-500l-branco.mp4" },
           { code: "50718", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/fio-cobre-500l-branco-quente.mp4" },
-          { code: "50719", color: "Multicolorido", swatch: SWATCH["Multicolorido"], src: "/natal/videos/Multicolor hd.MP4" },
+          { code: "50719", color: "Multicolorido", swatch: SWATCH["Multicolorido"], src: "/natal/videos/fio-cobre-500l-multicolorido.mp4" },
         ],
         description:
           "Versão longa do fio de cobre, para árvores grandes e ambientes inteiros.",
