@@ -6,7 +6,7 @@ import NatalOrcamentoForm from "@/components/natal/NatalOrcamentoForm";
 import ProductVideoHero from "@/components/natal/ProductVideoHero";
 import ScrollScrubPanel from "@/components/natal/ScrollScrubPanel";
 import Magnetic from "@/components/natal/Magnetic";
-import { natalCategories } from "@/lib/natalCatalog";
+import { natalSections } from "@/lib/natalCatalog";
 
 export const metadata: Metadata = {
   title: "Natal 3G — Iluminação e Decoração Natalina",
@@ -45,14 +45,14 @@ export default function NatalHomePage() {
           secondaryCta={{ label: "Orçamento", href: "#orcamento" }}
         />
 
-        {/* ═══════════ LINEUP — CADA CATEGORIA COMO UM "MODELO" (scroll-scrub) ═══════════ */}
+        {/* ═══════════ LINEUP — CADA GRUPO COMO UM "MODELO" (scroll-scrub) ═══════════ */}
         <section id="colecao" className="scroll-mt-16">
-          {natalCategories.map((cat, i) => {
-            const isLight = Boolean(cat.video) && cat.mediaBg === "white";
-            // Mesma regra de alternância do ScrollScrubPanel: a categoria 0
-            // (split-left) já força texto à direita, então as demais
+          {natalSections.map((sec, i) => {
+            const isLight = Boolean(sec.video) && sec.mediaBg === "white";
+            // Mesma regra de alternância do ScrollScrubPanel: o grupo 0
+            // (split-left) já força texto à direita, então os demais
             // continuam a alternância a partir daí (par = direita).
-            const isSplit = cat.mediaAlign === "left";
+            const isSplit = sec.mediaAlign === "left";
             const textOnRight = !isSplit && i % 2 === 0;
             // Painéis split-left claros (isLight) sobrepõem o texto no
             // vídeo com gradiente escuro no mobile, mas ficam ao lado do
@@ -81,13 +81,13 @@ export default function NatalHomePage() {
                 : "text-white group-hover:text-natal-gold";
             return (
               <ScrollScrubPanel
-                key={cat.slug}
-                href={`/natal/${cat.slug}`}
-                photo={cat.photo}
-                video={cat.video}
-                mediaBg={cat.mediaBg}
-                mediaAlign={cat.mediaAlign}
-                alt={cat.name}
+                key={sec.slug}
+                href={`/natal/${sec.slug}`}
+                photo={sec.photo}
+                video={sec.video}
+                mediaBg={sec.mediaBg}
+                mediaAlign={sec.mediaAlign}
+                alt={sec.name}
                 index={i}>
                 <span
                   className={`font-bold tracking-[0.3em] text-[10px] sm:text-xs uppercase mb-3 ${kickerClass}`}>
@@ -95,11 +95,11 @@ export default function NatalHomePage() {
                 </span>
                 <h2
                   className={`text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none max-w-xl ${titleClass}`}>
-                  {cat.name}
+                  {sec.name}
                 </h2>
                 <p
                   className={`mt-4 max-w-md text-xs sm:text-sm font-light leading-relaxed ${descClass} ${textOnRight ? "sm:ml-auto" : ""}`}>
-                  {cat.whatIs}
+                  {sec.blurb}
                 </p>
                 <Magnetic strength={0.4} className="mt-6 inline-block">
                   <span

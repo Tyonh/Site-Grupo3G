@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/siteConfig";
-import { natalCategories } from "@/lib/natalCatalog";
+import { natalSections } from "@/lib/natalCatalog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -16,8 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  const natalRoutes = natalCategories.map((category) => ({
-    url: `${siteConfig.url}/natal/${category.slug}`,
+  const natalRoutes = natalSections.map((section) => ({
+    url: `${siteConfig.url}/natal/${section.slug}`,
     lastModified: new Date(),
   }));
 

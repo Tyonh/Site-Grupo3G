@@ -52,7 +52,7 @@ export default function ProductVideoHero({
   }, []);
 
   return (
-    <section className="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-[#f3f3f3] text-black lg:h-[100svh] lg:min-h-[min(680px,100svh)]">
+    <section className="relative flex min-h-[calc(100svh-80px)] w-full flex-col overflow-hidden bg-[#f3f3f3] text-black xl:h-[calc(100svh-80px)] xl:min-h-[min(680px,calc(100svh-80px))]">
       <div
         aria-hidden
         className="absolute inset-0 select-none pointer-events-none text-natal-gold-deep/50"
@@ -80,7 +80,7 @@ export default function ProductVideoHero({
         initial={{ opacity: 0, scale: 0.92 }}
         animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-0 z-0 flex items-center justify-center p-4 sm:p-6 lg:p-8 pointer-events-none"
+        className="absolute inset-0 z-0 flex items-center justify-center p-4 sm:p-6 xl:p-8 pointer-events-none"
       >
         <video
           ref={videoRef}
@@ -91,7 +91,7 @@ export default function ProductVideoHero({
           playsInline
           autoPlay
           aria-hidden
-          className="h-full w-full max-h-[94vh] max-w-[1120px] object-cover mix-blend-multiply pointer-events-auto lg:object-contain"
+          className="h-full w-full max-h-[94vh] max-w-[1120px] object-cover mix-blend-multiply pointer-events-auto xl:object-contain"
           style={{
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
@@ -101,13 +101,13 @@ export default function ProductVideoHero({
         />
       </motion.div>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-1 flex-col items-center justify-start gap-6 overflow-y-auto px-6 pb-8 pt-8 sm:gap-8 sm:px-10 sm:pt-10 lg:block lg:h-full lg:flex-none lg:gap-0 lg:overflow-visible lg:px-16 lg:py-0">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1600px] flex-1 flex-col items-center justify-start gap-4 overflow-y-auto px-6 pb-4 pt-5 sm:gap-8 sm:px-10 sm:pb-8 sm:pt-10 xl:block xl:h-full xl:flex-none xl:gap-0 xl:overflow-visible xl:px-16 xl:py-0">
         {/* Kicker — canto superior esquerdo */}
         <motion.span
           initial={{ opacity: 0, y: -10 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-natal-red font-bold tracking-[0.35em] text-xs sm:text-sm uppercase text-center lg:absolute lg:top-12 lg:left-16 lg:text-left"
+          className="text-natal-red font-bold tracking-[0.35em] text-xs sm:text-sm uppercase text-center xl:absolute xl:top-12 xl:left-16 xl:text-left"
         >
           {kicker}
         </motion.span>
@@ -118,7 +118,7 @@ export default function ProductVideoHero({
             initial={{ opacity: 0, y: -10 }}
             animate={isLoaded ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-black uppercase leading-[0.95] tracking-tight text-black text-center lg:absolute lg:top-10 lg:right-16 lg:max-w-sm lg:text-right"
+            className="text-3xl sm:text-4xl font-black uppercase leading-[0.95] tracking-tight text-black text-center xl:absolute xl:top-10 xl:right-16 xl:max-w-sm xl:text-right"
           >
             {tagline}
           </motion.p>
@@ -131,7 +131,7 @@ export default function ProductVideoHero({
           initial={{ opacity: 0, y: 10 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-md rounded-2xl bg-white/60 px-5 py-3 text-center text-sm text-black font-light leading-relaxed backdrop-blur-sm lg:hidden"
+          className="max-w-md rounded-2xl bg-white/60 px-5 py-2 text-center text-sm text-black font-light leading-relaxed backdrop-blur-sm sm:py-3 xl:hidden"
         >
           {description}
         </motion.p>
@@ -141,12 +141,12 @@ export default function ProductVideoHero({
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="flex max-w-md flex-col gap-6 text-center lg:absolute lg:bottom-14 lg:left-16 lg:text-left"
+          className="flex max-w-md flex-col gap-6 text-center xl:absolute xl:bottom-14 xl:left-16 xl:text-left"
         >
           <h1 className="text-4xl xs:text-5xl sm:text-6xl font-black uppercase leading-[0.95] tracking-tight text-black">
             {title}
           </h1>
-          <p className="hidden text-sm sm:text-base text-black/70 font-light leading-relaxed lg:block lg:text-black/60">
+          <p className="hidden text-sm sm:text-base text-black/70 font-light leading-relaxed xl:block xl:text-black/60">
             {description}
           </p>
         </motion.div>
@@ -156,7 +156,7 @@ export default function ProductVideoHero({
           initial={{ opacity: 0, y: 20 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-col gap-4 xs:flex-row lg:absolute lg:bottom-14 lg:right-16"
+          className="flex flex-col gap-4 xs:flex-row xl:absolute xl:bottom-14 xl:right-16"
         >
           <Magnetic strength={0.3} className="inline-block">
             <a
@@ -180,7 +180,7 @@ export default function ProductVideoHero({
         <motion.div
           animate={prefersReducedMotion ? undefined : { y: [0, 6, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="hidden lg:absolute lg:bottom-14 lg:left-1/2 lg:flex lg:-translate-x-1/2 lg:flex-col lg:items-center lg:gap-1 lg:text-black/40"
+          className="hidden xl:absolute xl:bottom-14 xl:left-1/2 xl:flex xl:-translate-x-1/2 xl:flex-col xl:items-center xl:gap-1 xl:text-black/40"
         >
           <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Rolar</span>
           <svg
