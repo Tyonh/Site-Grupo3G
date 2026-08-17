@@ -28,12 +28,12 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
     ],
     products: [
       {
-        name: "Boneco de Neve Inflável — 2m",
-        image: "/natal/inflavel-boneco-neve.png",
+        name: "Boneco de Neve Inflável de Natal — 2,4m",
+        image: "/natal/inflavel-boneco-neve-globo.png",
         description:
-          "Boneco de neve de 2m com motor para encher incluso.",
+          "Boneco de neve de 2,4m com globo de neve do Papai Noel na base e motor para encher incluso.",
         specs: [
-          { label: "Altura", value: "2m" },
+          { label: "Altura", value: "2,4m" },
           { label: "Tipo", value: "Inflável" },
           { label: "Material", value: "Plástico" },
           { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
@@ -44,12 +44,28 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
         ],
       },
       {
-        name: "Duende Inflável — 1,8m",
+        name: "Boneco de Neve Brilhante — 1,5m",
+        image: "/natal/inflavel-boneco-neve-brilhante.png",
+        description:
+          "Boneco de neve de 1,5m com iluminação interna colorida e motor para encher incluso.",
+        specs: [
+          { label: "Altura", value: "1,5m" },
+          { label: "Tipo", value: "Inflável" },
+          { label: "Material", value: "Plástico" },
+          { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
+          { label: "Extras", value: "Motor para encher" },
+        ],
+        variants: [
+          { code: "51126", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
+        ],
+      },
+      {
+        name: "Duende Inflável de Natal — 1,2m",
         image: "/natal/inflavel-duende.png",
         description:
-          "Duende de natal de 1,8m, para compor a cena com o Papai Noel.",
+          "Duende de natal de 1,2m, para compor a cena com o Papai Noel.",
         specs: [
-          { label: "Altura", value: "1,8m" },
+          { label: "Altura", value: "1,2m" },
           { label: "Tipo", value: "Inflável" },
           { label: "Material", value: "Plástico" },
           { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
@@ -59,7 +75,7 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
         ],
       },
       {
-        name: "Papai Noel Inflável — 1,5m / 2,4m / 5m",
+        name: "Papai Noel Inflável de Natal — 1,5m / 2,4m / 5m",
         image: "/natal/inflavel-papai-noel.png",
         description:
           "Papai Noel inflável em três alturas — da calçada de casa à praça da cidade.",
@@ -73,6 +89,51 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
           { code: "51131", ledColor: "Papai Noel 1,5m", swatch: SWATCH["Vermelho"] },
           { code: "51129", ledColor: "Papai Noel 2,4m", swatch: SWATCH["Vermelho"] },
           { code: "51130", ledColor: "Papai Noel 5m", swatch: SWATCH["Vermelho"] },
+        ],
+      },
+      {
+        name: "Rena Inflável de Natal — 1,2m",
+        image: "/natal/inflavel-rena.png",
+        description:
+          "Rena de natal de 1,2m segurando um presente, para compor a cena com o Papai Noel.",
+        specs: [
+          { label: "Altura", value: "1,2m" },
+          { label: "Tipo", value: "Inflável" },
+          { label: "Material", value: "Plástico" },
+          { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
+        ],
+        variants: [
+          { code: "51133", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
+        ],
+      },
+      {
+        name: "Urso Polar Inflável de Natal — 1,8m",
+        image: "/natal/inflavel-urso-polar.png",
+        description:
+          "Urso polar inflável de 1,8m com filhote ao lado, segurando bengala doce.",
+        specs: [
+          { label: "Altura", value: "1,8m" },
+          { label: "Tipo", value: "Inflável" },
+          { label: "Material", value: "Plástico" },
+          { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
+        ],
+        variants: [
+          { code: "51128", ledColor: "Branco", swatch: SWATCH["Branco"] },
+        ],
+      },
+      {
+        name: "Olaf Inflável de Natal — 1,8m",
+        image: "/natal/inflavel-olaf.png",
+        description:
+          "Boneco de neve estilo Olaf de 1,8m, com chapéu preto e cachecol colorido.",
+        specs: [
+          { label: "Altura", value: "1,8m" },
+          { label: "Tipo", value: "Inflável" },
+          { label: "Material", value: "Plástico" },
+          { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
+        ],
+        variants: [
+          { code: "51126", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
         ],
       },
     ],

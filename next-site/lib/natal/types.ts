@@ -109,6 +109,7 @@ export const SWATCH: Record<string, string> = {
   Verde: "#386d24",
   "Âmbar": "#ffbf00",
   Dourado: "#e3b84e",
+  Amarelo: "#e3b84e",
   Roxo: "#7c3aed",
   Rosa: "#ec4899",
   "Aquamarine Azul": "#22d3ee",

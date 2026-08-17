@@ -57,6 +57,17 @@ export const mangueirasFitasCategories: NatalCategory[] = [
       {
         name: "Mangueira Neon 360° — rolo 50m",
         image: "/natal/mangueira-neon.png",
+        videos: [
+          { code: "50842", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/videos/mangueira-neon-360-vermelho.mp4" },
+          { code: "50845", color: "Roxo", swatch: SWATCH["Roxo"], src: "/natal/videos/mangueira-neon-360-roxo.mp4" },
+          { code: "50844", color: "Aquamarine Azul", swatch: SWATCH["Aquamarine Azul"], src: "/natal/videos/mangueira-neon-360-aquamarine.mp4" },
+          { code: "50846", color: "Rosa", swatch: SWATCH["Rosa"], src: "/natal/videos/mangueira-neon-360-rosa.mp4" },
+          { code: "50843", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/videos/mangueira-neon-360-verde.mp4" },
+          { code: "50847", color: "Amarelo", swatch: SWATCH["Amarelo"], src: "/natal/videos/mangueira-neon-360-amarelo.mp4" },
+          { code: "50839", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/mangueira-neon-360-branco.mp4" },
+          { code: "50841", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/videos/mangueira-neon-360-azul.mp4" },
+          { code: "50840", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/mangueira-neon-360-branco-quente.mp4" },
+        ],
         description:
           "Neon flexível que acende nos 360°, com 240 LEDs por metro e 9 cores — incluindo roxo, rosa e dourado.",
         specs: [
@@ -79,7 +90,7 @@ export const mangueirasFitasCategories: NatalCategory[] = [
           { code: "50844", ledColor: "Aquamarine Azul", wireColor: "Transparente", swatch: SWATCH["Aquamarine Azul"] },
           { code: "50845", ledColor: "Roxo", wireColor: "Transparente", swatch: SWATCH["Roxo"] },
           { code: "50846", ledColor: "Rosa", wireColor: "Transparente", swatch: SWATCH["Rosa"] },
-          { code: "50847", ledColor: "Dourado", wireColor: "Transparente", swatch: SWATCH["Dourado"] },
+          { code: "50847", ledColor: "Amarelo", wireColor: "Transparente", swatch: SWATCH["Amarelo"] },
         ],
       },
     ],

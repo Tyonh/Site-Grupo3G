@@ -2,13 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ShieldCheck, Sun, Thermometer, Zap, type LucideIcon } from "lucide-react";
 import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
+
+interface Spec {
+  icon: LucideIcon;
+  label: string;
+}
 
 interface Slide {
   title: string;
   subtitle?: string;
   category?: string;
-  caracImg: string;
+  specs: Spec[];
   btnPrimaryText: string;
   btnPrimaryHref: string;
   btnSecondaryText: string;
@@ -22,7 +28,11 @@ const slidesData: Slide[] = [
     title: "EFICIÊNCIA QUE TRANSFORMA",
     subtitle: "Pioneiros em tecnologia LED no Ceará há mais de 30 anos",
     category: "LUMINÁRIA SOLAR",
-    caracImg: "/carac-solar-w.png",
+    specs: [
+      { icon: ShieldCheck, label: "IP 66" },
+      { icon: Sun, label: "1500lm/W" },
+      { icon: Thermometer, label: "6500K" },
+    ],
     btnPrimaryText: "Fale com nossos especialistas",
     btnPrimaryHref: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.",
     btnSecondaryText: "Informações Técnicas",
@@ -32,7 +42,11 @@ const slidesData: Slide[] = [
   },
   {
     title: "REFLETOR MODULAR",
-    caracImg: "/carac-modular-fiec.png",
+    specs: [
+      { icon: ShieldCheck, label: "IP 66" },
+      { icon: Sun, label: "130lm/W" },
+      { icon: Thermometer, label: "6500K" },
+    ],
     btnPrimaryText: "Orçamento Rápido",
     btnPrimaryHref: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.",
     btnSecondaryText: "Ver Detalhes",
@@ -42,7 +56,11 @@ const slidesData: Slide[] = [
   },
   {
     title: "LUMINÁRIA HOMOLOGADA",
-    caracImg: "/carac-homo-fiec.png",
+    specs: [
+      { icon: ShieldCheck, label: "IP 66" },
+      { icon: Sun, label: "160lm/W" },
+      { icon: Thermometer, label: "5000K" },
+    ],
     btnPrimaryText: "Fale com nossos especialistas",
     btnPrimaryHref: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.",
     btnSecondaryText: "Ficha Técnica",
@@ -52,7 +70,11 @@ const slidesData: Slide[] = [
   },
   {
     title: "LUMINÁRIA EBRON 50W",
-    caracImg: "/carac-ebron-fiec.png",
+    specs: [
+      { icon: ShieldCheck, label: "IP 66" },
+      { icon: Zap, label: "Bivolt" },
+      { icon: Thermometer, label: "5000K" },
+    ],
     btnPrimaryText: "Comprar Agora",
     btnPrimaryHref: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.",
     btnSecondaryText: "Ficha Técnica",
@@ -147,15 +169,20 @@ export default function HeroSlider() {
                   )}
                 </div>
 
-                {/* Characteristics icon */}
-                <div className="flex justify-center md:justify-start min-h-[50px] items-center my-1 sm:my-2">
-                  <Image
-                    src={slide.caracImg}
-                    alt="Características"
-                    width={320}
-                    height={100}
-                    className="h-[35px] sm:h-[45px] md:h-[50px] lg:h-[55px] w-auto object-contain drop-shadow-lg"
-                  />
+                {/* Characteristics */}
+                <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 sm:gap-x-7 min-h-[50px] items-center my-1 sm:my-2">
+                  {slide.specs.map((spec, specIndex) => {
+                    const SpecIcon = spec.icon;
+                    return (
+                      <span
+                        key={specIndex}
+                        className="flex items-center gap-2 text-white font-bold text-lg sm:text-xl md:text-2xl drop-shadow-lg"
+                      >
+                        <SpecIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" strokeWidth={2} />
+                        {spec.label}
+                      </span>
+                    );
+                  })}
                 </div>
 
                 {/* CTA Buttons */}

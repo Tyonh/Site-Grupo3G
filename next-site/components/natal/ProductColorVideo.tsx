@@ -69,7 +69,7 @@ export default function ProductColorVideo({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="relative flex flex-col gap-3">
       <div className="relative w-full aspect-video overflow-hidden">
         <div className="absolute inset-0 scale-125 overflow-hidden">
           {videos.map((v, i) => (
@@ -108,18 +108,21 @@ export default function ProductColorVideo({
           {videos[active].color}
         </span>
 
-        {/* Dica animada convidando à interação — some após o primeiro clique/toque,
-            e respeita prefers-reduced-motion via a classe motion-safe do Tailwind */}
-        {!hasInteracted && (
-          <div
-            aria-hidden
-            className="absolute top-3 right-3 flex items-center gap-2 bg-white/95 text-black text-[10px] font-bold uppercase tracking-wider px-3 py-2 shadow-lg motion-safe:animate-pulse"
-          >
-            <span className="inline-block w-2 h-2 rounded-full bg-natal-red" />
-            Toque para trocar a cor
-          </div>
-        )}
       </div>
+
+      {/* Dica animada convidando à interação — fica fora do container do vídeo
+          para subir acima dele sem ser recortada pelo overflow-hidden que
+          recorta o vídeo. Some após o primeiro clique/toque e respeita
+          prefers-reduced-motion via a classe motion-safe do Tailwind */}
+      {!hasInteracted && (
+        <div
+          aria-hidden
+          className="absolute -top-11 right-3 flex items-center gap-2 bg-white/95 text-black text-[10px] font-bold uppercase tracking-wider px-3 py-2 shadow-lg motion-safe:animate-pulse"
+        >
+          <span className="inline-block w-2 h-2 rounded-full bg-natal-red" />
+          Toque para trocar a cor
+        </div>
+      )}
 
       {/* Região viva para leitores de tela anunciarem a troca de cor */}
       <span className="sr-only" role="status" aria-live="polite">
