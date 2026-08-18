@@ -43,6 +43,14 @@ export const cordoesLedCategories: NatalCategory[] = [
       {
         name: "Cordão de LED com Drive — 50L (2,5m)",
         image: "/natal/cordao-drive.png",
+        videos: [
+          { code: "50702", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/cordao-drive-25m-branco-quente.mp4" },
+          { code: "50706", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/videos/cordao-drive-25m-verde.mp4" },
+          { code: "50705", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/videos/cordao-drive-25m-vermelho.mp4" },
+          { code: "50704", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/videos/cordao-drive-25m-azul.mp4" },
+          { code: "50703", color: "Multicolorido", swatch: SWATCH["Multicolorido"], src: "/natal/videos/cordao-drive-25m-multicolorido.mp4" },
+          { code: "50701", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/cordao-drive-25m-branco.mp4" },
+        ],
         description:
           "Cordão curto com plugue e controlador de 8 funções. Ideal para árvores e molduras pequenas.",
         specs: [
