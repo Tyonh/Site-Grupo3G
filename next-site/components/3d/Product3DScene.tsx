@@ -4,8 +4,8 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { ProductModel } from "./ProductModel";
 import { ModelController } from "./ModelController";
-import { Environment } from "@react-three/drei";
 import { CanvasLoader } from "./CanvasLoader";
+import { StudioLights } from "./StudioLights";
 
 interface Product3DSceneProps {
   modelUrl: string;
@@ -49,9 +49,9 @@ export const Product3DScene = ({
           camera={{ position: [0, 0, 5], fov: 45 }}
           gl={{ antialias: true }}
         >
-          {/* Environment maps and lights setup inside Suspense */}
+          {/* Setup de luzes de estúdio inside Suspense */}
           <Suspense fallback={<CanvasLoader label="Carregando Refletor" opacity="80" />}>
-            <Environment preset="studio" environmentIntensity={environmentIntensity} />
+            <StudioLights environmentIntensity={environmentIntensity} />
             <ProductModel 
               modelUrl={activeModelUrl} 
               isInteractive={isInteractive} 
