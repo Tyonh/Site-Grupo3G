@@ -28,12 +28,22 @@ export interface NatalProductVideo {
   src: string;
 }
 
+export interface NatalProductImage {
+  code: string;
+  color: string;
+  swatch: string;
+  /** Foto do produto na cor (em /public/natal) */
+  src: string;
+}
+
 export interface NatalProduct {
   name: string;
   /** Imagem do produto extraída do catálogo (em /public/natal) */
   image?: string;
   /** Vídeos por cor — habilita o showcase com troca de cor */
   videos?: NatalProductVideo[];
+  /** Fotos por cor — showcase com troca de cor sem vídeo */
+  images?: NatalProductImage[];
   description: string;
   specs: NatalSpec[];
   variants: NatalVariant[];

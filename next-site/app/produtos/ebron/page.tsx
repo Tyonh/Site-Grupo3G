@@ -22,9 +22,9 @@ const LocalProduct3DScene = dynamic(
   { ssr: false },
 );
 
-// Cache bust estável por carregamento de sessão para otimização de rede do arquivo GLB de 162MB
+// Cache bust estável por carregamento de sessão
 const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
-const ebronModelUrl = `/models/Ebron 100.glb?v=${CACHE_BUST}`;
+const ebronModelUrl = `/models/Ebron100.final.glb?v=${CACHE_BUST}`;
 
 export default function LuminariaEbronPage() {
   const theme: "light" | "dark" = "light";

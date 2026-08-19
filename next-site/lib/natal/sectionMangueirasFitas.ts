@@ -33,6 +33,11 @@ export const mangueirasFitasCategories: NatalCategory[] = [
       {
         name: "Mangueira LED — rolo 100m",
         image: "/natal/mangueira-led.png",
+        images: [
+          { code: "50537", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/mangueira-led-100m-verde.png" },
+          { code: "50535", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/mangueira-led-100m-azul.png" },
+          { code: "50536", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/mangueira-led-100m-vermelho.png" },
+        ],
         description:
           "Rolo fechado de 100m com 24 LEDs por metro. Luz contínua para contornos longos.",
         specs: [
@@ -187,6 +192,12 @@ export const mangueirasFitasCategories: NatalCategory[] = [
       {
         name: "Fita de LED SMD — 50m",
         image: "/natal/fita-smd-50.png",
+        images: [
+          { code: "50741", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/fita-smd-50m-branco-quente.png" },
+          { code: "50744", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/fita-smd-50m-verde.png" },
+          { code: "50745", color: "Rosa", swatch: SWATCH["Rosa"], src: "/natal/fita-smd-50m-rosa.png" },
+          { code: "50743", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/fita-smd-50m-vermelho.png" },
+        ],
         description:
           "Rolo de 50m com 250 LEDs por metro, em 7 cores. Cortável de metro em metro.",
         specs: [

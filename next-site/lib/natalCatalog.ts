@@ -10,6 +10,7 @@
 export type {
   NatalCategory,
   NatalProduct,
+  NatalProductImage,
   NatalProductVideo,
   NatalSection,
   NatalSpec,

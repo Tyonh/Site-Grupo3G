@@ -22,9 +22,9 @@ const LocalProduct3DScene = dynamic(
   { ssr: false },
 );
 
-// Cache bust estável por carregamento de sessão para otimização de rede do arquivo GLB de 178MB
+// Cache bust estável por carregamento de sessão
 const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
-const homologadaModelUrl = `/models/Homologada.glb?v=${CACHE_BUST}`;
+const homologadaModelUrl = `/models/Homologada.final.glb?v=${CACHE_BUST}`;
 
 export default function LuminariaHomologadaPage() {
   const theme: "light" | "dark" = "light";

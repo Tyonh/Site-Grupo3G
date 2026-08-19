@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductColorVideo from "@/components/natal/ProductColorVideo";
+import ProductColorImage from "@/components/natal/ProductColorImage";
 import {
   getSectionBySlug,
   natalSections,
@@ -149,6 +150,11 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                       {product.videos ? (
                         <ProductColorVideo
                           videos={product.videos}
+                          productName={product.name}
+                        />
+                      ) : product.images ? (
+                        <ProductColorImage
+                          images={product.images}
                           productName={product.name}
                         />
                       ) : (

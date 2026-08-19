@@ -31,7 +31,7 @@ export default function ModuloProductPage() {
     useInView<HTMLElement>("300px");
 
   // Load light model (100W) for scroll background and heavy high-end model (300W) for final showcase
-  const backgroundModelUrl = `/models/moduloBackground.glb?v=${CACHE_BUST}`;
+  const backgroundModelUrl = `/models/moduloBackground.final.glb?v=${CACHE_BUST}`;
 
   // Theme styling helpers (shared across all /produtos/* pages)
   const {
@@ -333,7 +333,7 @@ export default function ModuloProductPage() {
             <div className={showcaseCanvasClass}>
               {isShowcaseInView && (
                 <LocalProduct3DScene
-                  modelUrl="/models/moduloInterativo.glb"
+                  modelUrl="/models/moduloInterativo.final.glb"
                   selectedPower={selectedPower}
                   theme={theme}
                   environmentIntensity={0.4}
