@@ -6,8 +6,9 @@ const csp = [
   "default-src 'self'",
   // 'unsafe-inline' is required for Next.js hydration scripts and inline JSON-LD;
   // Three.js/Draco loads its decoder from gstatic and spins up a blob: worker.
+  // 'wasm-unsafe-eval' compiles WebAssembly only (Draco decoder) — much narrower than 'unsafe-eval'.
   // 'unsafe-eval' is only needed in dev mode (React Refresh / debugging) — never shipped to production.
-  `script-src 'self' 'unsafe-inline' https://www.gstatic.com blob:${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.gstatic.com blob:${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob:",
