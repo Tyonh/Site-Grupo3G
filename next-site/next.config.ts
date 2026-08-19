@@ -13,7 +13,8 @@ const csp = [
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob:",
   "media-src 'self'",
-  "connect-src 'self' https://www.gstatic.com",
+  // blob: is required because GLTFLoader fetches embedded GLB textures via fetch() on blob: URLs.
+  "connect-src 'self' https://www.gstatic.com blob:",
   "worker-src 'self' blob:",
   "frame-src 'none'",
   "object-src 'none'",
