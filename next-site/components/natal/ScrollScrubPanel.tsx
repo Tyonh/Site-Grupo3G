@@ -13,11 +13,12 @@ interface ScrollScrubPanelProps {
   /** Cor de fundo do painel quando `video` está definido (o vídeo já nasce nessa cor) */
   mediaBg?: "black" | "white";
   /**
-   * "left" trava o vídeo na metade esquerda do painel (contido, sem cobrir
-   * o painel inteiro) e o texto na metade direita, ignorando a alternância
-   * padrão por índice. "center" (padrão) mantém o comportamento full-bleed.
+   * "left"/"right" travam o vídeo naquele lado do painel (contido, sem cobrir
+   * o painel inteiro) e o texto no lado oposto, ignorando a alternância
+   * padrão por índice. "right" usa uma mídia menor, que não encosta nas
+   * bordas do painel. "center" (padrão) mantém o comportamento full-bleed.
    */
-  mediaAlign?: "center" | "left";
+  mediaAlign?: "center" | "left" | "right";
   alt: string;
   index: number;
   children: ReactNode;
@@ -45,7 +46,8 @@ export default function ScrollScrubPanel({
   children,
 }: ScrollScrubPanelProps) {
   const isLight = Boolean(video) && mediaBg === "white";
-  const isSplitLeft = mediaAlign === "left";
+  const isSplitRight = mediaAlign === "right";
+  const isSplit = mediaAlign === "left" || isSplitRight;
   const ref = useRef<HTMLAnchorElement>(null);
   const videoRef = useAutoplayVideo<HTMLVideoElement>();
   const { scrollYProgress } = useScroll({
@@ -53,12 +55,20 @@ export default function ScrollScrubPanel({
     offset: ["start end", "end start"],
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 0.6], [1.18, 1]);
+  // No split-right o zoom é mais curto e cresce a partir da borda direita
+  // (origin-right): assim a mídia fica sempre rente ao limite do painel, sem
+  // ser cortada pelo overflow, e no zoom máximo ainda não encosta no título.
+  const imageScale = useTransform(
+    scrollYProgress,
+    [0, 0.6],
+    isSplitRight ? [1.1, 1] : [1.18, 1],
+  );
   const isEven = index % 2 === 0;
   // A primeira categoria (índice 0, split-left) já força o texto pra
   // direita — então a alternância das demais continua a partir daí
   // (índice ímpar = esquerda, par = direita), em vez de reiniciar do zero.
-  const textOnLeft = isSplitLeft ? false : !isEven;
+  // Nos painéis split o texto fica sempre no lado oposto ao vídeo.
+  const textOnLeft = isSplit ? isSplitRight : !isEven;
   const textX = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
@@ -78,15 +88,29 @@ export default function ScrollScrubPanel({
         isLight ? "border-black/10 bg-[#f1f1f1]" : "border-white/10 bg-black"
       }`}
     >
-      {isSplitLeft && video ? (
+      {isSplit && video ? (
         // Mobile: vídeo full-bleed cobrindo o painel inteiro, texto
         // sobreposto por cima com gradiente escuro pra legibilidade — sem
-        // área branca separada. Desktop: volta a ser a coluna esquerda
-        // (vídeo, do tamanho real dele) + coluna direita (texto), lado a lado.
-        <div className="absolute inset-0 lg:flex lg:flex-row">
+        // área branca separada. Desktop: vira coluna de vídeo (do tamanho
+        // real dele) + coluna de texto, lado a lado. Em "right" o vídeo vai
+        // pra direita e ocupa menos: altura reduzida e centrado na vertical,
+        // deixando respiro em vez de encostar nas bordas do painel.
+        <div
+          className={`absolute inset-0 lg:flex ${
+            isSplitRight ? "lg:flex-row-reverse" : "lg:flex-row"
+          }`}
+        >
           <motion.div
             style={{ scale: imageScale }}
-            className="absolute inset-0 lg:relative lg:inset-auto lg:z-10 lg:mr-[-1px] lg:aspect-video lg:h-full lg:w-auto lg:max-w-[55%] lg:shrink-0"
+            className={`absolute inset-0 lg:relative lg:inset-auto lg:z-10 lg:shrink-0 ${
+              isSplitRight
+                ? // Sem aspect fixo: a altura sai da proporção real do vídeo,
+                  // que já vem recortado rente ao produto. Assim a mídia
+                  // encosta na borda do painel em vez de flutuar numa caixa
+                  // com sobra em volta.
+                  "lg:h-auto lg:w-[58%] lg:self-center lg:origin-right"
+                : "lg:mr-[-1px] lg:aspect-video lg:h-full lg:w-auto lg:max-w-[55%]"
+            }`}
           >
             <video
               ref={videoRef}
@@ -96,7 +120,9 @@ export default function ScrollScrubPanel({
               playsInline
               autoPlay
               aria-hidden
-              className="h-full w-full object-cover"
+              className={`h-full w-full object-cover ${
+                isSplitRight ? "lg:h-auto lg:object-contain" : ""
+              }`}
             />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent lg:hidden" />

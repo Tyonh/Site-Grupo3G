@@ -7,6 +7,7 @@ import ProductVideoHero from "@/components/natal/ProductVideoHero";
 import ScrollScrubPanel from "@/components/natal/ScrollScrubPanel";
 import Magnetic from "@/components/natal/Magnetic";
 import { natalSections } from "@/lib/natalCatalog";
+import { versioned } from "@/lib/natal/assetVersion";
 
 export const metadata: Metadata = {
   title: "Natal 3G — Iluminação e Decoração Natalina",
@@ -23,8 +24,8 @@ export default function NatalHomePage() {
       <main className="w-full bg-black text-white">
         {/* ═══════════ ABERTURA — PRODUTO EM VÍDEO SOBRE FUNDO BRANCO ═══════════ */}
         <ProductVideoHero
-          videoSrc="/natal/videos/arvore.mp4"
-          posterSrc="/natal/hero-cordao-poster.jpg"
+          videoSrc={versioned("/natal/videos/arvore.mp4")}
+          posterSrc={versioned("/natal/hero-cordao-poster.jpg")}
           kicker="Catálogo Natal 2026 — Grupo 3G"
           title={
             <>
@@ -52,7 +53,8 @@ export default function NatalHomePage() {
             // Mesma regra de alternância do ScrollScrubPanel: o grupo 0
             // (split-left) já força texto à direita, então os demais
             // continuam a alternância a partir daí (par = direita).
-            const isSplit = sec.mediaAlign === "left";
+            const isSplit =
+              sec.mediaAlign === "left" || sec.mediaAlign === "right";
             const textOnRight = !isSplit && i % 2 === 0;
             // Painéis split-left claros (isLight) sobrepõem o texto no
             // vídeo com gradiente escuro no mobile, mas ficam ao lado do
@@ -83,8 +85,8 @@ export default function NatalHomePage() {
               <ScrollScrubPanel
                 key={sec.slug}
                 href={`/natal/${sec.slug}`}
-                photo={sec.photo}
-                video={sec.video}
+                photo={sec.photo ? versioned(sec.photo) : sec.photo}
+                video={sec.video ? versioned(sec.video) : sec.video}
                 mediaBg={sec.mediaBg}
                 mediaAlign={sec.mediaAlign}
                 alt={sec.name}

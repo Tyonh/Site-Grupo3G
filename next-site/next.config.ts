@@ -25,6 +25,15 @@ const csp = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  images: {
+    // As URLs das imagens de produto carregam um cache-buster `?v=<mtime>`
+    // (ver lib/natal/assetVersion.ts) para que sobrescrever um arquivo em
+    // public/ com o mesmo nome invalide o cache do navegador e da CDN.
+    // A partir do Next 16 query string em imagem local só é aceita se o
+    // caminho estiver em localPatterns — sem `search` definido, qualquer
+    // query é permitida.
+    localPatterns: [{ pathname: "/**" }],
+  },
   async headers() {
     return [
       {

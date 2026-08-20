@@ -68,8 +68,12 @@ export interface NatalCategory {
    * enviado veio com fundo branco. Ignorado se não houver `video`.
    */
   mediaBg?: "black" | "white";
-  /** "left" trava o vídeo na metade esquerda do painel e o texto na direita */
-  mediaAlign?: "center" | "left";
+  /**
+   * "left"/"right" travam o vídeo naquele lado do painel (contido, sem cobrir
+   * o painel inteiro) e o texto no lado oposto. "right" usa uma mídia menor
+   * que "left". "center" (padrão) mantém o vídeo full-bleed.
+   */
+  mediaAlign?: "center" | "left" | "right";
   /** Camada 1 — o que é, uma frase sem jargão */
   whatIs: string;
   /** Camada 2 — por que escolher esse e não o vizinho */
@@ -101,8 +105,12 @@ export interface NatalSection {
   video?: string;
   /** Cor de fundo do painel quando `video` está definido */
   mediaBg?: "black" | "white";
-  /** "left" trava o vídeo na metade esquerda do painel e o texto na direita */
-  mediaAlign?: "center" | "left";
+  /**
+   * "left"/"right" travam o vídeo naquele lado do painel (contido, sem cobrir
+   * o painel inteiro) e o texto no lado oposto. "right" usa uma mídia menor
+   * que "left". "center" (padrão) mantém o vídeo full-bleed.
+   */
+  mediaAlign?: "center" | "left" | "right";
   /** Chamada curta do grupo, usada no painel da home e no hero da página do grupo */
   blurb: string;
   /** Subcategorias do grupo, cada uma com sua ficha completa de produtos */

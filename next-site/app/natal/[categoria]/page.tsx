@@ -10,6 +10,7 @@ import {
   getSectionBySlug,
   natalSections,
 } from "@/lib/natalCatalog";
+import { versioned } from "@/lib/natal/assetVersion";
 
 interface PageProps {
   params: Promise<{ categoria: string }>;
@@ -49,7 +50,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
         <section className="relative h-[85vh] min-h-[520px] w-full overflow-hidden">
           {heroPhoto && (
             <Image
-              src={heroPhoto}
+              src={versioned(heroPhoto)}
               alt={`${section.name} em aplicação real`}
               fill
               sizes="100vw"
@@ -149,19 +150,19 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                     >
                       {product.videos ? (
                         <ProductColorVideo
-                          videos={product.videos}
+                          videos={product.videos.map((v) => ({ ...v, src: versioned(v.src) }))}
                           productName={product.name}
                         />
                       ) : product.images ? (
                         <ProductColorImage
-                          images={product.images}
+                          images={product.images.map((img) => ({ ...img, src: versioned(img.src) }))}
                           productName={product.name}
                         />
                       ) : (
                         <div className="relative w-full aspect-[4/3]">
                           {product.image ? (
                             <Image
-                              src={product.image}
+                              src={versioned(product.image)}
                               alt={product.name}
                               fill
                               sizes="(max-width: 1024px) 90vw, 560px"
@@ -266,7 +267,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
         >
           {(nextSection.photo ?? nextSection.categories[0]?.photo) && (
             <Image
-              src={(nextSection.photo ?? nextSection.categories[0]?.photo)!}
+              src={versioned((nextSection.photo ?? nextSection.categories[0]?.photo)!)}
               alt={nextSection.name}
               fill
               sizes="100vw"
