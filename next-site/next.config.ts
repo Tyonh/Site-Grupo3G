@@ -25,6 +25,12 @@ const csp = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  // Fixa a raiz do workspace nesta pasta: a VPS tem outro lockfile em /var/www
+  // (fora deste projeto) e o Turbopack estava inferindo /var/www como raiz,
+  // tentando compilar arquivos de outro projeto (ex: src/middleware.ts com @supabase/ssr).
+  turbopack: {
+    root: __dirname,
+  },
   images: {
     // As URLs das imagens de produto carregam um cache-buster `?v=<mtime>`
     // (ver lib/natal/assetVersion.ts) para que sobrescrever um arquivo em

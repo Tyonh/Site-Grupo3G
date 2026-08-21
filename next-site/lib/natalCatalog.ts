@@ -31,7 +31,7 @@ export const natalSections: NatalSection[] = [
     slug: "cordoes-de-led",
     name: "Cordões de LED",
     icon: "✨",
-    video: "/natal/videos/cordoes-entrada-branco.mp4",
+    video: "/natal/videos/cordoes-entrada-toque.mp4",
     mediaBg: "white",
     mediaAlign: "left",
     blurb:
