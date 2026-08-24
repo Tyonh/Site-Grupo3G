@@ -4,8 +4,8 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { ProductModel } from "./ProductModel";
 import { ModelController } from "./ModelController";
+import { Environment } from "@react-three/drei";
 import { CanvasLoader } from "./CanvasLoader";
-import { StudioLights } from "./StudioLights";
 
 interface LocalProduct3DSceneProps {
   modelUrl: string;
@@ -35,7 +35,10 @@ export const LocalProduct3DScene = ({
         gl={{ antialias: true }}
       >
         <Suspense fallback={<CanvasLoader label="Carregando Modelo 3D" opacity="85" />}>
-            <StudioLights environmentIntensity={environmentIntensity} />
+            <Environment
+              files="/hdri/studio_small_03_1k.hdr"
+              environmentIntensity={environmentIntensity}
+            />
             <ProductModel 
               modelUrl={modelUrl} 
               isInteractive={true} 

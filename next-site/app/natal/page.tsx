@@ -10,7 +10,9 @@ import { natalSections } from "@/lib/natalCatalog";
 import { versioned } from "@/lib/natal/assetVersion";
 
 export const metadata: Metadata = {
-  title: "Natal 3G — Iluminação e Decoração Natalina",
+  // `absolute` ignora o template `%s — 3G Iluminação` do layout, senão o
+  // nome da marca apareceria duas vezes no título da aba.
+  title: { absolute: "Natal 3G - Luz que Transforma" },
   description:
     "Cordões, mangueiras, fitas de LED, árvores gigantes, figuras 3D e infláveis. A linha natalina completa do Grupo 3G.",
   alternates: { canonical: "/natal" },
