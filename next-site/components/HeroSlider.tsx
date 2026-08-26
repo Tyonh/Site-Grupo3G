@@ -122,7 +122,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative w-full h-[780px] xs:h-[720px] sm:h-[650px] md:h-[600px] lg:h-[650px] xl:h-[700px] overflow-hidden bg-black flex items-center"
+      className="relative w-full h-dvh min-h-[560px] overflow-hidden bg-black flex items-center"
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
     >
