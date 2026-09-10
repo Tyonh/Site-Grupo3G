@@ -74,6 +74,10 @@ const doors: Door[] = [
 export default function GroupHome() {
   return (
     <>
+      {/* Sinal de prioridade máxima pro vídeo da primeira porta (Natal): sem
+          isso o navegador só começa a baixá-lo quando o parser alcança o
+          <video> no DOM, atrasando o autoplay em relação ao resto da página. */}
+      <link rel="preload" href="/natal/videos/arvore.mp4" as="video" type="video/mp4" />
       <GroupNavbar />
       <main className="flex-1 w-full flex flex-col">
         {/* Hero institucional — horizontal, full-bleed, com vídeo de fundo
@@ -125,12 +129,15 @@ export default function GroupHome() {
                 href={door.href}
                 className={`group relative flex min-h-[min(70svh,48rem)] w-full items-center overflow-hidden px-4 py-12 text-white transition-colors duration-500 focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white sm:px-8 sm:py-16 lg:px-12 ${door.bg}`}
               >
-                {/* Vídeo de fundo */}
+                {/* Vídeo de fundo — preload="auto" pra começar a rodar já na
+                    carga da página, sem esperar o navegador priorizar
+                    (default seria "metadata", que atrasa o autoplay) */}
                 <video
                   autoPlay
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   className="absolute inset-0 h-full w-full object-cover"
                 >
                   <source src={door.video} type="video/mp4" />

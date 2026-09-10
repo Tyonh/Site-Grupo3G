@@ -36,6 +36,11 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #f3f3f3; /* brand-light */
   overflow-x: hidden;
+  /* Trava a UI nativa do navegador (scrollbar, controles de formulário,
+     autofill) no tema claro. Sem isso, o navegador segue o tema do sistema
+     operacional do visitante — o site não tem (e não deve ter) um segundo
+     conjunto de cores para modo escuro. */
+  color-scheme: light;
 }
 
 @keyframes page-loader-rotate {
