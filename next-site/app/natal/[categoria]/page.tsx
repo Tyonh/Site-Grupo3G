@@ -43,7 +43,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
 
   return (
     <>
-      <Navbar />
+      <Navbar homeHref="/natal" />
 
       <main className="w-full bg-black text-white">
         {/* ═══════════ HERO FULL-BLEED — GRUPO ═══════════ */}

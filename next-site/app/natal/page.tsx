@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function NatalHomePage() {
   return (
     <>
-      <Navbar />
+      <Navbar homeHref="/natal" />
 
       <main className="w-full bg-black text-white">
         {/* ═══════════ ABERTURA — PRODUTO EM VÍDEO SOBRE FUNDO BRANCO ═══════════ */}

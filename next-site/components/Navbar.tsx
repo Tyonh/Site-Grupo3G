@@ -4,7 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-const Navbar = () => {
+interface NavbarProps {
+  /** Destino da logo — a marca "atual" de quem está usando este header.
+   *  Default "/3g" porque a maioria das páginas que usam este Navbar são da
+   *  marca 3G; páginas fora da marca (Natal, Sobre) passam o próprio caminho
+   *  explicitamente para a logo não levar o usuário pra fora de onde ele está. */
+  homeHref?: string;
+}
+
+const Navbar = ({ homeHref = "/3g" }: NavbarProps) => {
   const [open, setOpen] = useState(false);
 
   const toggleMenu = () => setOpen(!open);
@@ -21,7 +29,7 @@ const Navbar = () => {
     <header className="bg-brand-red text-white h-[80px] flex items-center relative z-50 w-full px-4 sm:px-6 md:px-8 shadow-md">
       <nav className="w-full max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-102">
+        <Link href={homeHref} className="flex items-center space-x-2 transition-transform duration-300 hover:scale-102">
           <Image
             src="/3G VETOR branco.png"
             alt="3G Iluminação"

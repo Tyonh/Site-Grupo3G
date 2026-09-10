@@ -66,7 +66,7 @@ const TIMELINE = [
 export default function SobrePage() {
   return (
     <>
-      <Navbar />
+      <Navbar homeHref="/" />
 
       {/* Fundo — degradê claro fixo, sem variante escura */}
       <div className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none bg-radial from-slate-50 via-slate-100 to-slate-200" />
