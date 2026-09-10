@@ -1,8 +1,14 @@
 import ProductFamilyHero, {
   type ProductHotspot,
 } from "@/components/ProductFamilyHero";
+import type { FamilyBrand } from "@/lib/familyTheme";
 
 interface ProductFamily {
+  /** Marca do Grupo 3G dona do produto — "3g" usa a paleta vermelho/branco/
+   *  cinza padrão; "ebron" é a marca própria (azul-marinho), hoje só a
+   *  EBRON e a EBRON PRO. Cada marca tem sua própria página (/3g, /ebron),
+   *  que renderiza este componente filtrado pela sua marca. */
+  brand: FamilyBrand;
   kicker: string;
   name: string;
   description: string;
@@ -17,6 +23,7 @@ interface ProductFamily {
 
 const families: ProductFamily[] = [
   {
+    brand: "3g",
     kicker: "Eficiência Absoluta",
     name: "Refletor Modular",
     description:
@@ -56,6 +63,7 @@ const families: ProductFamily[] = [
     ],
   },
   {
+    brand: "3g",
     kicker: "Energia Solar Autônoma",
     name: "Luminária Solar",
     description:
@@ -104,6 +112,7 @@ const families: ProductFamily[] = [
     ],
   },
   {
+    brand: "3g",
     kicker: "Iluminação Pública Premium",
     name: "Luminária Homologada",
     description:
@@ -152,6 +161,7 @@ const families: ProductFamily[] = [
     ],
   },
   {
+    brand: "ebron",
     kicker: "Eficiência Urbana",
     name: "Luminária EBRON",
     description:
@@ -179,6 +189,7 @@ const families: ProductFamily[] = [
     ],
   },
   {
+    brand: "ebron",
     kicker: "Linha Profissional 2026",
     name: "Luminária EBRON PRO",
     description:
@@ -210,13 +221,22 @@ const families: ProductFamily[] = [
   },
 ];
 
-export default function ProductsSection() {
+interface ProductsSectionProps {
+  /** Só as famílias dessa marca são renderizadas — /3g e /ebron passam a
+   *  sua respectiva marca aqui. */
+  brand: FamilyBrand;
+}
+
+export default function ProductsSection({ brand }: ProductsSectionProps) {
+  const brandFamilies = families.filter((family) => family.brand === brand);
+
   return (
     <>
-      {families.map((family, i) => (
+      {brandFamilies.map((family, i) => (
         <ProductFamilyHero
           key={family.href}
           index={i}
+          brand={family.brand}
           kicker={family.kicker}
           name={family.name}
           description={family.description}

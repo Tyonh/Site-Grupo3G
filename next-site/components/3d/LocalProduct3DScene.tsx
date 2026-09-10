@@ -10,7 +10,7 @@ import { CanvasLoader } from "./CanvasLoader";
 interface LocalProduct3DSceneProps {
   modelUrl: string;
   selectedPower: "100w" | "200w" | "300w";
-  theme?: "light" | "dark";
+  theme?: "light" | "dark" | "ebron";
   environmentIntensity?: number;
   lightIntensityMultiplier?: number;
 }
@@ -19,13 +19,15 @@ export const LocalProduct3DScene = ({
   modelUrl,
   selectedPower,
   theme = "light",
-  environmentIntensity = theme === "dark" ? 2.5 : 3.5,
+  environmentIntensity = theme === "dark" || theme === "ebron" ? 2.5 : 3.5,
   lightIntensityMultiplier = 1.0,
 }: LocalProduct3DSceneProps) => {
   return (
     <div className={`w-full h-full min-h-[400px] transition-colors duration-700 cursor-grab active:cursor-grabbing ${
-      theme === "dark"
-        ? "bg-radial from-gray-900 via-neutral-900 to-black"
+      theme === "ebron"
+        ? "bg-radial from-ebron-blue via-ebron-navy to-[#060f20]"
+        : theme === "dark"
+          ? "bg-radial from-gray-900 via-neutral-900 to-black"
         : "bg-radial from-slate-50 via-slate-100 to-slate-200"
     }`}>
       <Canvas

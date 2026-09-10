@@ -14,7 +14,7 @@ interface Product3DSceneProps {
   setIsInteractive: (val: boolean) => void;
   scrollContainerRef: React.RefObject<HTMLDivElement | null>;
   selectedPower: "100w" | "200w" | "300w";
-  theme?: "light" | "dark";
+  theme?: "light" | "dark" | "ebron";
   environmentIntensity?: number;
   lightIntensityMultiplier?: number;
 }
@@ -35,8 +35,10 @@ export const Product3DScene = ({
 
   return (
     <div className={`fixed top-0 left-0 w-full h-screen z-0 pointer-events-none transition-colors duration-700 ${
-      theme === "dark"
-        ? "bg-radial from-gray-900 to-black"
+      theme === "ebron"
+        ? "bg-radial from-ebron-blue via-ebron-navy to-[#060f20]"
+        : theme === "dark"
+          ? "bg-radial from-gray-900 to-black"
         : "bg-radial from-slate-50 via-slate-100 to-slate-200"
     }`}>
       {/* Enable pointer-events only for OrbitControls when interactive */}

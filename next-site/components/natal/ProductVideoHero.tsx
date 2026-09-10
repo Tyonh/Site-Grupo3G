@@ -91,7 +91,7 @@ export default function ProductVideoHero({
           playsInline
           autoPlay
           aria-hidden
-          className="h-full w-full max-h-[94vh] max-w-[1120px] object-cover mix-blend-multiply pointer-events-auto xl:object-contain"
+          className="h-full w-full max-h-[94vh] max-w-[1120px] object-contain mix-blend-multiply pointer-events-auto"
           style={{
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",

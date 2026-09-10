@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ShieldCheck, Sun, Thermometer, Zap, type LucideIcon } from "lucide-react";
+import { ShieldCheck, Sun, Thermometer, type LucideIcon } from "lucide-react";
 import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
 
 interface Spec {
@@ -67,20 +67,6 @@ const slidesData: Slide[] = [
     btnSecondaryHref: "https://grupo3giluminacao.com.br/pages/Homologada/Homologada.html",
     productImg: "/familia homologada.png",
     productAlt: "Luminária Homologada",
-  },
-  {
-    title: "LUMINÁRIA EBRON 50W",
-    specs: [
-      { icon: ShieldCheck, label: "IP 66" },
-      { icon: Zap, label: "Bivolt" },
-      { icon: Thermometer, label: "5000K" },
-    ],
-    btnPrimaryText: "Comprar Agora",
-    btnPrimaryHref: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.",
-    btnSecondaryText: "Ficha Técnica",
-    btnSecondaryHref: "https://grupo3giluminacao.com.br/pages/Ebron/Ebron.html",
-    productImg: "/FAMILIA EBRON.png",
-    productAlt: "Luminária Ebron 50W",
   },
 ];
 

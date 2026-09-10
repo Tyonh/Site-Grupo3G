@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+import EbronNavbar from "@/components/ebron/EbronNavbar";
 import Footer from "@/components/Footer";
-import { getProductTheme, productCheckMark } from "@/lib/productTheme";
+import { getProductCheckMark, getProductTheme } from "@/lib/productTheme";
 
 const useCases = [
   "Vias Públicas e Rodovias",
@@ -16,7 +16,7 @@ const useCases = [
 ];
 
 export default function EbronProPage() {
-  const theme: "light" | "dark" = "light";
+  const theme = "ebron" as const;
 
   // ─── Theme styling helpers (shared across all /produtos/* pages) ───
   const {
@@ -42,32 +42,32 @@ export default function EbronProPage() {
     showcaseInfoPanelClass,
   } = getProductTheme(theme);
 
-  const checkMark = productCheckMark;
+  const checkMark = getProductCheckMark("ebron");
 
   return (
     <>
-      <Navbar />
+      <EbronNavbar />
 
       {/* Fundo fixo com a foto do produto — a linha PRO ainda não tem modelo
           3D próprio (só EBRON, Homologada e Módulo têm .glb), então a foto
           real (recorte com fundo transparente) assume o lugar da cena 3D
-          interativa das demais páginas, ancorada à direita. */}
-      <div className="fixed inset-0 -z-10 bg-brand-light">
-        <div className="absolute inset-y-0 right-0 hidden w-1/2 sm:block">
+          interativa das demais páginas, centralizada no plano de fundo. */}
+      <div className="fixed inset-0 -z-10 bg-ebron-navy">
+        <div className="absolute inset-0 hidden sm:block">
           <Image
             src="/ebron-pro.png"
             alt=""
             aria-hidden
             fill
-            sizes="50vw"
+            sizes="min(50vw, 720px)"
             priority
-            className="object-contain object-right opacity-90"
+            className="object-contain object-center opacity-90"
           />
         </div>
       </div>
 
       {/* Main scrollable content */}
-      <div className="relative z-10 w-full flex flex-col">
+      <div className="ebron-product-page relative z-10 flex w-full flex-col">
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 1: HERO
         ═══════════════════════════════════════════════════════════════ */}

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ProductCloseupModal from "@/components/ProductCloseupModal";
+import { getFamilyTheme, type FamilyBrand } from "@/lib/familyTheme";
 
 export interface ProductHotspot {
   id: string;
@@ -27,6 +28,9 @@ export interface ProductHotspot {
 
 interface ProductFamilyHeroProps {
   index: number;
+  /** Marca dona do produto — decide a paleta (3G vermelho/claro, EBRON
+   *  azul-marinho) via `getFamilyTheme`. */
+  brand: FamilyBrand;
   kicker: string;
   name: string;
   description: string;
@@ -57,6 +61,7 @@ const REVEAL_DELAY_MS = 300;
  */
 export default function ProductFamilyHero({
   index,
+  brand,
   kicker,
   name,
   description,
@@ -66,6 +71,7 @@ export default function ProductFamilyHero({
   aspectRatio = "3/4",
   vectorImage,
 }: ProductFamilyHeroProps) {
+  const theme = getFamilyTheme(brand);
   const [openIds, setOpenIds] = useState<string[]>([]);
   const isOpen = (id: string) => openIds.includes(id);
 
@@ -115,13 +121,14 @@ export default function ProductFamilyHero({
   };
 
   return (
-    <section className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden border-b border-black/5 bg-brand-light px-6 py-24 sm:px-10 lg:px-16">
+    <section
+      className={`relative flex min-h-screen w-full flex-col justify-center overflow-hidden border-b px-6 py-24 sm:px-10 lg:px-16 ${theme.sectionBg} ${theme.sectionBorder}`}>
       {/* Nome da categoria fixo no canto superior esquerdo */}
       <div className="absolute top-8 left-6 z-10 sm:top-10 sm:left-10 lg:top-12 lg:left-16">
-        <span className="text-xs font-extrabold uppercase tracking-widest text-brand-red">
+        <span className={`text-xs font-extrabold uppercase tracking-widest ${theme.kicker}`}>
           {String(index + 1).padStart(2, "0")} — {kicker}
         </span>
-        <h3 className="mt-2 text-3xl font-black uppercase tracking-tight text-brand-charcoal sm:text-4xl lg:text-5xl">
+        <h3 className={`mt-2 text-3xl font-black uppercase tracking-tight sm:text-4xl lg:text-5xl ${theme.title}`}>
           {name}
         </h3>
       </div>
@@ -153,7 +160,7 @@ export default function ProductFamilyHero({
                 junto no mesmo fade. */}
             {hasVector && (
               <div
-                className={`absolute inset-0 bg-brand-light transition-opacity duration-700 ease-out ${
+                className={`absolute inset-0 transition-opacity duration-700 ease-out ${theme.vectorBackdropBg} ${
                   revealed ? "opacity-0" : "opacity-100"
                 }`}>
                 <Image
@@ -175,10 +182,8 @@ export default function ProductFamilyHero({
                   aria-label={`Ver detalhe: ${h.label}`}
                   onClick={() => toggle(h.id)}
                   style={{ top: `${h.top}%`, left: `${h.left}%` }}
-                  className={`absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center border-2 backdrop-blur-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red ${
-                    isOpen(h.id)
-                      ? "border-brand-red bg-brand-red text-white"
-                      : "border-brand-red bg-white/85 text-brand-red hover:bg-brand-red hover:text-white"
+                  className={`absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center border-2 backdrop-blur-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${theme.hotspotBorder} ${theme.hotspotFocusOutline} ${
+                    isOpen(h.id) ? theme.hotspotActive : theme.hotspotIdle
                   }`}>
                   <span aria-hidden className="text-lg leading-none">
                     {isOpen(h.id) ? "×" : "+"}
@@ -202,6 +207,7 @@ export default function ProductFamilyHero({
                   key={h.id}
                   hotspot={h}
                   image={image}
+                  theme={theme}
                   onClose={toggle}
                   onExpand={setExpandedId}
                 />
@@ -218,6 +224,7 @@ export default function ProductFamilyHero({
                   key={h.id}
                   hotspot={h}
                   image={image}
+                  theme={theme}
                   onClose={toggle}
                   onExpand={setExpandedId}
                 />
@@ -227,15 +234,15 @@ export default function ProductFamilyHero({
         </div>
 
         {/* DETALHES — único lugar com texto/características extras, sempre à direita */}
-        <div className="flex flex-col gap-6 lg:border-l lg:border-brand-dark/15 lg:pl-10">
-          <p className="font-light leading-relaxed text-brand-dark">
+        <div className={`flex flex-col gap-6 lg:border-l lg:pl-10 ${theme.divider}`}>
+          <p className={`font-light leading-relaxed ${theme.description}`}>
             {description}
           </p>
 
           {revealed ? (
-            <dl className="border-t border-brand-dark/15">
+            <dl className={`border-t ${theme.divider}`}>
               {hotspots.map((h) => (
-                <div key={h.id} className="border-b border-brand-dark/15">
+                <div key={h.id} className={`border-b ${theme.divider}`}>
                   <div
                     role="button"
                     tabIndex={0}
@@ -246,10 +253,8 @@ export default function ProductFamilyHero({
                         toggle(h.id);
                       }
                     }}
-                    className={`flex cursor-pointer items-center justify-between gap-4 py-3 text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red ${
-                      isOpen(h.id)
-                        ? "text-brand-red"
-                        : "text-brand-charcoal hover:text-brand-red"
+                    className={`flex cursor-pointer items-center justify-between gap-4 py-3 text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${theme.hotspotFocusOutline} ${
+                      isOpen(h.id) ? theme.listActive : theme.listIdle
                     }`}>
                     <dt className="font-bold uppercase tracking-wider">
                       {h.label}
@@ -259,7 +264,7 @@ export default function ProductFamilyHero({
                     </dd>
                   </div>
                   {isOpen(h.id) && (
-                    <dd className="pb-4 pr-6 text-xs font-light leading-relaxed text-brand-dark sm:text-sm">
+                    <dd className={`pb-4 pr-6 text-xs font-light leading-relaxed sm:text-sm ${theme.description}`}>
                       {h.detail}
                     </dd>
                   )}
@@ -267,12 +272,12 @@ export default function ProductFamilyHero({
               ))}
             </dl>
           ) : (
-            <div className="border-t border-brand-dark/15" />
+            <div className={`border-t ${theme.divider}`} />
           )}
 
           <Link
             href={href}
-            className="inline-flex h-12 w-fit items-center justify-center bg-brand-red px-6 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-charcoal">
+            className={`inline-flex h-12 w-fit items-center justify-center px-6 text-sm font-bold uppercase tracking-wider transition-colors ${theme.ctaBg} ${theme.ctaText} ${theme.ctaHover}`}>
             Ver produto
           </Link>
         </div>
@@ -289,29 +294,32 @@ export default function ProductFamilyHero({
   );
 }
 
+type FamilyTheme = ReturnType<typeof getFamilyTheme>;
+
 interface MiniCardProps {
   hotspot: ProductHotspot;
   /** Foto principal da categoria, usada como fallback quando o hotspot não
    *  tem uma closeupImage própria (aplica o zoom CSS de sempre). */
   image: string;
+  theme: FamilyTheme;
   onClose: (id: string) => void;
   /** Abre o setor em tela cheia para inspeção com zoom. */
   onExpand: (id: string) => void;
 }
 
 /** Card flutuante grande com a foto de close-up (real ou zoom CSS) de um setor. */
-function MiniCard({ hotspot: h, image, onClose, onExpand }: MiniCardProps) {
+function MiniCard({ hotspot: h, image, theme, onClose, onExpand }: MiniCardProps) {
   return (
-    <div className="overflow-hidden border-2 border-brand-red bg-white shadow-xl">
-      <div className="relative aspect-square w-full overflow-hidden bg-brand-light">
+    <div className={`overflow-hidden border-2 shadow-xl ${theme.miniCardBorder} ${theme.miniCardBg}`}>
+      <div className={`relative aspect-square w-full overflow-hidden ${theme.miniCardPhotoBg}`}>
         {/* A própria foto é o gatilho da aba em tela cheia */}
         <button
           type="button"
           aria-label={`Ampliar ${h.label}`}
           onClick={() => onExpand(h.id)}
-          className="group absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-red">
-          <span className="absolute inset-0 bg-brand-charcoal/0 transition-colors group-hover:bg-brand-charcoal/25" />
-          <span className="absolute bottom-1 left-1 flex h-6 items-center bg-brand-charcoal/75 px-2 text-[9px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity group-hover:opacity-100">
+          className={`group absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 ${theme.hotspotFocusOutline}`}>
+          <span className={`absolute inset-0 transition-colors ${theme.miniCardOverlay}`} />
+          <span className={`absolute bottom-1 left-1 flex h-6 items-center px-2 text-[9px] font-bold uppercase tracking-wide text-white opacity-0 transition-opacity group-hover:opacity-100 ${theme.miniCardAmpliarBg}`}>
             Ampliar
           </span>
         </button>
@@ -335,11 +343,11 @@ function MiniCard({ hotspot: h, image, onClose, onExpand }: MiniCardProps) {
           type="button"
           aria-label={`Fechar ${h.label}`}
           onClick={() => onClose(h.id)}
-          className="absolute top-1 right-1 z-20 flex h-6 w-6 cursor-pointer items-center justify-center bg-brand-charcoal/80 text-sm leading-none text-white hover:bg-brand-red">
+          className={`absolute top-1 right-1 z-20 flex h-6 w-6 cursor-pointer items-center justify-center text-sm leading-none text-white transition-colors ${theme.miniCardCloseBg}`}>
           ×
         </button>
       </div>
-      <p className="px-2 py-2 text-center text-[10px] font-bold uppercase leading-tight tracking-wide text-brand-charcoal sm:text-xs">
+      <p className={`px-2 py-2 text-center text-[10px] font-bold uppercase leading-tight tracking-wide sm:text-xs ${theme.miniCardLabel}`}>
         {h.label}
       </p>
     </div>

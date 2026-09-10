@@ -4,32 +4,40 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-const Navbar = () => {
+/**
+ * Header da marca EBRON — mesma estrutura do `Navbar` da 3G, mas na paleta
+ * azul-marinho própria da marca. Usa o símbolo oficial (arquivo branco,
+ * transparente) ao lado do nome em texto.
+ */
+const EbronNavbar = () => {
   const [open, setOpen] = useState(false);
 
   const toggleMenu = () => setOpen(!open);
 
   const links = [
-    { href: "/", label: "INÍCIO" },
-    { href: "/ebron", label: "EBRON" },
+    { href: "/", label: "GRUPO 3G" },
+    { href: "/3g", label: "3G" },
     { href: "/natal", label: "NATAL" },
     { href: "https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações.", label: "CONTATO" },
     { href: "/sobre", label: "SOBRE" },
   ];
 
   return (
-    <header className="bg-brand-red text-white h-[80px] flex items-center relative z-50 w-full px-4 sm:px-6 md:px-8 shadow-md">
+    <header className="bg-ebron-navy text-white h-[80px] flex items-center relative z-50 w-full px-4 sm:px-6 md:px-8 shadow-md">
       <nav className="w-full max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 transition-transform duration-300 hover:scale-102">
+        {/* Logo — símbolo + wordmark */}
+        <Link href="/ebron" className="flex items-center gap-2.5 transition-transform duration-300 hover:scale-102">
           <Image
-            src="/3G VETOR branco.png"
-            alt="3G Iluminação"
-            width={128}
-            height={181}
-            className="h-[50px] sm:h-[60px] w-auto object-contain"
+            src="/ebron-simbolo.png"
+            alt=""
+            width={48}
+            height={48}
+            className="h-[34px] w-[34px] object-contain sm:h-[42px] sm:w-[42px]"
             priority
           />
+          <span className="text-2xl sm:text-3xl font-black uppercase tracking-[0.2em] text-white">
+            EBRON
+          </span>
         </Link>
 
         {/* Desktop Menu */}
@@ -38,7 +46,7 @@ const Navbar = () => {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="hover:text-black transition-colors duration-300 hover-underline-animation uppercase py-2"
+                className="hover:text-ebron-blue-light transition-colors duration-300 hover-underline-animation uppercase py-2"
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
               >
@@ -50,7 +58,7 @@ const Navbar = () => {
 
         {/* Mobile Hamburger Button */}
         <button
-          className="md:hidden focus:outline-none p-2 rounded-lg hover:bg-red-800/60 transition-colors duration-300 cursor-pointer z-50"
+          className="md:hidden focus:outline-none p-2 rounded-lg hover:bg-ebron-blue/60 transition-colors duration-300 cursor-pointer z-50"
           onClick={toggleMenu}
           aria-label="Menu"
         >
@@ -74,9 +82,9 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu Glassmorphism Drawer with Smooth Transition */}
+      {/* Mobile Menu Drawer */}
       <div
-        className={`absolute top-[80px] left-0 w-full md:hidden glassmorphism shadow-2xl transition-all duration-400 ease-in-out z-40 overflow-hidden ${
+        className={`absolute top-[80px] left-0 w-full md:hidden bg-ebron-blue/96 backdrop-blur-md shadow-2xl transition-all duration-400 ease-in-out z-40 overflow-hidden ${
           open ? "max-h-[320px] opacity-100 border-t border-white/10" : "max-h-0 opacity-0 pointer-events-none"
         }`}
       >
@@ -85,7 +93,7 @@ const Navbar = () => {
             <li key={link.href} onClick={() => setOpen(false)} className="transform transition-transform duration-300 active:scale-95">
               <a
                 href={link.href}
-                className="inline-block py-2 text-white hover:text-black transition-colors duration-300 hover-underline-animation uppercase"
+                className="inline-block py-2 text-white hover:text-ebron-blue-light transition-colors duration-300 hover-underline-animation uppercase"
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
               >
@@ -99,4 +107,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default EbronNavbar;

@@ -6,6 +6,13 @@
   --color-brand-dark: #6c6c6b;
   --color-brand-charcoal: #1f1f1f;
 
+  /* Paleta EBRON — marca própria do Grupo 3G, azul-marinho profundo (extraída
+     da arte de referência: fundo degradê escuro com o logo giratório branco) */
+  --color-ebron-navy: #0a1830;
+  --color-ebron-blue: #123469;
+  --color-ebron-blue-light: #3f6bb3;
+  --color-ebron-light: #eef2f8;
+
   /* Paleta natalina (extraída do Catálogo Natal 2026) */
   --color-natal-red: #a62024;
   --color-natal-red-dark: #871c1f;
@@ -29,6 +36,148 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #f3f3f3; /* brand-light */
   overflow-x: hidden;
+}
+
+@keyframes page-loader-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes page-loader-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: rgba(15, 15, 16, 0.96);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  transition: opacity 800ms ease, backdrop-filter 800ms ease;
+}
+
+.page-loader[data-phase="ready"] .page-loader-ring,
+.page-loader[data-phase="leaving"] .page-loader-ring,
+.page-loader[data-phase="ready"] .page-loader-core,
+.page-loader[data-phase="leaving"] .page-loader-core {
+  animation-play-state: paused;
+}
+
+.page-loader[data-phase="leaving"] {
+  opacity: 0;
+  backdrop-filter: blur(0);
+  pointer-events: none;
+}
+
+@keyframes page-entrance {
+  from { opacity: 0.25; }
+  to { opacity: 1; }
+}
+
+body[data-page-entrance="active"] > :not(.page-loader) {
+  animation: page-entrance 850ms ease-out both;
+}
+
+.page-loader-mark {
+  position: relative;
+  width: clamp(10rem, 22vw, 14rem);
+  aspect-ratio: 1;
+}
+
+.page-loader-ring {
+  width: 100%;
+  height: 100%;
+  animation: page-loader-rotate 7s linear infinite;
+}
+
+.page-loader-ring-text {
+  fill: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.page-loader-core {
+  position: absolute;
+  inset: 23%;
+  display: grid;
+  place-items: center;
+  animation: page-loader-pulse 1.5s ease-in-out infinite;
+}
+
+.page-loader-core-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: translateY(-8%);
+}
+
+.page-loader-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader { transition-duration: 120ms; }
+  body[data-page-entrance="active"] > :not(.page-loader) { animation: none; }
+  .page-loader-ring,
+  .page-loader-core {
+    animation: none;
+  }
+}
+
+/* Páginas técnicas da EBRON: mantêm os componentes compartilhados, mas
+   aplicam a identidade azul-marinho em todos os detalhes que ainda usam as
+   utilidades neutras ou vermelhas da linha 3G. */
+.ebron-product-page .text-brand-red {
+  color: #3f6bb3;
+}
+
+.ebron-product-page .bg-brand-red {
+  background-color: #3f6bb3;
+  color: #0a1830;
+}
+
+.ebron-product-page .hover\:bg-red-800:hover {
+  background-color: #eef2f8;
+}
+
+.ebron-product-page [class~="bg-brand-red/15"] {
+  background-color: rgba(63, 107, 179, 0.2);
+}
+
+.ebron-product-page .text-slate-700,
+.ebron-product-page .text-slate-600,
+.ebron-product-page .text-slate-500 {
+  color: rgba(238, 242, 248, 0.8);
+}
+
+.ebron-product-page .bg-slate-50,
+.ebron-product-page .bg-slate-100 {
+  background-color: rgba(18, 52, 105, 0.35);
+}
+
+.ebron-product-page .border-slate-200 {
+  border-color: rgba(63, 107, 179, 0.3);
 }
 
 /* Custom Scrollbar and Snap utilities for Gallery */
@@ -163,4 +312,3 @@ body {
 .animate-fadeIn {
   animation: fadeIn 0.4s ease-out forwards;
 }
-

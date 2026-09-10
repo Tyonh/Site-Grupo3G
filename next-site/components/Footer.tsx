@@ -1,45 +1,47 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-brand-charcoal text-white pt-12 pb-6 px-[5%] w-full relative z-10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start flex-wrap gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start gap-8">
         
         {/* Navigation Column */}
-        <div className="flex-1 min-w-[200px] mb-5">
+        <div className="min-w-0 mb-5">
           <h3 className="text-lg font-bold mb-5 tracking-wide">Navegação Rápida</h3>
           <ul className="flex flex-col gap-3 font-light text-gray-300">
             <li>
-              <a
+              <Link
                 href="/sobre"
                 className="hover:text-brand-red transition-colors duration-300"
               >
                 Sobre Nós
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/natal"
                 className="hover:text-brand-red transition-colors duration-300"
               >
                 Natal
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* Contact Info Column */}
-        <div className="flex-1 min-w-[200px] mb-5 text-gray-300 font-light">
+        <div className="min-w-0 mb-5 text-gray-300 font-light">
           <h3 className="text-lg font-bold mb-5 tracking-wide text-white">Contato</h3>
           <p className="leading-relaxed mb-3">
             Rua Senador Almino, 180<br />
             Praia de Iracema - Fortaleza - Ceará, Brasil
           </p>
           <p className="leading-relaxed font-normal text-white">
-            85 3077.3323 | 85 98655-9388
+            85 98655-9388
           </p>
         </div>
 
         {/* Social Column */}
-        <div className="flex-1 min-w-[200px] mb-5 flex md:justify-end">
+        <div className="min-w-0 mb-5 flex sm:col-span-2 lg:col-span-1 lg:justify-end">
           <div className="flex gap-4">
             <a
               href="https://www.linkedin.com/company/3g-ilumina%C3%A7%C3%A3o/"

@@ -2,9 +2,9 @@
 
 import { useRef } from "react";
 import dynamic from "next/dynamic";
-import Navbar from "@/components/Navbar";
+import EbronNavbar from "@/components/ebron/EbronNavbar";
 import Footer from "@/components/Footer";
-import { getProductTheme, productCheckMark } from "@/lib/productTheme";
+import { getProductCheckMark, getProductTheme } from "@/lib/productTheme";
 import { useInView } from "@/hooks/useInView";
 
 // Lazy loading das cenas 3D para otimização extrema do LCP e TBT
@@ -27,7 +27,7 @@ const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
 const ebronModelUrl = `/models/Ebron100.final.glb?v=${CACHE_BUST}`;
 
 export default function LuminariaEbronPage() {
-  const theme: "light" | "dark" = "light";
+  const theme = "ebron" as const;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { ref: showcaseRef, isInView: isShowcaseInView } =
     useInView<HTMLElement>("300px");
@@ -56,11 +56,11 @@ export default function LuminariaEbronPage() {
     showcaseInfoPanelClass,
   } = getProductTheme(theme);
 
-  const checkMark = productCheckMark;
+  const checkMark = getProductCheckMark("ebron");
 
   return (
     <>
-      <Navbar />
+      <EbronNavbar />
 
       {/* 3D Background Canvas with Ebron 3D model */}
       <Product3DScene
@@ -75,7 +75,7 @@ export default function LuminariaEbronPage() {
       {/* Main scrollable content */}
       <div
         ref={scrollContainerRef}
-        className="relative z-10 w-full flex flex-col bg-transparent">
+        className="ebron-product-page relative z-10 flex w-full flex-col bg-transparent">
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 1: HERO
         ═══════════════════════════════════════════════════════════════ */}
@@ -344,7 +344,7 @@ export default function LuminariaEbronPage() {
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">IP</span>
                   <div>
                     <span className="font-bold text-sm">IP66</span>
-                    <p className="text-xs text-slate-500">Proteção contra poeira e jatos d'água</p>
+                    <p className="text-xs text-slate-500">Proteção contra poeira e jatos d&apos;água</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
