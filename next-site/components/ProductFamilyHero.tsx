@@ -192,43 +192,45 @@ export default function ProductFamilyHero({
               ))}
           </div>
 
-          {/* MINI-CARDS — um por setor aberto, empilhados em duas colunas
-              (esquerda/direita) centralizadas no espaço vazio ao redor da
-              foto. Empilhar em vez de posicionar pela altura exata do
-              hotspot evita que cards grandes se sobreponham; todos podem
-              ficar abertos ao mesmo tempo. */}
-          {revealed && leftCards.length > 0 && (
-            <div
-              className="absolute top-1/2 right-[100%] z-20 flex -translate-y-1/2 flex-col gap-4"
-              style={{ width: "clamp(120px, min(14vw, 22vh), 230px)" }}
-            >
-              {leftCards.map((h) => (
-                <MiniCard
-                  key={h.id}
-                  hotspot={h}
-                  image={image}
-                  theme={theme}
-                  onClose={toggle}
-                  onExpand={setExpandedId}
-                />
-              ))}
-            </div>
-          )}
-          {revealed && rightCards.length > 0 && (
-            <div
-              className="absolute top-1/2 left-[100%] z-20 flex -translate-y-1/2 flex-col gap-4"
-              style={{ width: "clamp(120px, min(14vw, 22vh), 230px)" }}
-            >
-              {rightCards.map((h) => (
-                <MiniCard
-                  key={h.id}
-                  hotspot={h}
-                  image={image}
-                  theme={theme}
-                  onClose={toggle}
-                  onExpand={setExpandedId}
-                />
-              ))}
+          {/* MINI-CARDS — um por setor aberto, em duas colunas
+              (esquerda/direita). A partir de `lg` elas flutuam no espaço
+              vazio das laterais da foto; abaixo disso esse espaço não
+              existe (a coluna ocupa a largura da tela), então as colunas
+              voltam ao fluxo, logo abaixo da foto — flutuando, os cards
+              ficavam cortados fora da tela no mobile. Empilhar em vez de
+              posicionar pela altura exata do hotspot evita que cards
+              grandes se sobreponham; todos podem ficar abertos ao mesmo
+              tempo. */}
+          {revealed && openHotspots.length > 0 && (
+            <div className="mt-6 flex items-start justify-center gap-3 lg:mt-0 lg:block">
+              {leftCards.length > 0 && (
+                <div className="flex w-full max-w-[230px] flex-col gap-3 lg:absolute lg:top-1/2 lg:right-[100%] lg:z-20 lg:w-[clamp(120px,min(14vw,22vh),230px)] lg:-translate-y-1/2 lg:gap-4">
+                  {leftCards.map((h) => (
+                    <MiniCard
+                      key={h.id}
+                      hotspot={h}
+                      image={image}
+                      theme={theme}
+                      onClose={toggle}
+                      onExpand={setExpandedId}
+                    />
+                  ))}
+                </div>
+              )}
+              {rightCards.length > 0 && (
+                <div className="flex w-full max-w-[230px] flex-col gap-3 lg:absolute lg:top-1/2 lg:left-[100%] lg:z-20 lg:w-[clamp(120px,min(14vw,22vh),230px)] lg:-translate-y-1/2 lg:gap-4">
+                  {rightCards.map((h) => (
+                    <MiniCard
+                      key={h.id}
+                      hotspot={h}
+                      image={image}
+                      theme={theme}
+                      onClose={toggle}
+                      onExpand={setExpandedId}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
