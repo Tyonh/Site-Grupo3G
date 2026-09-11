@@ -328,7 +328,7 @@ export default function ModuloProductPage() {
         {/* SECTION 6: DEDICATED INTERACTIVE SIMULATOR (Only at the end of the page) */}
         <section
           ref={showcaseRef}
-          className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+          className="min-h-screen flex items-center justify-center px-0 lg:px-20 py-0 lg:py-20 pointer-events-none select-none">
           <div className={showcasePanelClass}>
             {/* Left Column: Local 3D Canvas rendering the heavyweight Modulo Prime.glb — deferred until the section nears the viewport to avoid running a second WebGL context for the whole scroll */}
             <div className={showcaseCanvasClass}>

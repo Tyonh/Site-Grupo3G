@@ -312,7 +312,7 @@ export default function LuminariaHomologadaPage() {
         ═══════════════════════════════════════════════════════════════ */}
         <section
           ref={showcaseRef}
-          className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+          className="min-h-screen flex items-center justify-center px-0 lg:px-20 py-0 lg:py-20 pointer-events-none select-none">
           <div className={showcasePanelClass}>
             {/* Left Column: 3D Canvas with Homologada model — deferred until the section nears the viewport to avoid a second live WebGL context for the whole scroll */}
             <div className={showcaseCanvasClass}>

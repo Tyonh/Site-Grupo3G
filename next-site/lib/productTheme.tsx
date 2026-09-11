@@ -105,17 +105,19 @@ export function getProductTheme(theme: ProductTheme) {
     ? "hover:bg-white/10 transition-colors"
     : "hover:bg-slate-50/80 transition-colors";
 
-  // Fixed-height 3D showcase panel (last section of each product page).
-  // Uses viewport-relative height with min/max clamps instead of a bare
-  // pixel value so it can't overflow on short mobile/landscape viewports,
-  // and is now identical across every product page (was 700/650px on three
-  // pages and 500/550px on the fourth).
-  const showcasePanelClass = `relative w-full max-w-6xl min-h-[480px] h-[80vh] max-h-[700px] lg:h-[650px] rounded-3xl overflow-hidden border shadow-2xl transition-all duration-500 flex flex-col lg:flex-row pointer-events-auto ${
-    isEbron ? "bg-ebron-navy border-ebron-blue-light/25" : isDark ? "bg-zinc-950 border-white/10" : "bg-slate-50 border-slate-200"
+  // 3D showcase panel (last section of each product page). Full-bleed and
+  // full-height on mobile — no rounded card, no border — so the 3D model
+  // gets the whole screen instead of splitting it with the text panel below
+  // (that split made the model too small to see well on phones). From `lg`
+  // up it goes back to the card look, unchanged from before.
+  const showcasePanelClass = `relative w-full max-w-6xl min-h-screen lg:min-h-[480px] lg:h-[650px] lg:max-h-[700px] overflow-hidden transition-all duration-500 flex flex-col lg:flex-row pointer-events-auto rounded-none border-0 shadow-none lg:rounded-3xl lg:border lg:shadow-2xl ${
+    isEbron ? "bg-ebron-navy lg:border-ebron-blue-light/25" : isDark ? "bg-zinc-950 lg:border-white/10" : "bg-slate-50 lg:border-slate-200"
   }`;
 
+  // Mobile: canvas takes most of the screen (info panel below sizes itself
+  // to its content). Desktop: unchanged side-by-side split.
   const showcaseCanvasClass =
-    "w-full lg:w-7/12 h-[45vh] min-h-[280px] lg:h-full relative overflow-hidden";
+    "w-full lg:w-7/12 h-[70vh] min-h-[320px] lg:h-full relative overflow-hidden";
 
   const showcaseInfoPanelClass = `w-full lg:w-5/12 h-auto lg:h-full flex flex-col justify-center p-6 sm:p-8 md:p-12 gap-5 border-t lg:border-t-0 lg:border-l transition-all duration-500 ${
     isEbron
