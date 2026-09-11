@@ -24,6 +24,13 @@ interface ProductModelProps {
 const isModuloModel = (url: string): boolean =>
   url.toLowerCase().includes("modulo");
 
+// A montagem do módulo termina usando só metade do scroll da página (2x mais
+// rápida que 1:1 com o progresso do scroll) — a seção do simulador no final
+// da página é mais alta no mobile e pausa o fundo 3D um pouco antes do
+// scroll chegar a 100%; sem essa margem a montagem ficava incompleta quando
+// o fundo congelava.
+const SCROLL_ANIMATION_SPEED_MULTIPLIER = 2;
+
 export const ProductModel = ({
   modelUrl,
   isInteractive,
@@ -170,7 +177,9 @@ export const ProductModel = ({
         ? document.documentElement.scrollHeight - window.innerHeight
         : 0;
     const initialTargetTime =
-      scrollHeight > 0 ? (scrollTop / scrollHeight) * duration : 0;
+      scrollHeight > 0
+        ? Math.min((scrollTop / scrollHeight) * SCROLL_ANIMATION_SPEED_MULTIPLIER, 1) * duration
+        : 0;
 
     actionNames.forEach((name) => {
       const act = actions[name];
@@ -189,7 +198,8 @@ export const ProductModel = ({
       scrub: true,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
-        const targetTime = self.progress * duration;
+        const targetTime =
+          Math.min(self.progress * SCROLL_ANIMATION_SPEED_MULTIPLIER, 1) * duration;
         actionNames.forEach((name) => {
           const act = actions[name];
           if (act) {
