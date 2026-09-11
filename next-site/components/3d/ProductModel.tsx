@@ -6,6 +6,7 @@ import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import * as THREE from "three";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -31,7 +32,7 @@ export const ProductModel = ({
   isScrollControlled = true,
 }: ProductModelProps) => {
   const groupRef = useRef<THREE.Group>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const isModulo = isModuloModel(modelUrl);
   const [cameraInitialized, setCameraInitialized] = useState(false);
 
@@ -81,20 +82,10 @@ export const ProductModel = ({
     };
   }, [isScrollControlled]);
 
-  // Detect screen size for responsive scaling
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Load GLTF with Draco decoder
-  const { scene, animations } = useGLTF(
-    modelUrl,
-    "https://www.gstatic.com/draco/versioned/decoders/1.5.5/",
-  );
+  // Load GLTF with Draco decoder — hospedado localmente em vez do CDN do
+  // Google (evita uma requisição de rede externa extra a cada carregamento,
+  // especialmente custosa em conexões móveis).
+  const { scene, animations } = useGLTF(modelUrl, "/draco/gltf/");
 
   // Clone the scene graph to prevent multi-canvas conflicts (disappearing models)
   const clonedScene = useMemo(() => scene.clone(), [scene]);
@@ -312,7 +303,15 @@ export const ProductModel = ({
   // Modulo → animated trajectory | Others → static position from Blender
   // ═══════════════════════════════════════════════════════════════════════════
   useFrame((state, delta) => {
-    mixer.update(delta);
+    // Módulo controla o tempo da animação manualmente (ScrollTrigger/GSAP já
+    // chamam mixer.update(0) com o tempo certo nos effects acima) — chamar
+    // mixer.update(delta) aqui de novo recalcularia a mesma pose à toa em
+    // todo frame, sem efeito visual. Produtos sem animação (EBRON,
+    // Homologada) não pagam esse custo de qualquer forma, mas mantemos a
+    // chamada pra eles caso ganhem animação no futuro.
+    if (!isModulo) {
+      mixer.update(delta);
+    }
 
     if (blenderCam) {
       if (isScrollControlled || isModulo) {

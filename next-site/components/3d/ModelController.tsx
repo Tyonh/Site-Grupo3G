@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import * as THREE from "three";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Register ScrollTrigger plugin with GSAP
 if (typeof window !== "undefined") {
@@ -23,6 +24,11 @@ export const ModelController = ({
   scrollContainerRef,
   lightIntensityMultiplier = 1.0,
 }: ModelControllerProps) => {
+  const isMobile = useIsMobile();
+  // Mapa de sombra menor em mobile: reduz custo de GPU, a sombra continua na
+  // posição certa, só com a borda um pouco menos definida de perto.
+  const shadowMapSize: [number, number] = isMobile ? [512, 512] : [2048, 2048];
+
   useEffect(() => {
     if (!scrollContainerRef || !scrollContainerRef.current) return;
 
@@ -58,7 +64,7 @@ export const ModelController = ({
         position={[8, 10, 8]}
         intensity={3.0 * lightIntensityMultiplier}
         castShadow
-        shadow-mapSize={[2048, 2048]}
+        shadow-mapSize={shadowMapSize}
         shadow-bias={-0.0001}
       />
 

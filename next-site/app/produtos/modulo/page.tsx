@@ -71,6 +71,7 @@ export default function ModuloProductPage() {
         theme={theme}
         environmentIntensity={0.4}
         lightIntensityMultiplier={0.3}
+        paused={isShowcaseInView}
       />
 
       {/* Main scrollable layout wrapper */}

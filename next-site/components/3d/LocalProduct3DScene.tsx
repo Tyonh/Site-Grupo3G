@@ -6,6 +6,7 @@ import { ProductModel } from "./ProductModel";
 import { ModelController } from "./ModelController";
 import { Environment } from "@react-three/drei";
 import { CanvasLoader } from "./CanvasLoader";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface LocalProduct3DSceneProps {
   modelUrl: string;
@@ -22,6 +23,8 @@ export const LocalProduct3DScene = ({
   environmentIntensity = theme === "dark" || theme === "ebron" ? 2.5 : 3.5,
   lightIntensityMultiplier = 1.0,
 }: LocalProduct3DSceneProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <div className={`w-full h-full min-h-[400px] transition-colors duration-700 cursor-grab active:cursor-grabbing ${
       theme === "ebron"
@@ -32,7 +35,7 @@ export const LocalProduct3DScene = ({
     }`}>
       <Canvas
         shadows="percentage"
-        dpr={[1, 1.75]}
+        dpr={isMobile ? 1 : [1, 1.75]}
         camera={{ position: [0, 0, 5], fov: 45 }}
         gl={{ antialias: true }}
       >

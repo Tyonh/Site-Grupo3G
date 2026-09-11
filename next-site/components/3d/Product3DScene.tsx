@@ -6,6 +6,7 @@ import { ProductModel } from "./ProductModel";
 import { ModelController } from "./ModelController";
 import { Environment } from "@react-three/drei";
 import { CanvasLoader } from "./CanvasLoader";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface Product3DSceneProps {
   modelUrl: string;
@@ -17,6 +18,10 @@ interface Product3DSceneProps {
   theme?: "light" | "dark" | "ebron";
   environmentIntensity?: number;
   lightIntensityMultiplier?: number;
+  // Quando true, para o loop de render deste Canvas (frameloop="never") sem
+  // recarregar o modelo — usado pra não rodar dois contextos WebGL ao mesmo
+  // tempo quando o simulador interativo do final da página assume a tela.
+  paused?: boolean;
 }
 
 export const Product3DScene = ({
@@ -29,9 +34,11 @@ export const Product3DScene = ({
   theme = "light",
   environmentIntensity = 3.5,
   lightIntensityMultiplier = 1.0,
+  paused = false,
 }: Product3DSceneProps) => {
   // Dynamically switch models based on interaction state
   const activeModelUrl = isInteractive && interactiveModelUrl ? interactiveModelUrl : modelUrl;
+  const isMobile = useIsMobile();
 
   return (
     <div className={`fixed top-0 left-0 w-full h-screen z-0 pointer-events-none transition-colors duration-700 ${
@@ -47,9 +54,10 @@ export const Product3DScene = ({
       }`}>
         <Canvas
           shadows="percentage"
-          dpr={[1, 1.75]}
+          dpr={isMobile ? 1 : [1, 1.75]}
           camera={{ position: [0, 0, 5], fov: 45 }}
           gl={{ antialias: true }}
+          frameloop={paused ? "never" : "always"}
         >
           {/* Mapa de ambiente de estúdio — hospedado localmente em vez do
               preset do drei, que baixava o HDR de um CDN externo e derrubava

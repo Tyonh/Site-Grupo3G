@@ -70,6 +70,7 @@ export default function LuminariaHomologadaPage() {
         scrollContainerRef={scrollContainerRef}
         selectedPower="100w"
         theme={theme}
+        paused={isShowcaseInView}
       />
 
       {/* Main scrollable content */}
