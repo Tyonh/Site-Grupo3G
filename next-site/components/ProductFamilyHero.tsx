@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, type ReactElement } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ProductCloseupModal from "@/components/ProductCloseupModal";
 import { getFamilyTheme, type FamilyBrand } from "@/lib/familyTheme";
+import { useProductHeroReveal } from "@/hooks/useProductHeroReveal";
 
 export interface ProductHotspot {
   id: string;
@@ -45,10 +46,9 @@ interface ProductFamilyHeroProps {
    *  hotspots de características passam a existir. Sem essa prop o card se
    *  comporta exatamente como antes — recurso opt-in. */
   vectorImage?: string;
+  /** Tempo de espera (ms) para revelação automática por scroll em dispositivos móveis. */
+  mobileRevealDelayMs?: number;
 }
-
-/** Tempo de hover contínuo (ms) até a foto real ser revelada. */
-const REVEAL_DELAY_MS = 300;
 
 /**
  * Apresentação estilo "hero" em tela cheia de uma família de produtos: nome
@@ -70,7 +70,8 @@ export default function ProductFamilyHero({
   hotspots,
   aspectRatio = "3/4",
   vectorImage,
-}: ProductFamilyHeroProps) {
+  mobileRevealDelayMs = 650,
+}: ProductFamilyHeroProps): ReactElement {
   const theme = getFamilyTheme(brand);
   const [openIds, setOpenIds] = useState<string[]>([]);
   const isOpen = (id: string) => openIds.includes(id);
@@ -94,34 +95,22 @@ export default function ProductFamilyHero({
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const expanded = hotspots.find((h) => h.id === expandedId) ?? null;
 
-  // ─── Modo de revelação (opcional, só quando vectorImage é passada) ───
+  // ─── Modo de revelação modular (Desktop por hover, Mobile/3G por scroll ou toque) ───
   const hasVector = Boolean(vectorImage);
-  const [revealed, setRevealed] = useState(!hasVector);
-  const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
-    };
-  }, []);
-
-  const handlePhotoEnter = () => {
-    if (!hasVector || revealed) return;
-    revealTimerRef.current = setTimeout(
-      () => setRevealed(true),
-      REVEAL_DELAY_MS,
-    );
-  };
-
-  const handlePhotoLeave = () => {
-    if (revealTimerRef.current) {
-      clearTimeout(revealTimerRef.current);
-      revealTimerRef.current = null;
-    }
-  };
+  const {
+    sectionRef,
+    revealed,
+    handlePhotoEnter,
+    handlePhotoLeave,
+    handlePhotoClick,
+  } = useProductHeroReveal({
+    hasVector,
+    mobileDelayMs: mobileRevealDelayMs,
+  });
 
   return (
     <section
+      ref={sectionRef as React.RefObject<HTMLElement>}
       className={`relative flex min-h-screen w-full flex-col justify-center overflow-hidden border-b px-6 py-24 sm:px-10 lg:px-16 ${theme.sectionBg} ${theme.sectionBorder}`}>
       {/* Nome da categoria fixo no canto superior esquerdo */}
       <div className="absolute top-8 left-6 z-10 sm:top-10 sm:left-10 lg:top-12 lg:left-16">
@@ -139,10 +128,11 @@ export default function ProductFamilyHero({
             aqui: só a caixa interna da foto recorta a própria imagem) */}
         <div className="relative mx-auto" style={{ width: "clamp(240px, 29vw, 460px)" }}>
           <div
-            className="relative overflow-hidden"
+            className={`relative overflow-hidden ${hasVector && !revealed ? "cursor-pointer" : ""}`}
             style={{ aspectRatio }}
             onMouseEnter={handlePhotoEnter}
-            onMouseLeave={handlePhotoLeave}>
+            onMouseLeave={handlePhotoLeave}
+            onClick={handlePhotoClick}>
             {/* Foto real — sempre no DOM, por baixo da ilustração vetorial
                 enquanto não revelada. Nunca é substituída pelos mini-cards. */}
             <Image
@@ -175,14 +165,21 @@ export default function ProductFamilyHero({
             )}
 
             {revealed &&
-              hotspots.map((h) => (
+              hotspots.map((h, i) => (
                 <button
                   key={h.id}
                   type="button"
                   aria-label={`Ver detalhe: ${h.label}`}
-                  onClick={() => toggle(h.id)}
-                  style={{ top: `${h.top}%`, left: `${h.left}%` }}
-                  className={`absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center border-2 backdrop-blur-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${theme.hotspotBorder} ${theme.hotspotFocusOutline} ${
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggle(h.id);
+                  }}
+                  style={{
+                    top: `${h.top}%`,
+                    left: `${h.left}%`,
+                    animationDelay: `${i * 100 + 150}ms`,
+                  }}
+                  className={`absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center border-2 backdrop-blur-sm transition-colors animate-hotspot-pop focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${theme.hotspotBorder} ${theme.hotspotFocusOutline} ${
                     isOpen(h.id) ? theme.hotspotActive : theme.hotspotIdle
                   }`}>
                   <span aria-hidden className="text-lg leading-none">
@@ -242,7 +239,7 @@ export default function ProductFamilyHero({
           </p>
 
           {revealed ? (
-            <dl className={`border-t ${theme.divider}`}>
+            <dl className={`border-t animate-details-fade ${theme.divider}`}>
               {hotspots.map((h) => (
                 <div key={h.id} className={`border-b ${theme.divider}`}>
                   <div
