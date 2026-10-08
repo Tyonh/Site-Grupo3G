@@ -34,3 +34,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Atualização da página Homologada
+
+A rota `/produtos/luminaria-homologada` utiliza o modelo final de 50 W e a curva de referência do ensaio de 200 W. A apresentação e o cenário são gerados pelos componentes do site; não dependem de arquivos de trabalho em `artifacts`.
+
+As mídias em `public/` são ignoradas pelo Git e precisam ser enviadas separadamente para a VPS, preservando os caminhos:
+
+- `public/models/Homologada50W.web.glb`
+- `public/homologada-final-poster.png`
+- `public/photometry/homologada-200w-relatorio.pdf`
+- `public/hdri/studio_small_03_1k.hdr` (já existente; conferir no servidor)
+
+Os dados da curva estão em `lib/data/homologada-200w-photometry.json` e acompanham o código. Antes de atualizar o servidor, executar `npm run build` dentro de `next-site`.

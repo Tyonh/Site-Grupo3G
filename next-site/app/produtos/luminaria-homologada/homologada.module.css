@@ -1,0 +1,59 @@
+.page { background: #fff; color: #262b2c; }
+.page main { background: #fff; }
+.performance, .technical { padding: 110px 6%; max-width: 1440px; margin: auto; }
+.sectionHead { max-width: 610px; }
+.eyebrow { color: #b12b30; font-size: 10px; letter-spacing: .16em; font-weight: 700; margin: 0 0 18px; }
+.sectionHead h2, .construction h2, .contact h2 { font-size: clamp(30px, 3.5vw, 48px); font-weight: 500; line-height: 1.16; letter-spacing: -.045em; margin: 0 0 20px; text-wrap: balance; }
+.sectionHead > p:last-child, .constructionCopy > p, .familyHead p { font-size: 13px; line-height: 1.9; color: #777e80; }
+.highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; margin-top: 65px; }
+.highlight { padding-top: 24px; border-top: 1px solid #dadfdf; }
+.highlight > svg { color: #b12b30; }
+.metric { font-size: clamp(27px, 3vw, 40px); font-weight: 500; letter-spacing: -.05em; margin: 30px 0 22px; }
+.metric span { font-size: 13px; font-weight: 400; color: #7c8385; letter-spacing: 0; }
+.highlight h3 { font-size: 12px; font-weight: 600; margin: 0 0 8px; }
+.highlight > p:last-child { font-size: 11px; line-height: 1.8; color: #82898a; }
+.construction { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 9%; max-width: 1440px; margin: auto; padding: 55px 6% 100px; }
+.productImage { background: #f7f8f7; height: 680px; padding: 35px; position: relative; border-radius: 6px; }
+.productImage > span { font-size: 10px; color: #7e8485; letter-spacing: .13em; }
+.productImage img { height: 90%; width: 100%; object-fit: contain; }
+.parts { list-style: none; padding: 0; margin-top: 35px; }
+.parts li { display: flex; gap: 24px; border-top: 1px solid #e5e8e7; padding: 20px 0; }
+.parts li > span { font-size: 10px; color: #b12b30; padding-top: 3px; }
+.parts h3 { font-size: 13px; font-weight: 600; margin: 0 0 6px; }
+.parts p { font-size: 11px; color: #82898a; line-height: 1.8; margin: 0; }
+.technical { border-top: 1px solid #e6e9e8; scroll-margin-top: 30px; }
+.specs { display: grid; grid-template-columns: 1fr 1fr; gap: 0 65px; margin-top: 45px; }
+.specs > div { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid #edf0ee; font-size: 11px; }
+.specs dt { color: #80888a; }
+.specs dd { font-weight: 600; text-align: right; margin: 0; }
+.familyHead { margin-top: 85px; }
+.familyHead h3 { font-size: 25px; font-weight: 500; letter-spacing: -.03em; }
+.familyHead p { font-size: 12px; margin: 12px 0 30px; }
+.tableScroll { overflow-x: auto; border-top: 1px solid #dbe0de; }
+.tableScroll:focus-visible { outline: 2px solid #b12b30; outline-offset: 5px; }
+.tableScroll table { width: 100%; border-collapse: collapse; font-size: 12px; white-space: nowrap; text-align: left; }
+.tableScroll caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.tableScroll th, .tableScroll td { padding: 23px 20px; border-bottom: 1px solid #e9edeb; }
+.tableScroll thead th { color: #848b8d; font-weight: 400; font-size: 10px; }
+.tableScroll tbody th { font-weight: 600; }
+.tableScroll td:nth-child(3) { color: #b12b30; }
+.contact { text-align: center; padding: 100px 6%; background: #f6f7f5; }
+.contact h2 { max-width: 600px; margin: 0 auto 35px; }
+.contact a { display: inline-flex; align-items: center; justify-content: center; gap: 25px; padding: 18px 25px; background: #b12b30; color: white; font-size: 12px; font-weight: 600; border-radius: 4px; }
+.contact a:hover { background: #8b2026; }
+.contact a:focus-visible { outline: 2px solid #b12b30; outline-offset: 5px; }
+@media (max-width: 767px) {
+  .performance, .technical { padding: 65px 6%; }
+  .eyebrow { font-size: 9px; }
+  .highlights { grid-template-columns: 1fr 1fr; gap: 32px 20px; margin-top: 35px; }
+  .metric { font-size: 28px; margin: 22px 0 15px; }
+  .metric span { font-size: 10px; }
+  .construction { grid-template-columns: 1fr; gap: 40px; padding: 25px 6% 65px; }
+  .productImage { height: 470px; padding: 25px; }
+  .specs { grid-template-columns: 1fr; margin-top: 25px; }
+  .specs > div { padding: 15px 0; }
+  .familyHead { margin-top: 55px; }
+  .familyHead h3 { font-size: 24px; }
+  .tableScroll th, .tableScroll td { padding: 18px 15px; }
+  .contact { padding: 65px 6%; }
+}
