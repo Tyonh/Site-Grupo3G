@@ -5,7 +5,15 @@
 .nightScrim { position: absolute; inset: 0; background: linear-gradient(0deg, #08121f 0%, #08121fa6 15%, #08121f00 35%), linear-gradient(90deg, #08121f 6%, #08121fd9 24%, #08121f00 55%); opacity: var(--night); z-index: 1; pointer-events: none; }
 .topline { position: absolute; inset: 30px 5.5% auto; z-index: 3; display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 600; letter-spacing: .14em; }
 .topline a { display: flex; gap: 6px; align-items: center; letter-spacing: .03em; min-height: 44px; }
-.word { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); font-size: clamp(75px, 12.1vw, 200px); font-weight: 900; line-height: 1; letter-spacing: -.065em; color: #f0f1f0; white-space: nowrap; opacity: var(--word-opacity); }
+.word { position: absolute; top: 12%; left: 50%; transform: translateX(-50%); font-size: clamp(75px, 12.1vw, 200px); font-weight: 900; line-height: 1; letter-spacing: -.065em; color: #c13842; white-space: nowrap; opacity: var(--word-opacity); }
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .word {
+    background: linear-gradient(110deg, #eed4d6 0%, #de7880 24%, #bf2d3a 48%, #de7880 74%, #eed4d6 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
 .visual { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .poster { position: absolute; height: 66%; width: auto; object-fit: contain; left: 64%; top: 18%; transform: translateX(-50%); }
 .visual > div { opacity: 0; }
