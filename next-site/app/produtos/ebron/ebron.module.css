@@ -2,12 +2,12 @@
 .page main { background: #fff; }
 .performance, .technical { padding: 110px 6%; max-width: 1440px; margin: auto; }
 .sectionHead { max-width: 610px; }
-.eyebrow { color: #b12b30; font-size: 10px; letter-spacing: .16em; font-weight: 700; margin: 0 0 18px; }
+.eyebrow { color: #254f88; font-size: 10px; letter-spacing: .16em; font-weight: 700; margin: 0 0 18px; }
 .sectionHead h2, .construction h2, .contact h2 { font-size: clamp(30px, 3.5vw, 48px); font-weight: 500; line-height: 1.16; letter-spacing: -.045em; margin: 0 0 20px; text-wrap: balance; }
 .sectionHead > p:last-child, .constructionCopy > p, .familyHead p { font-size: 13px; line-height: 1.9; color: #777e80; }
 .highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; margin-top: 65px; }
 .highlight { padding-top: 24px; border-top: 1px solid #dadfdf; }
-.highlight > svg { color: #b12b30; }
+.highlight > svg { color: #254f88; }
 .metric { font-size: clamp(27px, 3vw, 40px); font-weight: 500; letter-spacing: -.05em; margin: 30px 0 22px; }
 .metric span { font-size: 13px; font-weight: 400; color: #7c8385; letter-spacing: 0; }
 .highlight h3 { font-size: 12px; font-weight: 600; margin: 0 0 8px; }
@@ -18,7 +18,7 @@
 .productImage img { height: 90%; width: 100%; object-fit: contain; }
 .parts { list-style: none; padding: 0; margin-top: 35px; }
 .parts li { display: flex; gap: 24px; border-top: 1px solid #e5e8e7; padding: 20px 0; }
-.parts li > span { font-size: 10px; color: #b12b30; padding-top: 3px; }
+.parts li > span { font-size: 10px; color: #254f88; padding-top: 3px; }
 .parts h3 { font-size: 13px; font-weight: 600; margin: 0 0 6px; }
 .parts p { font-size: 11px; color: #82898a; line-height: 1.8; margin: 0; }
 .technical { border-top: 1px solid #e6e9e8; scroll-margin-top: 30px; }
@@ -30,18 +30,18 @@
 .familyHead h3 { font-size: 25px; font-weight: 500; letter-spacing: -.03em; }
 .familyHead p { font-size: 12px; margin: 12px 0 30px; }
 .tableScroll { overflow-x: auto; border-top: 1px solid #dbe0de; }
-.tableScroll:focus-visible { outline: 2px solid #b12b30; outline-offset: 5px; }
+.tableScroll:focus-visible { outline: 2px solid #254f88; outline-offset: 5px; }
 .tableScroll table { width: 100%; border-collapse: collapse; font-size: 12px; white-space: nowrap; text-align: left; }
 .tableScroll caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .tableScroll th, .tableScroll td { padding: 23px 20px; border-bottom: 1px solid #e9edeb; }
 .tableScroll thead th { color: #848b8d; font-weight: 400; font-size: 10px; }
 .tableScroll tbody th { font-weight: 600; }
-.tableScroll td:nth-child(3) { color: #b12b30; }
-.contact { text-align: center; padding: 100px 6%; background: #f6f7f5; }
+.tableScroll td:nth-child(3) { color: #254f88; }
+.contact { text-align: center; padding: 100px 6%; background: #f0f4f8; }
 .contact h2 { max-width: 600px; margin: 0 auto 35px; }
-.contact a { display: inline-flex; align-items: center; justify-content: center; gap: 25px; padding: 18px 25px; background: #b12b30; color: white; font-size: 12px; font-weight: 600; border-radius: 4px; }
-.contact a:hover { background: #8b2026; }
-.contact a:focus-visible { outline: 2px solid #b12b30; outline-offset: 5px; }
+.contact a { display: inline-flex; align-items: center; justify-content: center; gap: 25px; padding: 18px 25px; background: #254f88; color: white; font-size: 12px; font-weight: 600; border-radius: 4px; }
+.contact a:hover { background: #163760; }
+.contact a:focus-visible { outline: 2px solid #254f88; outline-offset: 5px; }
 @media (max-width: 767px) {
   .performance, .technical { padding: 65px 6%; }
   .eyebrow { font-size: 9px; }

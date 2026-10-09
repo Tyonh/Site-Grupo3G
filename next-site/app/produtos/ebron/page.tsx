@@ -1,375 +1,96 @@
-"use client";
-
-import { useRef } from "react";
-import dynamic from "next/dynamic";
+import Image from "next/image";
+import { ArrowUpRight, Focus, ShieldCheck, Sun, Timer } from "lucide-react";
 import EbronNavbar from "@/components/ebron/EbronNavbar";
 import Footer from "@/components/Footer";
-import { getProductCheckMark, getProductTheme } from "@/lib/productTheme";
-import { useInView } from "@/hooks/useInView";
+import EbronScrollExperience from "@/components/EbronScrollExperience";
+import styles from "./ebron.module.css";
 
-// Lazy loading das cenas 3D para otimização extrema do LCP e TBT
-const Product3DScene = dynamic(
-  () =>
-    import("@/components/3d/Product3DScene").then((mod) => mod.Product3DScene),
-  { ssr: false },
-);
+const highlights = [
+  { icon: Sun, value: "100", unit: "lm/W", label: "Eficácia luminosa", text: "5.000 lm na versão de 50 W." },
+  { icon: ShieldCheck, value: "IP66", unit: "", label: "Proteção externa", text: "Projetada para exposição ao tempo." },
+  { icon: Focus, value: "120°", unit: "", label: "Ângulo de projeção", text: "Conjunto óptico para iluminação de vias." },
+  { icon: Timer, value: "25 mil", unit: "horas", label: "Vida útil nominal", text: "Especificação da linha Ebron." },
+];
 
-const LocalProduct3DScene = dynamic(
-  () =>
-    import("@/components/3d/LocalProduct3DScene").then(
-      (mod) => mod.LocalProduct3DScene,
-    ),
-  { ssr: false },
-);
+const features = [
+  ["Temperatura de cor", "5000 K"], ["Fator de potência", "≥ 0,92"],
+  ["Índice de reprodução de cor", "≥ 80"], ["Ângulo de projeção", "120°"],
+  ["Eficácia luminosa", "100 lm/W"], ["Grau de proteção", "IP66"],
+  ["Vida útil nominal", "25.000 horas"], ["Corpo", "Alumínio"],
+  ["Proteção contra surtos", "Opcional"],
+];
 
-// Cache bust estável por carregamento de sessão
-const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
-const ebronModelUrl = `/models/Ebron100.final.glb?v=${CACHE_BUST}`;
+const models = [
+  ["50612", "50 W", "5.000 lm", "38,7 × 12,7 cm"],
+  ["50613", "100 W", "10.000 lm", "45,6 × 14,5 cm"],
+  ["50614", "150 W", "15.000 lm", "53,0 × 17,8 cm"],
+  ["50615", "200 W", "20.000 lm", "60,2 × 19,6 cm"],
+  ["50616", "300 W", "30.000 lm", "69,7 × 22,4 cm"],
+];
 
 export default function LuminariaEbronPage() {
-  const theme = "ebron" as const;
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const { ref: showcaseRef, isInView: isShowcaseInView } =
-    useInView<HTMLElement>("300px");
-
-  // ─── Theme styling helpers (shared across all /produtos/* pages) ───
-  const {
-    cardClass,
-    cardWideClass,
-    cardTableClass,
-    titleClass,
-    title2Class,
-    textMutedClass,
-    textMutedTableClass,
-    subCardClass,
-    subTextMutedClass,
-    listTextClass,
-    detailItemClass,
-    detailLabelClass,
-    detailValClass,
-    tableWrapperClass,
-    theadClass,
-    tbodyClass,
-    trClass,
-    showcasePanelClass,
-    showcaseCanvasClass,
-    showcaseInfoPanelClass,
-  } = getProductTheme(theme);
-
-  const checkMark = getProductCheckMark("ebron");
-
-  return (
-    <>
-      <EbronNavbar />
-
-      {/* 3D Background Canvas with Ebron 3D model */}
-      <Product3DScene
-        modelUrl={ebronModelUrl}
-        isInteractive={false}
-        setIsInteractive={() => {}}
-        scrollContainerRef={scrollContainerRef}
-        selectedPower="100w"
-        theme={theme}
-        paused={isShowcaseInView}
-      />
-
-      {/* Main scrollable content */}
-      <div
-        ref={scrollContainerRef}
-        className="ebron-product-page relative z-10 flex w-full flex-col bg-transparent">
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 1: HERO
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
-          <div className={cardClass}>
-            <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              EFICIÊNCIA URBANA
-            </span>
-            <h1 className={titleClass}>LUMINÁRIA EBRON</h1>
-            <p className={textMutedClass}>
-              Lançamento 2024. A união de excelente custo-benefício,
-              durabilidade e eficiência de 100 lm/W. Fabricada em corpo de
-              alumínio robusto para alto rendimento térmico.
-            </p>
-            <a
-              href="https://wa.me/5585986559388"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-12 bg-brand-red text-white font-bold rounded-xl mt-4 hover:bg-red-800 transition-colors uppercase tracking-wider text-sm shadow-lg text-center pointer-events-auto">
-              Fale com um Especialista
-            </a>
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 2: ARCHITECTURE & BENEFITS
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
-          <div className={cardClass}>
-            <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              PROJETO MODERNO
-            </span>
-            <h2 className={title2Class}>DIFERENCIAIS EBRON</h2>
-            <p className={textMutedClass}>
-              Desenvolvida com corpo slim aerodinâmico e conjunto de lentes com
-              amplo ângulo de projeção lateral, otimizando a distribuição de luz
-              nas vias.
-            </p>
-            <ul className={listTextClass}>
-              <li className="flex items-center gap-3">
-                {checkMark}
-                Corpo leve e resistente em liga de alumínio
-              </li>
-              <li className="flex items-center gap-3">
-                {checkMark}
-                Projeção uniforme com ângulo de 120°
-              </li>
-              <li className="flex items-center gap-3">
-                {checkMark}
-                Excelente dissipação térmica integrada à carcaça
-              </li>
-              <li className="flex items-center gap-3">
-                {checkMark}
-                Protetor contra surtos elétricos (Opcional)
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 3: SPECIFICATIONS — KEY HIGHLIGHTS
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
-          <div className={cardClass}>
-            <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              ESPECIFICAÇÕES CHAVE
-            </span>
-            <h2 className={title2Class}>DURABILIDADE E FOCO</h2>
-            <div className="grid grid-cols-2 gap-4 mt-2">
-              <div className={subCardClass}>
-                <h3 className="text-brand-red text-2xl font-black">100 lm/W</h3>
-                <p className={subTextMutedClass}>Eficácia Luminosa</p>
-              </div>
-              <div className={subCardClass}>
-                <h3 className="text-brand-red text-2xl font-black">IP66</h3>
-                <p className={subTextMutedClass}>Grau de Proteção</p>
-              </div>
-              <div className={subCardClass}>
-                <h3 className="text-brand-red text-2xl font-black">120°</h3>
-                <p className={subTextMutedClass}>Projeção Óptica</p>
-              </div>
-              <div className={subCardClass}>
-                <h3 className="text-brand-red text-2xl font-black">25.000h</h3>
-                <p className={subTextMutedClass}>Vida Útil Nominal</p>
-              </div>
-              <div className={`${subCardClass} col-span-2`}>
-                <h3 className="text-brand-red text-xl font-black">
-                  IRC &ge; 80
-                </h3>
-                <p className={subTextMutedClass}>
-                  Fidelidade de Cores Superior
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 4: DETAILED CHARACTERISTICS GRID
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
-          <div className={cardWideClass}>
-            <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              FICHA COMPLETA
-            </span>
-            <h2 className={title2Class}>CARACTERÍSTICAS</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mt-2 text-sm font-medium">
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Temp. Cor</span>
-                <span className={detailValClass}>5000K</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Fator Potência</span>
-                <span className={detailValClass}>&ge;0.92</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Eficácia</span>
-                <span className="font-bold text-brand-red">100 lm/W</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Vida Útil</span>
-                <span className={detailValClass}>25.000h</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Ângulo Projeção</span>
-                <span className={detailValClass}>120°</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Grau Proteção</span>
-                <span className="font-bold text-brand-red">IP66</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>IRC</span>
-                <span className={detailValClass}>&ge;80</span>
-              </div>
-              <div className={detailItemClass}>
-                <span className={detailLabelClass}>Material</span>
-                <span className={detailValClass}>Alumínio</span>
-              </div>
-              <div className={`${detailItemClass} col-span-1 sm:col-span-2`}>
-                <span className={detailLabelClass}>Protetor de Surto</span>
-                <span className={detailValClass}>Opcional</span>
-              </div>
-              <div className={`${detailItemClass} col-span-1 sm:col-span-2`}>
-                <span className={detailLabelClass}>Modelo Versão</span>
-                <span className={detailValClass}>EBRON 2024</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 5: MODELS & DIMENSIONS TABLE
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
-          <div className={cardTableClass}>
-            <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-              POTÊNCIA & DIMENSÕES
-            </span>
-            <h2 className={title2Class}>MODELOS EBRON</h2>
-            <p className={textMutedTableClass}>
-              Consulte a tabela técnica de códigos e dimensões slim da linha
-              EBRON.
-            </p>
-            <div className={tableWrapperClass}>
-              <table className="w-full text-left text-xs sm:text-sm">
-                <thead className={theadClass}>
-                  <tr>
-                    <th className="p-3 sm:p-4 text-brand-red">Código</th>
-                    <th className="p-3 sm:p-4">Potência</th>
-                    <th className="p-3 sm:p-4">Fluxo Luminoso</th>
-                    <th className="p-3 sm:p-4">Dimensões (AxL)</th>
-                  </tr>
-                </thead>
-                <tbody className={tbodyClass}>
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">50612</td>
-                    <td className="p-3 sm:p-4 font-bold">50W</td>
-                    <td className="p-3 sm:p-4 font-bold text-brand-red">
-                      5.000 lm
-                    </td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      38.7 x 12.7 cm
-                    </td>
-                  </tr>
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">50613</td>
-                    <td className="p-3 sm:p-4 font-bold">100W</td>
-                    <td className="p-3 sm:p-4 font-bold text-brand-red">
-                      10.000 lm
-                    </td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      45.6 x 14.5 cm
-                    </td>
-                  </tr>
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">50614</td>
-                    <td className="p-3 sm:p-4 font-bold">150W</td>
-                    <td className="p-3 sm:p-4 font-bold text-brand-red">
-                      15.000 lm
-                    </td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      53.0 x 17.8 cm
-                    </td>
-                  </tr>
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">50615</td>
-                    <td className="p-3 sm:p-4 font-bold">200W</td>
-                    <td className="p-3 sm:p-4 font-bold text-brand-red">
-                      20.000 lm
-                    </td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      60.2 x 19.6 cm
-                    </td>
-                  </tr>
-                  <tr className={trClass}>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">50616</td>
-                    <td className="p-3 sm:p-4 font-bold">300W</td>
-                    <td className="p-3 sm:p-4 font-bold text-brand-red">
-                      30.000 lm
-                    </td>
-                    <td className="p-3 sm:p-4 font-mono opacity-80">
-                      69.7 x 22.4 cm
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 6: 3D PRODUCT SHOWCASE (Static presentation)
-        ═══════════════════════════════════════════════════════════════ */}
-        <section
-          ref={showcaseRef}
-          className="min-h-screen flex items-center justify-center px-0 lg:px-20 py-0 lg:py-20 pointer-events-none select-none">
-          <div className={showcasePanelClass}>
-            {/* Left Column: 3D Canvas with Ebron model — deferred until the section nears the viewport to avoid a second live WebGL context for the whole scroll */}
-            <div className={showcaseCanvasClass}>
-              {isShowcaseInView && (
-                <LocalProduct3DScene
-                  modelUrl={ebronModelUrl}
-                  selectedPower="100w"
-                  theme={theme}
-                />
-              )}
-            </div>
-
-            {/* Right Column: Product Info Panel */}
-            <div className={showcaseInfoPanelClass}>
-              <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
-                APRESENTAÇÃO 3D
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black uppercase leading-tight">
-                Luminária Ebron
-              </h2>
-              <p className="text-sm sm:text-base font-normal leading-relaxed text-slate-600">
-                Explore o modelo tridimensional de engenharia da luminária
-                EBRON. Visualize em detalhes o design slim aerodinâmico,
-                as aletas de dissipação térmica e o conjunto óptico de
-                projeção de 120°.
-              </p>
-              <div className="flex flex-col gap-3 mt-2">
-                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">IP</span>
-                  <div>
-                    <span className="font-bold text-sm">IP66</span>
-                    <p className="text-xs text-slate-500">Proteção contra poeira e jatos d&apos;água</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">lm</span>
-                  <div>
-                    <span className="font-bold text-sm">100 lm/W</span>
-                    <p className="text-xs text-slate-500">Eficácia luminosa de alta performance</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">Al</span>
-                  <div>
-                    <span className="font-bold text-sm">Alumínio Premium</span>
-                    <p className="text-xs text-slate-500">Corpo slim com dissipação integrada</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <Footer />
-      </div>
-    </>
-  );
+  return <div className={styles.page}>
+    <EbronNavbar />
+    <main>
+      <EbronScrollExperience />
+      <section className={styles.performance} aria-labelledby="ebron-performance-title">
+        <div className={styles.sectionHead}>
+          <p className={styles.eyebrow}>DESEMPENHO EM CADA VIA</p>
+          <h2 id="ebron-performance-title">O essencial, bem resolvido.</h2>
+          <p>Uma família de luminárias urbanas com corpo slim, conjunto óptico frontal e proteção para uso externo.</p>
+        </div>
+        <div className={styles.highlights}>{highlights.map(({ icon: Icon, value, unit, label, text }) =>
+          <article key={label} className={styles.highlight}>
+            <Icon size={22} strokeWidth={1.2} aria-hidden="true" />
+            <p className={styles.metric}>{value} {unit && <span>{unit}</span>}</p>
+            <h3>{label}</h3><p>{text}</p>
+          </article>
+        )}</div>
+      </section>
+      <section className={styles.construction} aria-labelledby="ebron-construction-title">
+        <div className={styles.productImage}>
+          <span>EBRON · 50 W</span>
+          <Image src="/ebron50w-poster.png" alt="Luminária Ebron 50 W vista de frente, com conjunto de LEDs e encaixe tubular" width={900} height={1200} sizes="(max-width: 767px) 85vw, 40vw" />
+        </div>
+        <div className={styles.constructionCopy}>
+          <p className={styles.eyebrow}>CONSTRUÇÃO DA EBRON</p>
+          <h2 id="ebron-construction-title">Uma forma que trabalha pela luz.</h2>
+          <p>O conjunto frontal, a dissipação traseira e o encaixe tubular compõem uma luminária compacta para a cidade.</p>
+          <ol className={styles.parts}>
+            <li><span>01</span><div><h3>Óptica frontal</h3><p>Conjunto de LEDs sob cobertura transparente.</p></div></li>
+            <li><span>02</span><div><h3>Dissipação integrada</h3><p>Barras centrais e laterais incorporadas à carcaça de alumínio.</p></div></li>
+            <li><span>03</span><div><h3>Encaixe tubular</h3><p>Base fixa para montagem em braço de poste.</p></div></li>
+            <li><span>04</span><div><h3>Vedação transparente</h3><p>Junta perimetral integrada ao fechamento frontal.</p></div></li>
+          </ol>
+        </div>
+      </section>
+      <section id="ficha-tecnica" className={styles.technical} aria-labelledby="ebron-technical-title">
+        <div className={styles.sectionHead}>
+          <p className={styles.eyebrow}>INFORMAÇÕES PARA ESPECIFICAR</p>
+          <h2 id="ebron-technical-title">Ficha técnica.</h2>
+          <p>Dados da linha Ebron e dimensões das versões disponíveis.</p>
+        </div>
+        <dl className={styles.specs}>{features.map(([label, value]) =>
+          <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+        )}</dl>
+        <div className={styles.familyHead}>
+          <h3>Encontre a potência para o seu projeto.</h3>
+          <p>O modelo apresentado em 3D é o Ebron de 50 W. As demais versões estão listadas abaixo.</p>
+        </div>
+        <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Tabela de modelos Ebron; deslize horizontalmente em telas pequenas">
+          <table>
+            <caption>Modelos Ebron, fluxo luminoso e dimensões</caption>
+            <thead><tr>{["Código", "Potência", "Fluxo luminoso", "Dimensões (A × L)"].map(label => <th key={label} scope="col">{label}</th>)}</tr></thead>
+            <tbody>{models.map(row => <tr key={row[0]}>{row.map((value, index) => index === 1 ? <th key={index} scope="row">{value}</th> : <td key={index}>{value}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+      </section>
+      <section className={styles.contact} aria-labelledby="ebron-contact-title">
+        <p className={styles.eyebrow}>DO PRODUTO AO SEU PROJETO</p>
+        <h2 id="ebron-contact-title">Vamos iluminar a sua cidade?</h2>
+        <a href="https://wa.me/5585986559388" target="_blank" rel="noopener noreferrer">Fale com um especialista <ArrowUpRight size={18} /></a>
+      </section>
+    </main>
+    <Footer />
+  </div>;
 }

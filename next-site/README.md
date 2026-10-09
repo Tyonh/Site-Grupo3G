@@ -47,3 +47,13 @@ As mídias em `public/` são ignoradas pelo Git e precisam ser enviadas separada
 - `public/hdri/studio_small_03_1k.hdr` (já existente; conferir no servidor)
 
 Os dados da curva estão em `lib/data/homologada-200w-photometry.json` e acompanham o código. Antes de atualizar o servidor, executar `npm run build` dentro de `next-site`.
+
+## Atualização da página Ebron
+
+A rota `/produtos/ebron` usa o modelo reconstruído de 50 W e uma cena visual de instalação e iluminação. A área iluminada é ilustrativa, sem curva fotométrica atribuída à Ebron.
+
+Enviar separadamente para a VPS, preservando estes caminhos ignorados pelo Git:
+
+- `public/models/Ebron50W.web.glb`
+- `public/ebron50w-poster.png`
+- `public/hdri/studio_small_03_1k.hdr` (já existente; conferir no servidor)
