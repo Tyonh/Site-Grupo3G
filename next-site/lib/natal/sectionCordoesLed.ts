@@ -133,6 +133,13 @@ export const cordoesLedCategories: NatalCategory[] = [
       {
         name: "Cordão de LED Escuro — 100L Strobo (20 LEDs piscando)",
         image: "/natal/cordao-strobo.png",
+        videos: [
+          { code: "50997", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/cordao-strobo-escuro-branco.mp4" },
+          { code: "50998", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/cordao-strobo-escuro-branco-quente.mp4" },
+          { code: "50999", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/videos/cordao-strobo-escuro-azul.mp4" },
+          { code: "51000", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/videos/cordao-strobo-escuro-verde.mp4" },
+          { code: "51001", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/videos/cordao-strobo-escuro-vermelho.mp4" },
+        ],
         description:
           "Fio escuro que some no galho e no telhado. Não possui plugue e drive — a cada 5 unidades acompanha plugue grátis.",
         specs: [
@@ -178,8 +185,15 @@ export const cordoesLedCategories: NatalCategory[] = [
       {
         name: "Cordão de LED Colorido — 100L Strobo (20 LEDs piscando)",
         image: "/natal/cordao-strobo.png",
+        videos: [
+          { code: "51003", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/cordao-strobo-colorido-branco.mp4" },
+          { code: "51004", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/cordao-strobo-colorido-branco-quente.mp4" },
+          { code: "51005", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/videos/cordao-strobo-colorido-azul.mp4" },
+          { code: "51006", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/videos/cordao-strobo-colorido-verde.mp4" },
+          { code: "51033", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/videos/cordao-strobo-colorido-vermelho.mp4" },
+        ],
         description:
-          "Fio na mesma cor do LED — o cabo vira parte da decoração em vez de tentar sumir.",
+          "Cordão de LED strobo da marca 3G. Fio na mesma cor do LED — o cabo vira parte da decoração em vez de tentar sumir.",
         specs: [
           { label: "Comprimento", value: "10m + 0,5m de cabo de plugue" },
           { label: "Diâmetro", value: "22mm" },
@@ -249,6 +263,11 @@ export const cordoesLedCategories: NatalCategory[] = [
       {
         name: "Cordão de LED — 1000L (100m)",
         image: "/natal/cordao-100m.png",
+        videos: [
+          { code: "51014", color: "Branco", swatch: SWATCH["Branco"], src: "/natal/videos/cordao-100m-branco.mp4" },
+          { code: "51015", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/videos/cordao-100m-branco-quente.mp4" },
+          { code: "51016", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/videos/cordao-100m-verde.mp4" },
+        ],
         description:
           "Rolo fechado para grandes projetos: praças, fachadas de prédio e decoração urbana. Fio na cor do LED.",
         specs: [
