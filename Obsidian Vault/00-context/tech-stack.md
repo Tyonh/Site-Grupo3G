@@ -14,6 +14,13 @@ A arquitetura de software é dividida nas seguintes camadas principais:
 - **Three.js / React Three Fiber (R3F)**: Abstração declarativa do WebGL que permite integrar a cena 3D ao ciclo de vida do React.
 - **@react-three/drei**: Biblioteca de utilitários auxiliares (ScrollControls, Stage, OrbitControls) para implementação rápida do scrollytelling do produto.
 
+### Mídia e Renderização de Vídeo de Alta Performance
+- **HTML5 Video Engine Nativo**: Manipulado com tipagem estrita e ciclo de vida otimizado via React refs.
+- **useAutoplayVideo Hook**: Prevenção de bloqueio de autoplay no Safari/iOS e fallback silencioso reativo a gestos.
+- **Framer Motion**: Orquestração de transições suaves, scrollytelling (`useScroll`, `useTransform`) e efeitos de entrada de mídia.
+- **Shaders CSS & Mascaramento**: `mix-blend-multiply` para integração de fundo transparente e `WebkitMaskImage` com gradientes lineares dinâmicos (`[[video-architecture|video-architecture.md]]`).
+
+
 ### Backend & Integrações
 - **Node.js (API Routes do Next.js)**: Utilizado para rotas internas seguras de e-mail e persistência rápida de leads sem necessidade de infraestrutura de microsserviços separada.
 - **Nginx & PM2 (Ambiente Linux)**: Estrutura recomendada para hospedagem em VPS (Ubuntu), onde o PM2 gerencia as instâncias Node.js rodando o Next.js em modo produção (`next start`), e o Nginx atua como proxy reverso com SSL e compressão gzip/brotli ativas.

@@ -164,7 +164,7 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
     products: [
       {
         name: "Figura de Estrelas",
-        image: "/natal/figura-estrelas.png",
+        image: "/natal/figura-estrelas-foto.png",
         description:
           "Composição de estrelas de 60cm de largura por 1,6m de altura.",
         specs: [
@@ -177,7 +177,7 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
       },
       {
         name: "Figura de Ave",
-        image: "/natal/figura-ave.png",
+        image: "/natal/figura-ave-foto.png",
         description:
           "Ave com ramo de oliveira, de 4,2m de largura — peça de destaque para vão largo.",
         specs: [
@@ -190,7 +190,7 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
       },
       {
         name: "Figura de Árvore",
-        image: "/natal/figura-arvore.png",
+        image: "/natal/figura-arvore-foto.png",
         description:
           "Árvore de natal desenhada com presentes na base, de 60cm x 1,6m.",
         specs: [
@@ -203,7 +203,7 @@ export const decoracaoUrbanaCategories: NatalCategory[] = [
       },
       {
         name: "Figura de Bolas",
-        image: "/natal/figura-bolas.png",
+        image: "/natal/figura-bolas-foto.png",
         description:
           "Composição de bolas e volutas, de 80cm de largura por 1,6m de altura.",
         specs: [

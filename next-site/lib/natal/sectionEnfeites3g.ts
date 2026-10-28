@@ -39,8 +39,8 @@ export const enfeites3gCategories: NatalCategory[] = [
           { label: "Distância entre LED", value: "10cm" },
         ],
         variants: [
-          { code: "51023", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
-          { code: "51022", ledColor: "Branco", swatch: SWATCH["Branco"] },
+          { code: "51057", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
+          { code: "51056", ledColor: "Branco", swatch: SWATCH["Branco"] },
         ],
       },
       {
@@ -54,8 +54,36 @@ export const enfeites3gCategories: NatalCategory[] = [
           { label: "Distância entre LED", value: "10cm" },
         ],
         variants: [
-          { code: "51023", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
-          { code: "51022", ledColor: "Branco", swatch: SWATCH["Branco"] },
+          { code: "51055", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
+          { code: "51054", ledColor: "Branco", swatch: SWATCH["Branco"] },
+        ],
+      },
+      {
+        name: "Meteoro LED — 8 tubos (30cm)",
+        image: "/natal/meteoro.png",
+        description:
+          "Conjunto com 8 tubos de 30cm em branco quente, com conector macho/fêmea para emendar.",
+        specs: [
+          { label: "Tamanho", value: "30cm por tubo" },
+          { label: "Tubos", value: "8 tubos" },
+          { label: "Conexão", value: "Conector macho/fêmea (emendável)" },
+        ],
+        variants: [
+          { code: "51142", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
+        ],
+      },
+      {
+        name: "Meteoro LED — 8 tubos (80cm)",
+        image: "/natal/meteoro.png",
+        description:
+          "Conjunto com 8 tubos de 80cm em branco quente, com conector macho/fêmea para emendar.",
+        specs: [
+          { label: "Tamanho", value: "80cm por tubo" },
+          { label: "Tubos", value: "8 tubos" },
+          { label: "Conexão", value: "Conector macho/fêmea (emendável)" },
+        ],
+        variants: [
+          { code: "51143", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
         ],
       },
     ],
@@ -95,7 +123,7 @@ export const enfeites3gCategories: NatalCategory[] = [
           { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
         ],
         variants: [
-          { code: "50533", ledColor: "Branco", swatch: SWATCH["Branco"] },
+          { code: "45357", ledColor: "Branco", swatch: SWATCH["Branco"] },
         ],
       },
     ],
@@ -148,14 +176,18 @@ export const enfeites3gCategories: NatalCategory[] = [
         name: "Bola LED — 30cm",
         image: "/natal/bola-led-30.png",
         description:
-          "Versão menor da esfera, em branco quente, para composições com várias bolas.",
+          "Versão menor da esfera, com 48 LEDs, disponível em quatro cores. Para composições com várias bolas.",
         specs: [
           { label: "Tamanho", value: "30cm" },
+          { label: "LEDs", value: "48 LEDs" },
           { label: "Voltagem", value: "220V" },
           { label: "Proteção", value: "IP 44", plain: "área externa coberta" },
         ],
         variants: [
-          { code: "51023", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
+          { code: "51138", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
+          { code: "51139", ledColor: "Vermelho", swatch: SWATCH["Vermelho"] },
+          { code: "41140", ledColor: "Azul", swatch: SWATCH["Azul"] },
+          { code: "51141", ledColor: "Verde", swatch: SWATCH["Verde"] },
         ],
       },
     ],

@@ -74,7 +74,7 @@ export default function ProductColorVideo({
         <div className="absolute inset-0 scale-125 overflow-hidden">
           {videos.map((v, i) => (
             <video
-              key={v.code}
+              key={`${v.code}-${v.color}`}
               ref={(el) => {
                 videoRefs.current[i] = el;
               }}
@@ -142,7 +142,7 @@ export default function ProductColorVideo({
       >
         {videos.map((v, i) => (
           <button
-            key={v.code}
+            key={`${v.code}-${v.color}`}
             ref={(el) => {
               tabRefs.current[i] = el;
             }}

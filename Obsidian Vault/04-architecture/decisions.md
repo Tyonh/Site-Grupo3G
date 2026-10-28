@@ -68,3 +68,28 @@ Implementar um pipeline obrigatório de pré-processamento de modelos 3D usando 
 - **Negativas**:
   - Exige que os desenvolvedores tenham ferramentas Node cli locais instaladas (`gltf-pipeline`) ou usem um script de conversão durante a esteira de build (`[[tasks#TASK-002: Desenvolvimento do Core de Scrollytelling 3D|TASK-002]]`).
   - Ligeira perda de detalhes microscópicos da luminária, que é imperceptível na visualização web standard.
+
+---
+
+## ADR 004: Engenharia e Otimização de Vídeos Web de Alta Performance
+
+### Contexto
+O site substitui e complementa malhas 3D por mídias em vídeo de alta definição para apresentação de produtos (linha Natal, Iluminação Solar, EBRON e institucional). Contudo, a reprodução de múltiplos vídeos em navegadores móveis enfrenta desafios severos: políticas rígidas de autoplay no iOS/Safari (Modo de Baixo Consumo), consumo desnecessário de CPU/GPU com múltiplos players rodando simultaneamente, fundos brancos opacos recortados e persistência de cache ao atualizar arquivos em disco.
+
+### Decisão
+Estabelecer um padrão unificado de arquitetura e aplicação de vídeos (`[[video-architecture|video-architecture.md]]`):
+1. **Autoplay Resiliente**: Uso sistemático do hook `useAutoplayVideo`, que garante propriedades `muted`/`defaultMuted` nativas antes do `.play()` e ativação reativa silenciosa no primeiro gesto (`touchstart`, `pointerdown`, `scroll`).
+2. **Integração Visual sem Canal Alfa**: Uso da classe CSS `mix-blend-multiply` com fundo base sincronizado e máscara de gradiente (`maskImage`) para integrar vídeos de produto com fundo branco puro diretamente na página, evitando arquivos WebM pesados e incompatíveis.
+3. **Pilha de Vídeos Econômica para Configuradores**: No componente `ProductColorVideo`, empilhar vídeos de cada cor, mantendo ativos apenas `video.play()` da cor selecionada e `video.pause()` nos demais, com transições em crossfade (`transition-[opacity,transform,filter]`) e ARIA tablist acessível.
+4. **Mascaramento Dinâmico em Shader/CSS**: No `SolarBackground`, alternar entre vídeos diurno e noturno via `WebkitMaskImage` controlado pelo scroll do usuário.
+5. **Cache-Busting em Build Time**: Uso da função `versioned()` com base no `mtime` dos arquivos em `public/`, prevenindo entrega de mídia obsoleta.
+
+### Consequências
+- **Positivas**:
+  - Autoplay infalível no ecossistema iOS e Android sem botões de play invasivos.
+  - Baixíssimo consumo de memória e bateria em dispositivos móveis.
+  - Fidelidade visual premium sem necessidade de renderização 3D contínua.
+- **Negativas**:
+  - Requer que vídeos para o modo `mix-blend-multiply` tenham fundo branco perfeitamente estourado (#FFFFFF).
+  - Vídeos volumosos devem ser transferidos manualmente para a VPS em diretório ignorado pelo Git.
+

@@ -222,7 +222,16 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                                   style={{ backgroundColor: v.swatch }}
                                 />
                                 {v.ledColor}
-                                <span className="text-neutral-400 font-mono">{v.code}</span>
+                                {v.code && (
+                                  <span className="text-neutral-400 font-mono">{v.code}</span>
+                                )}
+                                {v.plugCode && (
+                                  <span className="text-neutral-400 font-mono">
+                                    <span aria-hidden> · </span>
+                                    <span className="sr-only">com plugue </span>
+                                    {v.plugCode}
+                                  </span>
+                                )}
                               </span>
                             ))}
                           </div>

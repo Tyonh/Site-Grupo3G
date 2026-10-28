@@ -6,7 +6,10 @@
  */
 
 export interface NatalVariant {
+  /** Código oficial (tabela do contêiner). Na linha com versão de plugue é o da versão sem plugue (CMF) */
   code: string;
+  /** Código da mesma cor na versão com plugue (PSSD), quando o produto tem as duas */
+  plugCode?: string;
   ledColor: string;
   wireColor?: string;
   /** Cor aproximada para o swatch visual (hex) */
