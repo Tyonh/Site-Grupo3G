@@ -27,8 +27,11 @@ export default function ModuloProductPage() {
   const [selectedPower, setSelectedPower] = useState<"100w" | "200w" | "300w">(
     "100w",
   );
-  const { ref: showcaseRef, isInView: isShowcaseInView } =
-    useInView<HTMLElement>("300px");
+  const {
+    ref: showcaseRef,
+    isInView: isShowcaseInView,
+    isVisible: isShowcaseVisible,
+  } = useInView<HTMLElement>("300px");
 
   // Load light model (100W) for scroll background and heavy high-end model (300W) for final showcase
   const backgroundModelUrl = `/models/moduloBackground.final.glb?v=${CACHE_BUST}`;
@@ -71,7 +74,7 @@ export default function ModuloProductPage() {
         theme={theme}
         environmentIntensity={0.4}
         lightIntensityMultiplier={0.3}
-        paused={isShowcaseInView}
+        paused={isShowcaseVisible}
       />
 
       {/* Main scrollable layout wrapper */}

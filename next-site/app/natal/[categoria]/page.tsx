@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductColorVideo from "@/components/natal/ProductColorVideo";
 import ProductColorImage from "@/components/natal/ProductColorImage";
+import ProductSingleVideo from "@/components/natal/ProductSingleVideo";
 import {
   getSectionBySlug,
   natalSections,
@@ -158,6 +159,12 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                           images={product.images.map((img) => ({ ...img, src: versioned(img.src) }))}
                           productName={product.name}
                         />
+                      ) : product.video ? (
+                        <ProductSingleVideo
+                          src={versioned(product.video)}
+                          poster={product.videoPoster ? versioned(product.videoPoster) : undefined}
+                          productName={product.name}
+                        />
                       ) : (
                         <div className="relative w-full aspect-[4/3]">
                           {product.image ? (
@@ -207,12 +214,12 @@ export default async function NatalCategoryPage({ params }: PageProps) {
 
                         <div>
                           <h5 className="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-500 mb-3">
-                            Cores disponíveis
+                            {product.optionsTitle ?? "Cores disponíveis"}
                           </h5>
                           <div className="flex flex-wrap gap-2">
                             {product.variants.map((v) => (
                               <span
-                                key={`${v.code}-${v.ledColor}`}
+                                key={`${v.code}-${v.label ?? v.ledColor}`}
                                 className="inline-flex items-center gap-2 bg-white border border-neutral-200 pl-2 pr-3 py-1.5 text-[11px] font-medium text-neutral-700"
                                 title={v.wireColor ? `Fio: ${v.wireColor}` : undefined}
                               >
@@ -221,7 +228,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                                   className="w-3.5 h-3.5 rounded-full border border-black/15 shrink-0"
                                   style={{ backgroundColor: v.swatch }}
                                 />
-                                {v.ledColor}
+                                {v.label ?? v.ledColor}
                                 {v.code && (
                                   <span className="text-neutral-400 font-mono">{v.code}</span>
                                 )}

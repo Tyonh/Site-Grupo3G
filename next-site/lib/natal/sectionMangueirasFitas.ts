@@ -125,32 +125,19 @@ export const mangueirasFitasCategories: NatalCategory[] = [
     ],
     products: [
       {
-        name: "Fita de LED Neon — 50m",
-        image: "/natal/fita-neon.png",
-        description:
-          "Rolo de 50m com 200 LEDs por metro e difusor neon. Cortável de metro em metro.",
-        specs: [
-          { label: "Comprimento", value: "50m (rolo)" },
-          { label: "LEDs", value: "200 LEDs/m" },
-          { label: "Distância entre LED", value: "10cm" },
-          { label: "Voltagem", value: "220V" },
-          { label: "Proteção", value: "IP 65", plain: "resiste a chuva" },
-          { label: "Corte", value: "De metro em metro" },
-        ],
-        variants: [
-          { code: "50732", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
-          { code: "50733", ledColor: "Branco", swatch: SWATCH["Branco"] },
-          { code: "50734", ledColor: "Vermelho", swatch: SWATCH["Vermelho"] },
-          { code: "50735", ledColor: "Azul", swatch: SWATCH["Azul"] },
-          { code: "50736", ledColor: "Verde", swatch: SWATCH["Verde"] },
-          { code: "50737", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
-        ],
-      },
-      {
         name: "Fita de LED Neon — 100m",
         image: "/natal/fita-neon.png",
+        images: [
+          { code: "50732", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/fita-neon-100m-branco-quente.png" },
+          { code: "", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/fita-neon-100m-vermelho.png" },
+          { code: "", color: "Rosa", swatch: SWATCH["Rosa"], src: "/natal/fita-neon-100m-rosa.png" },
+          { code: "", color: "Roxo", swatch: SWATCH["Roxo"], src: "/natal/fita-neon-100m-roxo.png" },
+          { code: "", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/fita-neon-100m-azul.png" },
+          { code: "", color: "Aquamarine Azul", swatch: SWATCH["Aquamarine Azul"], src: "/natal/fita-neon-100m-aquamarine.png" },
+          { code: "", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/fita-neon-100m-verde.png" },
+        ],
         description:
-          "Rolo dobrado de 100m em branco quente, para obras e projetos de metragem longa.",
+          "Rolo de 100m com difusor neon, disponível em sete cores, para obras e projetos de metragem longa.",
         specs: [
           { label: "Comprimento", value: "100m (rolo)" },
           { label: "LEDs", value: "200 LEDs/m" },
@@ -161,11 +148,18 @@ export const mangueirasFitasCategories: NatalCategory[] = [
         ],
         variants: [
           { code: "50732", ledColor: "Branco Quente", swatch: SWATCH["Branco Quente"] },
+          // Códigos das demais cores do rolo de 100m ainda não definidos
+          { code: "", ledColor: "Vermelho", swatch: SWATCH["Vermelho"] },
+          { code: "", ledColor: "Rosa", swatch: SWATCH["Rosa"] },
+          { code: "", ledColor: "Roxo", swatch: SWATCH["Roxo"] },
+          { code: "", ledColor: "Azul", swatch: SWATCH["Azul"] },
+          { code: "", ledColor: "Aquamarine Azul", swatch: SWATCH["Aquamarine Azul"] },
+          { code: "", ledColor: "Verde", swatch: SWATCH["Verde"] },
         ],
       },
     ],
     commercial:
-      "Venda em rolo fechado (50m ou 100m). Informe a metragem e a cor para orçamento.",
+      "Venda em rolo fechado de 100m. Informe a cor para orçamento.",
   },
   {
     slug: "fitas-de-led",

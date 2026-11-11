@@ -10,6 +10,8 @@ export interface NatalVariant {
   code: string;
   /** Código da mesma cor na versão com plugue (PSSD), quando o produto tem as duas */
   plugCode?: string;
+  /** Texto exibido no lugar da cor quando a opção é outra coisa (ex.: o tamanho "2,5m") */
+  label?: string;
   ledColor: string;
   wireColor?: string;
   /** Cor aproximada para o swatch visual (hex) */
@@ -47,6 +49,12 @@ export interface NatalProduct {
   videos?: NatalProductVideo[];
   /** Fotos por cor — showcase com troca de cor sem vídeo */
   images?: NatalProductImage[];
+  /** Vídeo geral do produto, sem seletor de cor (em /public/natal/videos) — toca em loop, mudo */
+  video?: string;
+  /** Capa do vídeo: imagem mostrada até ele carregar (em /public/natal/videos) */
+  videoPoster?: string;
+  /** Título da lista de opções (padrão "Cores disponíveis"; ex.: "Tamanhos disponíveis") */
+  optionsTitle?: string;
   description: string;
   specs: NatalSpec[];
   variants: NatalVariant[];

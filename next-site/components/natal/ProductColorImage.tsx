@@ -41,7 +41,7 @@ export default function ProductColorImage({
       <div className="relative w-full aspect-video overflow-hidden">
         {images.map((img, i) => (
           <Image
-            key={img.code}
+            key={`${img.code}-${img.color}`}
             src={img.src}
             alt={`${productName} — cor ${img.color}`}
             fill
@@ -84,7 +84,7 @@ export default function ProductColorImage({
       >
         {images.map((img, i) => (
           <button
-            key={img.code}
+            key={`${img.code}-${img.color}`}
             type="button"
             role="tab"
             aria-selected={i === active}

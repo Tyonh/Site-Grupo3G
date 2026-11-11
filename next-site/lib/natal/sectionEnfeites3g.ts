@@ -155,6 +155,12 @@ export const enfeites3gCategories: NatalCategory[] = [
       {
         name: "Bola LED — 50cm",
         image: "/natal/bola-led-50.png",
+        images: [
+          { code: "51023", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/bola-led-50-branco-quente.png" },
+          { code: "51024", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/bola-led-50-azul.png" },
+          { code: "51025", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/bola-led-50-verde.png" },
+          { code: "51026", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/bola-led-50-vermelho.png" },
+        ],
         description:
           "Esfera de 50cm com 280 LEDs, disponível em cinco cores. Para árvore de porte e composição de praça.",
         specs: [
@@ -175,6 +181,12 @@ export const enfeites3gCategories: NatalCategory[] = [
       {
         name: "Bola LED — 30cm",
         image: "/natal/bola-led-30.png",
+        images: [
+          { code: "51138", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/bola-led-50-branco-quente.png" },
+          { code: "41140", color: "Azul", swatch: SWATCH["Azul"], src: "/natal/bola-led-50-azul.png" },
+          { code: "51141", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/bola-led-50-verde.png" },
+          { code: "51139", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/bola-led-50-vermelho.png" },
+        ],
         description:
           "Versão menor da esfera, com 48 LEDs, disponível em quatro cores. Para composições com várias bolas.",
         specs: [

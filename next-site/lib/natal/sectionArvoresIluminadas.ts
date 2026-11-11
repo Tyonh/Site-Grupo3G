@@ -30,59 +30,37 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
     ],
     products: [
       {
-        name: "Árvore de LED — 2,5m",
-        image: "/natal/arvore-25m.png",
-        description:
-          "Árvore de 2,5m de altura e 1,4m de diâmetro, com 3.120 LEDs.",
-        specs: [
-          { label: "Altura", value: "2,5m" },
-          { label: "Diâmetro", value: "1,4m" },
-          { label: "LEDs", value: "3.120 LEDs" },
-        ],
-        variants: [
-          { code: "51027", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
-        ],
-      },
-      {
-        name: "Árvore de LED — 5m",
+        name: "Árvore de LED",
         image: "/natal/arvore-gigante-rosa.png",
+        video: "/natal/videos/arvore-de-led.mp4",
+        videoPoster: "/natal/videos/arvore-de-led-capa.jpg",
+        optionsTitle: "Tamanhos disponíveis",
         description:
-          "Árvore de 5m de altura e 2,3m de diâmetro, com 8.880 LEDs.",
+          "Árvore de LED em estrutura monumental, em dois tamanhos: 2,5m e 5m de altura.",
         specs: [
-          { label: "Altura", value: "5m" },
-          { label: "Diâmetro", value: "2,3m" },
-          { label: "LEDs", value: "8.880 LEDs" },
+          { label: "Árvore de 2,5m", value: "Diâmetro 1,4m · 3.120 LEDs" },
+          { label: "Árvore de 5m", value: "Diâmetro 2,3m · 8.880 LEDs" },
         ],
         variants: [
-          { code: "51028", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
+          { code: "51027", label: "2,5m", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
+          { code: "51028", label: "5m", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
         ],
       },
       {
-        name: "Árvore de LED — 5,6m",
-        image: "/natal/arvore-56m.png",
-        description:
-          "Árvore de 5,6m de altura e 4,2m de diâmetro, com 7.560 LEDs.",
-        specs: [
-          { label: "Altura", value: "5,6m" },
-          { label: "Diâmetro", value: "4,2m" },
-          { label: "LEDs", value: "7.560 LEDs" },
-        ],
-        variants: [
-          { code: "51029", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
-        ],
-      },
-      {
-        name: "Árvore de LED — 8,6m",
+        name: "Árvore Festiva",
         image: "/natal/arvore-86m.png",
+        video: "/natal/videos/arvore-festiva.mp4",
+        videoPoster: "/natal/videos/arvore-festiva-capa.jpg",
+        optionsTitle: "Tamanhos disponíveis",
         description:
-          "A maior da linha: 8,6m de altura, 4,2m de diâmetro e 8.040 LEDs.",
+          "Árvore festiva de LED em estrutura monumental, em dois tamanhos: 5,6m e 8,6m de altura.",
         specs: [
-          { label: "Altura", value: "8,6m" },
-          { label: "Diâmetro", value: "4,2m" },
-          { label: "LEDs", value: "8.040 LEDs" },
+          { label: "Árvore de 5,6m", value: "Diâmetro 4,2m · 7.560 LEDs" },
+          { label: "Árvore de 8,6m", value: "Diâmetro 4,2m · 8.040 LEDs" },
         ],
         variants: [
-          { code: "51030", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
+          { code: "51029", label: "5,6m", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
+          { code: "51030", label: "8,6m", ledColor: "Multicolorido", swatch: SWATCH["Multicolorido"] },
         ],
       },
       {
@@ -102,7 +80,7 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
       },
       {
         name: "Rena 3D",
-        image: "/natal/rena-3d.png",
+        image: "/natal/rena-3d-foto.jpg",
         description:
           "Rena com trenó em armação 3D iluminada, de 4,2m de largura por 1,6m de altura.",
         specs: [
