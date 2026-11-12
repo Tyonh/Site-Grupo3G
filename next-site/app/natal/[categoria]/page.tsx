@@ -22,26 +22,44 @@ export function generateStaticParams() {
   return natalSections.map((s) => ({ categoria: s.slug }));
 }
 
+/**
+ * Descrição para busca: a chamada curta do grupo, completada com as categorias
+ * e o gancho do catálogo enquanto cabe em 160 caracteres (acima disso o Google
+ * corta o texto no resultado). Só entra o que existe no catálogo.
+ */
+function buildMetaDescription(section: NonNullable<ReturnType<typeof getSectionBySlug>>): string {
+  const parts = [
+    `Categorias: ${section.categories.map((c) => c.name).join(", ")}.`,
+    "Catálogo Natal 3G com código de cada cor.",
+  ];
+  let description: string = section.blurb;
+  for (const part of parts) {
+    if (`${description} ${part}`.length <= 160) description = `${description} ${part}`;
+  }
+  return description;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { categoria } = await params;
   const section = getSectionBySlug(categoria);
   if (!section) return { title: "Natal 3G" };
   const shareImage = section.photo ?? section.categories[0]?.photo;
+  const description = buildMetaDescription(section);
   return {
     title: `${section.name} — Natal 3G`,
-    description: section.blurb,
+    description,
     alternates: { canonical: `/natal/${section.slug}` },
     openGraph: {
       type: "website",
       title: `${section.name} — Natal 3G`,
-      description: section.blurb,
+      description,
       url: `/natal/${section.slug}`,
       ...(shareImage ? { images: [{ url: shareImage }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: `${section.name} — Natal 3G`,
-      description: section.blurb,
+      description,
       ...(shareImage ? { images: [shareImage] } : {}),
     },
   };

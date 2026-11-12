@@ -29,7 +29,10 @@ export const metadata: Metadata = {
   // `absolute` ignora o template `%s — 3G Iluminação` do layout, senão o
   // nome da marca apareceria duas vezes no título da aba.
   title: { absolute: "3G Iluminação - Luz que Transforma" },
-  description: siteConfig.description,
+  // Própria desta marca: a home "/" usa a descrição geral do grupo, e as duas
+  // não podem ser idênticas.
+  description:
+    "3G Iluminação, marca do Grupo 3G: refletor modular LED, luminária pública homologada e luminária solar all-in-one para iluminação pública e industrial.",
   alternates: { canonical: "/3g" },
 };
 

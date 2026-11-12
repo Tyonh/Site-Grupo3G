@@ -103,6 +103,8 @@ export default function EbronHeroSlider() {
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-12">
         {slides.map((slide, index) => {
+          // Uma página tem um único H1: só o primeiro slide; os demais são H2.
+          const TitleTag = index === 0 ? "h1" : "h2";
           const visible = index === activeSlide;
 
           return (
@@ -117,9 +119,9 @@ export default function EbronHeroSlider() {
                 <span className="text-xs font-extrabold uppercase tracking-[0.3em] text-ebron-blue-light">
                   Iluminação pública EBRON
                 </span>
-                <h1 className="text-3xl font-black uppercase leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+                <TitleTag className="text-3xl font-black uppercase leading-tight tracking-tight sm:text-4xl lg:text-5xl">
                   {slide.title}
-                </h1>
+                </TitleTag>
                 <p className="max-w-xl text-sm font-light leading-relaxed text-ebron-light/85 sm:text-base lg:text-lg">
                   {slide.description}
                 </p>

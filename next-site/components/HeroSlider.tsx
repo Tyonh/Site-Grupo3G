@@ -127,6 +127,8 @@ export default function HeroSlider() {
       {/* Slide Container */}
       <div className="relative w-full h-full max-w-7xl mx-auto z-10 px-4 sm:px-6 flex items-center">
         {slidesData.map((slide, index) => {
+          // Uma página tem um único H1: só o primeiro slide; os demais são H2.
+          const TitleTag = index === 0 ? "h1" : "h2";
           const isActive = index === currentSlide;
           return (
             <div
@@ -140,9 +142,9 @@ export default function HeroSlider() {
               {/* Text content */}
               <div className="flex flex-col gap-3 w-full md:w-[56%] lg:w-[58%] justify-center text-white text-center md:text-left mt-6 md:mt-0 order-2 md:order-1 z-20">
                 <div>
-                  <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tight leading-tight uppercase text-shadow-md">
+                  <TitleTag className="text-2xl xs:text-3xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tight leading-tight uppercase text-shadow-md">
                     {slide.title}
-                  </h1>
+                  </TitleTag>
                   {slide.subtitle && (
                     <h2 className="text-xs sm:text-sm md:text-sm lg:text-base xl:text-lg text-brand-light font-light mt-2 opacity-90">
                       {slide.subtitle}

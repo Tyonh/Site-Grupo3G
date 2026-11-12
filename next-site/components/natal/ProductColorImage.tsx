@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type KeyboardEvent } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import type { NatalProductImage } from "@/lib/natalCatalog";
 
 interface ProductColorImageProps {
@@ -20,6 +20,7 @@ export default function ProductColorImage({
 }: ProductColorImageProps) {
   const [active, setActive] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const selectColor = (index: number) => {
     if (index === active) return;
@@ -34,6 +35,9 @@ export default function ProductColorImage({
     if (nextIndex === null) return;
     e.preventDefault();
     selectColor(nextIndex);
+    // Foco acompanha a seleção (roving tabindex); sem isto a próxima seta
+    // seria disparada no botão antigo e a navegação travaria.
+    tabRefs.current[nextIndex]?.focus();
   };
 
   return (
@@ -85,6 +89,9 @@ export default function ProductColorImage({
         {images.map((img, i) => (
           <button
             key={`${img.code}-${img.color}`}
+            ref={(el) => {
+              tabRefs.current[i] = el;
+            }}
             type="button"
             role="tab"
             aria-selected={i === active}
