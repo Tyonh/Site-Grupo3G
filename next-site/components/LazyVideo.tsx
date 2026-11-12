@@ -8,6 +8,8 @@ interface LazyVideoProps {
   /** Imagem mostrada até o vídeo carregar (e o tempo todo com movimento reduzido) */
   poster: string;
   className?: string;
+  /** Velocidade de reprodução (1 = normal, 2 = o dobro). Opcional. */
+  playbackRate?: number;
 }
 
 /**
@@ -20,7 +22,7 @@ interface LazyVideoProps {
  * arquivo só é pedido quando o vídeo está a ~400px de entrar na tela. Sai da
  * tela, pausa.
  */
-export default function LazyVideo({ src, poster, className }: LazyVideoProps) {
+export default function LazyVideo({ src, poster, className, playbackRate }: LazyVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const reduceMotion = usePrefersReducedMotion();
 
@@ -31,6 +33,12 @@ export default function LazyVideo({ src, poster, className }: LazyVideoProps) {
 
     video.muted = true;
     video.defaultMuted = true;
+    // `defaultPlaybackRate` vale para cada carga do arquivo (o src só é
+    // definido depois, quando o vídeo chega perto da tela).
+    if (playbackRate) {
+      video.defaultPlaybackRate = playbackRate;
+      video.playbackRate = playbackRate;
+    }
 
     let observer: IntersectionObserver | undefined;
     const start = () => {
@@ -63,7 +71,7 @@ export default function LazyVideo({ src, poster, className }: LazyVideoProps) {
       window.removeEventListener("load", start);
       observer?.disconnect();
     };
-  }, [src, reduceMotion]);
+  }, [src, reduceMotion, playbackRate]);
 
   return (
     <video

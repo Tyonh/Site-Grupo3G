@@ -25,6 +25,12 @@ interface Door {
   video: string;
   /** Quadro inicial do vídeo: aparece na hora, antes de o vídeo ser baixado */
   poster: string;
+  /** Classes do vídeo na faixa. Vídeo horizontal cobre a faixa inteira; o da
+   *  árvore é vertical (9:16): fica inteiro e centralizado, e as laterais
+   *  esmaecem para a cor da faixa (que tem o mesmo cinza do fundo do vídeo). */
+  videoClass: string;
+  /** Velocidade do vídeo (1 = normal). Omitir mantém a original. */
+  videoSpeed?: number;
   /** Cor sólida atrás do vídeo (evita flash em branco/preto no carregamento) */
   bg: string;
   accent: string;
@@ -44,7 +50,13 @@ const doors: Door[] = [
     imageAlt: "Árvore de Natal decorada — produto Grupo 3G",
     video: "/natal/videos/arvore.mp4",
     poster: "/posters/door-natal.jpg",
-    bg: "bg-natal-green",
+    // 1.5 = uma vez e meia a velocidade (o vídeo original dura 12,5 s). Ajuste aqui.
+    videoSpeed: 1.5,
+    videoClass:
+      "absolute inset-y-0 left-1/2 aspect-[9/16] h-full w-auto -translate-x-1/2 object-cover [mask-image:linear-gradient(to_right,transparent,#000_22%,#000_78%,transparent)]",
+    // Mesma cor do fundo do vídeo da árvore (#f3f3f3): o vídeo, agora menor e
+    // centralizado, se funde à faixa e ela mantém o degradê cinza de antes.
+    bg: "bg-[#f3f3f3]",
     accent: "text-natal-gold",
     hoverAccent: "group-hover:text-natal-gold",
     tint: "bg-natal-green/42",
@@ -57,6 +69,7 @@ const doors: Door[] = [
     imageAlt: "Luminária Solar 3G",
     video: "/landipagevi-web.mp4",
     poster: "/posters/door-3g.jpg",
+    videoClass: "absolute inset-0 h-full w-full object-cover",
     bg: "bg-brand-charcoal",
     accent: "text-brand-red",
     hoverAccent: "group-hover:text-brand-red",
@@ -71,6 +84,7 @@ const doors: Door[] = [
     imageAlt: "Luminária EBRON PRO",
     video: "/ebron-bg-web.mp4",
     poster: "/posters/door-ebron.jpg",
+    videoClass: "absolute inset-0 h-full w-full object-cover",
     bg: "bg-ebron-navy",
     accent: "text-ebron-blue-light",
     hoverAccent: "group-hover:text-ebron-blue-light",
@@ -141,7 +155,8 @@ export default function GroupHome() {
                 <LazyVideo
                   src={door.video}
                   poster={door.poster}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className={door.videoClass}
+                  playbackRate={door.videoSpeed}
                 />
                 {/* Véu com a cor da marca — cobre o vídeo por padrão e some ao
                     passar o mouse, revelando o vídeo "sem efeito". Alpha em
