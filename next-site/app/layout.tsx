@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PageTransitionLoader from "@/components/PageTransitionLoader";
+import SkipLink from "@/components/SkipLink";
+import MotionToggle from "@/components/MotionToggle";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
@@ -118,14 +120,21 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
+        {/* Sem JavaScript o loader de entrada nunca sairia da tela e taparia o
+            conteúdo, que já vem completo no HTML. */}
+        <noscript>
+          <style>{".page-loader{display:none!important}"}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd).replace(/</g, "\\u003c") }}
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <SkipLink />
         <PageTransitionLoader />
         {children}
+        <MotionToggle />
       </body>
     </html>
   );

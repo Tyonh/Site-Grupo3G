@@ -40,7 +40,7 @@ export default function LuminariaSolarPage() {
       {/* Floating Theme Switcher */}
       <button
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className={`fixed top-24 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full border shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 pointer-events-auto ${
+        className={`fixed top-24 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full border shadow-lg cursor-pointer transition duration-300 hover:scale-110 active:scale-95 pointer-events-auto ${
           theme === "dark"
             ? "bg-black/80 text-yellow-400 border-white/10 hover:border-yellow-400/50"
             : "bg-white/80 text-indigo-950 border-slate-200 hover:border-indigo-500/50"
@@ -85,6 +85,8 @@ export default function LuminariaSolarPage() {
 
       {/* Main scrollable content */}
       <div className="relative z-10 w-full flex flex-col bg-transparent">
+        {/* Conteúdo principal: o Footer fica fora do <main> (landmark próprio) */}
+        <main className="w-full flex flex-col">
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 1: HERO
         ═══════════════════════════════════════════════════════════════ */}
@@ -357,7 +359,7 @@ export default function LuminariaSolarPage() {
         ═══════════════════════════════════════════════════════════════ */}
         <section className="min-h-[70vh] flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div
-            className={`relative w-full max-w-5xl min-h-[380px] h-[70vh] max-h-[650px] rounded-3xl overflow-hidden border shadow-2xl transition-all duration-500 flex flex-col items-center justify-center pointer-events-auto ${
+            className={`relative w-full max-w-5xl min-h-[380px] h-[70vh] max-h-[650px] rounded-3xl overflow-hidden border shadow-2xl transition-colors duration-500 flex flex-col items-center justify-center pointer-events-auto ${
               theme === "dark"
                 ? "bg-zinc-950 border-white/10"
                 : "bg-slate-50 border-slate-200"
@@ -380,6 +382,7 @@ export default function LuminariaSolarPage() {
             </div>
           </div>
         </section>
+        </main>
 
         {/* Footer */}
         <Footer />

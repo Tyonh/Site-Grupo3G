@@ -40,6 +40,7 @@ export default function ProductCloseupModal({
     panY: number;
   } | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const resetView = useCallback(() => {
     setZoom(MIN_ZOOM);
@@ -57,12 +58,15 @@ export default function ProductCloseupModal({
   }, []);
 
   // Trava o scroll da página enquanto a aba está aberta e devolve no fim.
+  // O foco vai para o botão de fechar e, ao fechar, volta para quem abriu a aba.
   useEffect(() => {
+    const trigger = document.activeElement as HTMLElement | null;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     return () => {
       document.body.style.overflow = previous;
+      trigger?.focus();
     };
   }, []);
 
@@ -72,6 +76,21 @@ export default function ProductCloseupModal({
       if (e.key === "+" || e.key === "=") changeZoom(ZOOM_STEP);
       if (e.key === "-" || e.key === "_") changeZoom(-ZOOM_STEP);
       if (e.key === "0") resetView();
+      // Prende o foco no diálogo: Tab e Shift+Tab giram entre os botões dele.
+      if (e.key === "Tab") {
+        const nodes = dialogRef.current?.querySelectorAll<HTMLElement>("button:not([disabled])");
+        if (!nodes?.length) return;
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        const active = document.activeElement;
+        if (!dialogRef.current?.contains(active) || (e.shiftKey && active === first)) {
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -104,10 +123,11 @@ export default function ProductCloseupModal({
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label={`Detalhe: ${label}`}
-      className="fixed inset-0 z-50 flex flex-col bg-brand-charcoal/95 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex flex-col overscroll-contain bg-brand-charcoal/95 backdrop-blur-sm"
       onClick={onClose}>
       {/* Barra superior — título do setor e controles de zoom */}
       <div
@@ -155,7 +175,7 @@ export default function ProductCloseupModal({
 
       {/* Palco da foto — roda do mouse dá zoom, arrastar navega pela região */}
       <div
-        className="relative flex-1 overflow-hidden"
+        className="relative flex-1 touch-none overflow-hidden"
         onClick={(e) => e.stopPropagation()}
         onWheel={handleWheel}
         onDoubleClick={() =>
@@ -170,7 +190,8 @@ export default function ProductCloseupModal({
             zoom === MIN_ZOOM ? "zoom-in" : isDragging ? "grabbing" : "grab",
         }}>
         <div
-          className="relative h-full w-full transition-transform duration-200 ease-out"
+          // Sem transição durante o arrasto: senão a foto fica atrasada atrás do dedo.
+          className={`relative h-full w-full ${isDragging ? "" : "transition-transform duration-200 ease-out"}`}
           style={{
             transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
           }}>

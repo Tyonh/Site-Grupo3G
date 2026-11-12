@@ -68,6 +68,8 @@ export default function EbronProPage() {
 
       {/* Main scrollable content */}
       <div className="ebron-product-page relative z-10 flex w-full flex-col">
+        {/* Conteúdo principal: o Footer fica fora do <main> (landmark próprio) */}
+        <main className="flex w-full flex-col">
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 1: HERO
         ═══════════════════════════════════════════════════════════════ */}
@@ -332,7 +334,7 @@ export default function EbronProPage() {
                 para instalação imediata em postes de vias públicas.
               </p>
               <div className="flex flex-col gap-3 mt-2">
-                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
+                <div className="flex items-center gap-3 p-3 rounded-xl border transition-colors duration-500 bg-slate-50 border-slate-200">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">
                     IP
                   </span>
@@ -343,7 +345,7 @@ export default function EbronProPage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
+                <div className="flex items-center gap-3 p-3 rounded-xl border transition-colors duration-500 bg-slate-50 border-slate-200">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">
                     lm
                   </span>
@@ -354,7 +356,7 @@ export default function EbronProPage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-3 rounded-xl border transition-all duration-500 bg-slate-50 border-slate-200">
+                <div className="flex items-center gap-3 p-3 rounded-xl border transition-colors duration-500 bg-slate-50 border-slate-200">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-brand-red/15 text-brand-red text-xs font-black">
                     PC
                   </span>
@@ -369,6 +371,7 @@ export default function EbronProPage() {
             </div>
           </div>
         </section>
+        </main>
 
         {/* Footer */}
         <Footer />

@@ -8,19 +8,19 @@ interface GalleryItem {
 const galleryItems: GalleryItem[] = [
   {
     title: "Campo sobral - Refletor Modular",
-    image: "/sobral-campo.png",
+    image: "/sobral-campo-web.jpg",
   },
   {
     title: "Terra&Mar - Refletor Modular",
-    image: "/terramar.JPG",
+    image: "/terramar-web.jpg",
   },
   {
     title: "Quixeramobim - Refletor Modular",
-    image: "/quixeramobim-camp.JPG",
+    image: "/quixeramobim-web.jpg",
   },
   {
     title: "Caucaia - Refletor Modular",
-    image: "/caucaua-campo.png",
+    image: "/caucaua-campo-web.jpg",
   },
   {
     title: "Juazeiro - Solar",
@@ -28,7 +28,7 @@ const galleryItems: GalleryItem[] = [
   },
   {
     title: "Juazeiro - Homologada",
-    image: "/Juazeiro-2.png",
+    image: "/Juazeiro-2-web.jpg",
   },
   {
     title: "Beberibe - Homologada",
@@ -52,7 +52,7 @@ export default function GallerySection() {
         {galleryItems.map((item, index) => (
           <div
             key={index}
-            className="relative w-full h-full overflow-hidden rounded-xl bg-gray-900 flex flex-col items-center justify-center transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl scroll-snap-align-center group border border-white/5">
+            className="relative w-full h-full overflow-hidden rounded-xl bg-gray-900 flex flex-col items-center justify-center transition-[transform,box-shadow] duration-500 hover:scale-[1.01] hover:shadow-2xl scroll-snap-align-center group border border-white/5">
             {/* Elegant overlay gradient for typography legibility */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent z-10 transition-opacity duration-300 opacity-80 group-hover:opacity-95" />
 

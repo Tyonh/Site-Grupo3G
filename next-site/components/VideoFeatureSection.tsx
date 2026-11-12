@@ -43,7 +43,7 @@ export default function VideoFeatureSection() {
             href="https://wa.me/5585986559388?text=Olá!%20Gostaria%20de%20mais%20informações."
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center h-14 w-full sm:w-[280px] bg-brand-red text-white font-bold rounded-lg hover:-translate-y-0.5 hover:bg-red-800 transition-all duration-300 shadow-lg text-center uppercase tracking-wider text-sm cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
+            className="flex items-center justify-center h-14 w-full sm:w-[280px] bg-brand-red text-white font-bold rounded-lg hover:-translate-y-0.5 hover:bg-red-800 transition duration-300 shadow-lg text-center uppercase tracking-wider text-sm cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
           >
             Solicitar Orçamento
           </a>

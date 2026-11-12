@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useId, useRef, useState, type KeyboardEvent } from "react";
 import type { NatalProductImage } from "@/lib/natalCatalog";
 
 interface ProductColorImageProps {
@@ -21,6 +21,9 @@ export default function ProductColorImage({
   const [active, setActive] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const uid = useId();
+  const panelId = `${uid}-painel`;
+  const tabId = (i: number) => `${uid}-aba-${i}`;
 
   const selectColor = (index: number) => {
     if (index === active) return;
@@ -42,7 +45,11 @@ export default function ProductColorImage({
 
   return (
     <div className="relative flex flex-col gap-3">
-      <div className="relative w-full aspect-video overflow-hidden">
+      <div
+        id={panelId}
+        role="tabpanel"
+        aria-labelledby={tabId(active)}
+        className="relative w-full aspect-video overflow-hidden">
         {images.map((img, i) => (
           <Image
             key={`${img.code}-${img.color}`}
@@ -94,6 +101,8 @@ export default function ProductColorImage({
             }}
             type="button"
             role="tab"
+            id={tabId(i)}
+            aria-controls={panelId}
             aria-selected={i === active}
             aria-label={`Ver ${productName} na cor ${img.color}`}
             tabIndex={i === active ? 0 : -1}

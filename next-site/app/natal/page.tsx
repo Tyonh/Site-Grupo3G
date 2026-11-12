@@ -118,7 +118,7 @@ export default function NatalHomePage() {
                   <span
                     className={`inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] transition-colors ${exploreClass}`}>
                     Explorar
-                    <span className="inline-block w-10 h-[1px] bg-current transition-all group-hover:w-16" />
+                    <span className="inline-block w-10 h-[1px] bg-current transition-[width] group-hover:w-16" />
                   </span>
                 </Magnetic>
               </ScrollScrubPanel>

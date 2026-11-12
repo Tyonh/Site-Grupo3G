@@ -65,17 +65,17 @@ const GroupNavbar = () => {
         >
           <div className="w-7 h-5 flex flex-col justify-between items-center relative">
             <span
-              className={`w-full h-[3px] bg-white rounded transition-all duration-300 origin-left ${
+              className={`w-full h-[3px] bg-white rounded transition-[transform,opacity] duration-300 origin-left ${
                 open ? "rotate-45 translate-x-[3px] translate-y-[-2px]" : ""
               }`}
             />
             <span
-              className={`w-full h-[3px] bg-white rounded transition-all duration-300 ${
+              className={`w-full h-[3px] bg-white rounded transition-opacity duration-300 ${
                 open ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`w-full h-[3px] bg-white rounded transition-all duration-300 origin-left ${
+              className={`w-full h-[3px] bg-white rounded transition-[transform,opacity] duration-300 origin-left ${
                 open ? "-rotate-45 translate-x-[3px] translate-y-[2px]" : ""
               }`}
             />
@@ -87,7 +87,7 @@ const GroupNavbar = () => {
       <div
         id="group-mobile-menu"
         inert={!open}
-        className={`absolute top-full left-0 w-full md:hidden bg-brand-red/97 backdrop-blur-md shadow-2xl transition-all duration-400 ease-in-out z-40 overflow-y-auto overscroll-contain ${
+        className={`absolute top-full left-0 w-full md:hidden bg-brand-red/97 backdrop-blur-md shadow-2xl transition-[max-height,opacity] duration-400 ease-in-out z-40 overflow-y-auto overscroll-contain ${
           open ? "max-h-[calc(100dvh-5rem)] opacity-100 border-t border-white/10" : "max-h-0 opacity-0 pointer-events-none"
         }`}
       >

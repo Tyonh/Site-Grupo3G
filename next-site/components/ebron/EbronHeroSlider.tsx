@@ -62,6 +62,8 @@ export default function EbronHeroSlider() {
     if (isPaused) return;
 
     const interval = window.setInterval(() => {
+      // Botão global "Pausar animações": não troca de slide sozinho.
+      if (document.documentElement.dataset.motion === "paused") return;
       setActiveSlide((current) => (current + 1) % slides.length);
     }, 8000);
 
@@ -95,9 +97,10 @@ export default function EbronHeroSlider() {
         loop
         muted
         playsInline
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-55"
       >
-        <source src="/ebron-bg.mp4" type="video/mp4" />
+        <source src="/ebron-bg-web.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-gradient-to-r from-ebron-navy/95 via-ebron-navy/75 to-ebron-navy/35" />
 
@@ -111,7 +114,7 @@ export default function EbronHeroSlider() {
             <article
               key={slide.href}
               aria-hidden={!visible}
-              className={`absolute inset-0 mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-8 px-4 py-16 transition-all duration-700 sm:px-6 md:flex-row md:justify-between md:gap-10 lg:px-12 ${
+              className={`absolute inset-0 mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-8 px-4 py-16 transition-[opacity,visibility] duration-700 sm:px-6 md:flex-row md:justify-between md:gap-10 lg:px-12 ${
                 visible ? "visible opacity-100" : "invisible pointer-events-none opacity-0"
               }`}
             >
@@ -144,14 +147,14 @@ export default function EbronHeroSlider() {
                     target="_blank"
                     rel="noopener noreferrer"
                     tabIndex={visible ? 0 : -1}
-                    className="flex h-12 w-full items-center justify-center rounded-lg bg-ebron-blue-light px-6 text-xs font-bold uppercase tracking-wider text-ebron-navy shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white sm:w-64"
+                    className="flex h-12 w-full items-center justify-center rounded-lg bg-ebron-blue-light px-6 text-xs font-bold uppercase tracking-wider text-ebron-navy shadow-lg transition hover:-translate-y-0.5 hover:bg-white sm:w-64"
                   >
                     Fale com um especialista
                   </a>
                   <Link
                     href={slide.href}
                     tabIndex={visible ? 0 : -1}
-                    className="flex h-12 w-full items-center justify-center rounded-lg border border-white/25 bg-white/10 px-6 text-xs font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-white hover:text-ebron-navy sm:w-52"
+                    className="flex h-12 w-full items-center justify-center rounded-lg border border-white/25 bg-white/10 px-6 text-xs font-bold uppercase tracking-wider text-white transition hover:-translate-y-0.5 hover:bg-white hover:text-ebron-navy sm:w-52"
                   >
                     Ver detalhes
                   </Link>
@@ -159,7 +162,7 @@ export default function EbronHeroSlider() {
               </div>
 
               <div className="relative order-1 h-52 w-full sm:h-64 md:order-2 md:h-[400px] md:w-[45%] lg:h-[460px]">
-                <div className={`relative mx-auto h-full w-[260px] transition-all duration-700 sm:w-[320px] md:w-[390px] lg:w-[450px] ${visible ? "translate-x-0 scale-100 opacity-100" : "translate-x-12 scale-95 opacity-0"}`}>
+                <div className={`relative mx-auto h-full w-[260px] transition-[opacity,transform] duration-700 sm:w-[320px] md:w-[390px] lg:w-[450px] ${visible ? "translate-x-0 scale-100 opacity-100" : "translate-x-12 scale-95 opacity-0"}`}>
                   <Image
                     src={slide.image}
                     alt={slide.imageAlt}
@@ -183,7 +186,7 @@ export default function EbronHeroSlider() {
             onClick={() => selectSlide(index)}
             aria-label={`Mostrar ${slide.title}`}
             aria-current={index === activeSlide ? "true" : undefined}
-            className={`h-3.5 w-3.5 rounded-full border border-white/40 transition-all ${
+            className={`h-3.5 w-3.5 rounded-full border border-white/40 transition ${
               index === activeSlide ? "scale-125 border-ebron-blue-light bg-ebron-blue-light" : "bg-white/40 hover:bg-white/80"
             }`}
           />

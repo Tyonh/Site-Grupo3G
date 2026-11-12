@@ -79,6 +79,8 @@ export default function HeroSlider() {
   const startSlider = () => {
     stopSlider();
     timerRef.current = setInterval(() => {
+      // Botão global "Pausar animações": não troca de slide sozinho.
+      if (document.documentElement.dataset.motion === "paused") return;
       setCurrentSlide((prev) => (prev + 1) % slidesData.length);
     }, 8000);
   };
@@ -119,9 +121,10 @@ export default function HeroSlider() {
         loop
         muted
         playsInline
+        aria-hidden="true"
         className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-40 pointer-events-none"
       >
-        <source src="/landipagevi.mp4" type="video/mp4" />
+        <source src="/landipagevi-web.mp4" type="video/mp4" />
       </video>
 
       {/* Slide Container */}
@@ -133,7 +136,7 @@ export default function HeroSlider() {
           return (
             <div
               key={index}
-              className={`absolute inset-0 flex flex-col md:flex-row items-center justify-center md:justify-between transition-all duration-1000 ease-in-out px-4 sm:px-6 py-8 md:py-0 ${
+              className={`absolute inset-0 flex flex-col md:flex-row items-center justify-center md:justify-between transition-[opacity,visibility] duration-1000 ease-in-out px-4 sm:px-6 py-8 md:py-0 ${
                 isActive
                   ? "opacity-100 pointer-events-auto visible"
                   : "opacity-0 pointer-events-none invisible"
@@ -179,7 +182,7 @@ export default function HeroSlider() {
                     href={slide.btnPrimaryHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center h-12 w-full sm:w-[250px] md:w-[220px] lg:w-[260px] xl:w-[280px] bg-brand-red text-white font-bold rounded-lg hover:-translate-y-0.5 hover:bg-red-800 transition-all duration-300 shadow-lg text-center text-xs sm:text-sm uppercase tracking-wider"
+                    className="flex items-center justify-center h-12 w-full sm:w-[250px] md:w-[220px] lg:w-[260px] xl:w-[280px] bg-brand-red text-white font-bold rounded-lg hover:-translate-y-0.5 hover:bg-red-800 transition duration-300 shadow-lg text-center text-xs sm:text-sm uppercase tracking-wider"
                   >
                     {slide.btnPrimaryText}
                   </a>
@@ -187,7 +190,7 @@ export default function HeroSlider() {
                     href={slide.btnSecondaryHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center h-12 w-full sm:w-[200px] md:w-[160px] lg:w-[200px] xl:w-[220px] bg-brand-dark text-white font-bold rounded-lg hover:-translate-y-0.5 hover:bg-gray-800 transition-all duration-300 shadow-lg text-center text-xs sm:text-sm uppercase tracking-wider"
+                    className="flex items-center justify-center h-12 w-full sm:w-[200px] md:w-[160px] lg:w-[200px] xl:w-[220px] bg-brand-dark text-white font-bold rounded-lg hover:-translate-y-0.5 hover:bg-gray-800 transition duration-300 shadow-lg text-center text-xs sm:text-sm uppercase tracking-wider"
                   >
                     {slide.btnSecondaryText}
                   </a>
@@ -197,7 +200,7 @@ export default function HeroSlider() {
               {/* Product Image */}
               <div className="w-full md:w-[44%] lg:w-[42%] flex justify-center md:justify-end order-1 md:order-2 h-[180px] sm:h-[220px] md:h-[400px] lg:h-[450px] relative mt-12 sm:mt-16 md:mt-0">
                 <div
-                  className={`relative w-[260px] sm:w-[320px] md:w-[380px] lg:w-[420px] xl:w-[450px] h-full transition-all duration-1000 ease-out transform ${
+                  className={`relative w-[260px] sm:w-[320px] md:w-[380px] lg:w-[420px] xl:w-[450px] h-full transition-[opacity,transform] duration-1000 ease-out transform ${
                     isActive
                       ? "opacity-100 translate-x-0 scale-100"
                       : "opacity-0 translate-x-16 scale-95"
@@ -224,7 +227,7 @@ export default function HeroSlider() {
           <button
             key={index}
             onClick={() => handleDotClick(index)}
-            className={`w-3.5 h-3.5 rounded-full border border-white/40 cursor-pointer transition-all duration-300 ${
+            className={`w-3.5 h-3.5 rounded-full border border-white/40 cursor-pointer transition duration-300 ${
               index === currentSlide
                 ? "bg-brand-red scale-125 border-brand-red"
                 : "bg-white/40 hover:bg-white/80"

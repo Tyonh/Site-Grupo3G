@@ -343,7 +343,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
               alt={nextSection.name}
               fill
               sizes="100vw"
-              className="object-cover opacity-50 transition-all duration-700 group-hover:opacity-70 group-hover:scale-105"
+              className="object-cover opacity-50 transition-[opacity,transform] duration-700 group-hover:opacity-70 group-hover:scale-105"
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30" />

@@ -71,7 +71,7 @@ export default function SobrePage() {
       {/* Fundo — degradê claro fixo, sem variante escura */}
       <div className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none bg-radial from-slate-50 via-slate-100 to-slate-200" />
 
-      <div className="relative z-10 w-full flex flex-col bg-transparent items-center px-4 sm:px-6 lg:px-20 py-16 sm:py-20 lg:py-28 gap-10 sm:gap-16">
+      <main className="relative z-10 w-full flex flex-col bg-transparent items-center px-4 sm:px-6 lg:px-20 py-16 sm:py-20 lg:py-28 gap-10 sm:gap-16">
         {/* Section 1: Hero & Philosophy */}
         <section className="w-full flex justify-center">
           <div className={cardClass}>
@@ -152,7 +152,7 @@ export default function SobrePage() {
             </div>
           </div>
         </section>
-      </div>
+      </main>
 
       <Footer />
     </>

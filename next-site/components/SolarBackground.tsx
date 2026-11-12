@@ -45,18 +45,20 @@ const SolarBackground = ({ theme }: SolarBackgroundProps) => {
       {/* Base video: Solar Day */}
       <video
         ref={dayVideoRef}
+        aria-hidden="true"
         autoPlay
         loop
         muted
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
-        <source src="/models/solar.mp4" type="video/mp4" />
+        <source src="/models/solar-web.mp4" type="video/mp4" />
       </video>
 
       {/* Overlaid video with mask: Solar Night */}
       <video
         ref={nightVideoRef}
+        aria-hidden="true"
         autoPlay
         loop
         muted
@@ -64,7 +66,7 @@ const SolarBackground = ({ theme }: SolarBackgroundProps) => {
         className="absolute top-0 left-0 w-full h-full object-cover"
         style={maskStyle}
       >
-        <source src="/models/solar%20noite.mp4" type="video/mp4" />
+        <source src="/models/solar-noite-web.mp4" type="video/mp4" />
       </video>
     </div>
   );

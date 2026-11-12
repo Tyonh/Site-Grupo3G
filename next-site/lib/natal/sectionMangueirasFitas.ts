@@ -189,7 +189,7 @@ export const mangueirasFitasCategories: NatalCategory[] = [
         images: [
           { code: "50741", color: "Branco Quente", swatch: SWATCH["Branco Quente"], src: "/natal/fita-smd-50m-branco-quente.png" },
           { code: "50744", color: "Verde", swatch: SWATCH["Verde"], src: "/natal/fita-smd-50m-verde.png" },
-          { code: "50745", color: "Rosa", swatch: SWATCH["Rosa"], src: "/natal/fita-smd-50m-rosa.png" },
+          { code: "50745", color: "Rosa", swatch: SWATCH["Rosa"], src: "/natal/fita-smd-50m-rosa.webp" },
           { code: "50743", color: "Vermelho", swatch: SWATCH["Vermelho"], src: "/natal/fita-smd-50m-vermelho.png" },
         ],
         description:

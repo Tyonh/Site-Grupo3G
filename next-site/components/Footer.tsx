@@ -48,7 +48,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Linkedin"
-              className="p-3 bg-white/10 hover:bg-brand-red rounded-full transition-all duration-300 hover:scale-110 flex items-center justify-center"
+              className="p-3 bg-white/10 hover:bg-brand-red rounded-full transition duration-300 hover:scale-110 flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="p-3 bg-white/10 hover:bg-brand-red rounded-full transition-all duration-300 hover:scale-110 flex items-center justify-center"
+              className="p-3 bg-white/10 hover:bg-brand-red rounded-full transition duration-300 hover:scale-110 flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

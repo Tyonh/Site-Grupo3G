@@ -58,23 +58,25 @@ const EbronNavbar = () => {
 
         {/* Mobile Hamburger Button */}
         <button
-          className="md:hidden focus:outline-none p-2 rounded-lg hover:bg-ebron-blue/60 transition-colors duration-300 cursor-pointer z-50"
+          className="md:hidden min-h-11 min-w-11 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white p-2 rounded-lg hover:bg-ebron-blue/60 transition-colors duration-300 cursor-pointer z-50"
           onClick={toggleMenu}
-          aria-label="Menu"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+          aria-controls="ebron-mobile-menu"
         >
           <div className="w-7 h-5 flex flex-col justify-between items-center relative">
             <span
-              className={`w-full h-[3px] bg-white rounded transition-all duration-300 origin-left ${
+              className={`w-full h-[3px] bg-white rounded transition-[transform,opacity] duration-300 origin-left ${
                 open ? "rotate-45 translate-x-[3px] translate-y-[-2px]" : ""
               }`}
             />
             <span
-              className={`w-full h-[3px] bg-white rounded transition-all duration-300 ${
+              className={`w-full h-[3px] bg-white rounded transition-opacity duration-300 ${
                 open ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`w-full h-[3px] bg-white rounded transition-all duration-300 origin-left ${
+              className={`w-full h-[3px] bg-white rounded transition-[transform,opacity] duration-300 origin-left ${
                 open ? "-rotate-45 translate-x-[3px] translate-y-[2px]" : ""
               }`}
             />
@@ -84,7 +86,9 @@ const EbronNavbar = () => {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`absolute top-[80px] left-0 w-full md:hidden bg-ebron-blue/96 backdrop-blur-md shadow-2xl transition-all duration-400 ease-in-out z-40 overflow-hidden ${
+        id="ebron-mobile-menu"
+        inert={!open}
+        className={`absolute top-[80px] left-0 w-full md:hidden bg-ebron-blue/96 backdrop-blur-md shadow-2xl transition-[max-height,opacity] duration-400 ease-in-out z-40 overflow-hidden ${
           open ? "max-h-[320px] opacity-100 border-t border-white/10" : "max-h-0 opacity-0 pointer-events-none"
         }`}
       >

@@ -50,7 +50,7 @@ const doors: Door[] = [
     tagline: "Refletores, luminárias solares e homologadas para iluminação pública e industrial.",
     image: "/solar-helios.png",
     imageAlt: "Luminária Solar 3G",
-    video: "/landipagevi.mp4",
+    video: "/landipagevi-web.mp4",
     bg: "bg-brand-charcoal",
     accent: "text-brand-red",
     hoverAccent: "group-hover:text-brand-red",
@@ -63,7 +63,7 @@ const doors: Door[] = [
     tagline: "Iluminação urbana com o melhor custo-benefício: EBRON e EBRON PRO.",
     image: "/ebron-pro.png",
     imageAlt: "Luminária EBRON PRO",
-    video: "/ebron-bg.mp4",
+    video: "/ebron-bg-web.mp4",
     bg: "bg-ebron-navy",
     accent: "text-ebron-blue-light",
     hoverAccent: "group-hover:text-ebron-blue-light",
@@ -89,6 +89,7 @@ export default function GroupHome() {
             loop
             muted
             playsInline
+            aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
           >
             <source src="/grupo3g-hero-bg.mp4" type="video/mp4" />
@@ -138,6 +139,7 @@ export default function GroupHome() {
                   muted
                   playsInline
                   preload="auto"
+                  aria-hidden="true"
                   className="absolute inset-0 h-full w-full object-cover"
                 >
                   <source src={door.video} type="video/mp4" />
@@ -175,7 +177,7 @@ export default function GroupHome() {
                       className={`mt-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-colors ${door.hoverAccent}`}
                     >
                       Explorar
-                      <span className="inline-block h-[1px] w-8 bg-current transition-all group-hover:w-12" />
+                      <span className="inline-block h-[1px] w-8 bg-current transition-[width] group-hover:w-12" />
                     </span>
                   </div>
 

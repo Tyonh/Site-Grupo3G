@@ -49,7 +49,7 @@ export const Product3DScene = ({
         : "bg-radial from-slate-50 via-slate-100 to-slate-200"
     }`}>
       {/* Enable pointer-events only for OrbitControls when interactive */}
-      <div className={`h-full transition-all duration-700 ${
+      <div className={`h-full transition-[width] duration-700 ${
         isInteractive ? "w-full lg:w-[60vw] pointer-events-auto" : "w-full pointer-events-none"
       }`}>
         <Canvas

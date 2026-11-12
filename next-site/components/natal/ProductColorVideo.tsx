@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import type { NatalProductVideo } from "@/lib/natalCatalog";
 
 interface ProductColorVideoProps {
@@ -32,6 +32,9 @@ export default function ProductColorVideo({
   const [flashKey, setFlashKey] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const uid = useId();
+  const panelId = `${uid}-painel`;
+  const tabId = (i: number) => `${uid}-aba-${i}`;
 
   // Reproduz apenas o vídeo ativo; pausa os demais para poupar CPU/banda
   useEffect(() => {
@@ -70,7 +73,11 @@ export default function ProductColorVideo({
 
   return (
     <div className="relative flex flex-col gap-3">
-      <div className="relative w-full aspect-video overflow-hidden">
+      <div
+        id={panelId}
+        role="tabpanel"
+        aria-labelledby={tabId(active)}
+        className="relative w-full aspect-video overflow-hidden">
         <div className="absolute inset-0 scale-125 overflow-hidden">
           {videos.map((v, i) => (
             <video
@@ -148,6 +155,8 @@ export default function ProductColorVideo({
             }}
             type="button"
             role="tab"
+            id={tabId(i)}
+            aria-controls={panelId}
             aria-selected={i === active}
             aria-label={`Ver ${productName} na cor ${v.color}`}
             tabIndex={i === active ? 0 : -1}

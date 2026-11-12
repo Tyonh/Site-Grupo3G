@@ -18,8 +18,11 @@ const LocalProduct3DScene = dynamic(
   { ssr: false }
 );
 
-// Cache-bust once per page load to prevent infinite React suspension loops while ensuring the latest export is loaded
-const CACHE_BUST = typeof window !== "undefined" ? Date.now() : 1;
+// Versão do modelo 3D: a URL só muda quando este valor muda, então o navegador
+// guarda o .glb em cache. Troque o valor sempre que o modelo for reexportado.
+// (Com Date.now() a URL era nova a cada visita e o cache nunca valia, e o valor
+// do servidor diferia do cliente.)
+const MODEL_VERSION = "final-1";
 
 export default function ModuloProductPage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -34,7 +37,7 @@ export default function ModuloProductPage() {
   } = useInView<HTMLElement>("300px");
 
   // Load light model (100W) for scroll background and heavy high-end model (300W) for final showcase
-  const backgroundModelUrl = `/models/moduloBackground.final.glb?v=${CACHE_BUST}`;
+  const backgroundModelUrl = `/models/moduloBackground.final.glb?v=${MODEL_VERSION}`;
 
   // Theme styling helpers (shared across all /produtos/* pages)
   const {
@@ -81,6 +84,8 @@ export default function ModuloProductPage() {
       <div
         ref={scrollContainerRef}
         className="relative z-10 w-full flex flex-col bg-transparent">
+        {/* Conteúdo principal: o Footer fica fora do <main> (landmark próprio) */}
+        <main className="w-full flex flex-col">
         {/* SECTION 1: HERO */}
         <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
@@ -371,7 +376,7 @@ export default function ModuloProductPage() {
                     <button
                       key={power}
                       onClick={() => setSelectedPower(power)}
-                      className={`flex-1 h-12 rounded-xl flex items-center justify-center font-black text-sm transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 border ${
+                      className={`flex-1 h-12 rounded-xl flex items-center justify-center font-black text-sm transition duration-300 cursor-pointer hover:scale-105 active:scale-95 border ${
                         selectedPower === power
                           ? "bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/25"
                           : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900"
@@ -384,6 +389,7 @@ export default function ModuloProductPage() {
             </div>
           </div>
         </section>
+        </main>
 
         {/* Footer renders naturally at the bottom of the scroll container */}
         <Footer />
