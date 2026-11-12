@@ -32,24 +32,37 @@ export default function LazyVideo({ src, poster, className }: LazyVideoProps) {
     video.muted = true;
     video.defaultMuted = true;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!video.getAttribute("src")) {
-            video.src = src;
-            video.preload = "auto";
+    let observer: IntersectionObserver | undefined;
+    const start = () => {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            if (!video.getAttribute("src")) {
+              video.src = src;
+              video.preload = "auto";
+            }
+            video.play().catch(() => {
+              /* autoplay pode ser bloqueado — a capa continua na tela */
+            });
+          } else {
+            video.pause();
           }
-          video.play().catch(() => {
-            /* autoplay pode ser bloqueado — a capa continua na tela */
-          });
-        } else {
-          video.pause();
-        }
-      },
-      { rootMargin: "400px 0px" },
-    );
-    observer.observe(video);
-    return () => observer.disconnect();
+        },
+        { rootMargin: "400px 0px" },
+      );
+      observer.observe(video);
+    };
+
+    // Só começa depois que a página terminou de carregar: o vídeo é enfeite e
+    // já tem a capa; baixá-lo junto com o JavaScript e as imagens atrasava o
+    // que o visitante precisa ver primeiro (principalmente em 4G lento).
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+
+    return () => {
+      window.removeEventListener("load", start);
+      observer?.disconnect();
+    };
   }, [src, reduceMotion]);
 
   return (

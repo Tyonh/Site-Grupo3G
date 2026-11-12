@@ -94,17 +94,11 @@ export default function GroupHome() {
         <section className="relative flex min-h-[calc(100svh-5rem)] w-full items-center overflow-hidden bg-brand-charcoal px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           {/* poster: o quadro inicial aparece já no primeiro render e é ele o
               elemento de maior destaque (LCP), em vez de esperar o vídeo. */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <LazyVideo
+            src="/grupo3g-hero-bg.mp4"
             poster="/posters/home-hero.jpg"
-            aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
-          >
-            <source src="/grupo3g-hero-bg.mp4" type="video/mp4" />
-          </video>
+          />
           <div
             className="pointer-events-none absolute inset-0"
             style={{
