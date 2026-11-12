@@ -35,12 +35,13 @@ export default function PageTransitionLoader() {
         }, reduced ? 150 : 1150));
       });
     };
-    if (document.readyState === "complete") ready();
-    else window.addEventListener("load", ready, { once: true });
+    // Libera assim que a página hidratou. Antes esperava o evento `load`, que
+    // só dispara quando TODAS as imagens e vídeos da página terminam de
+    // baixar: no celular com 4G lento isso passava de 5 segundos de loader.
+    ready();
     return () => {
       cancelAnimationFrame(frame);
       timers.forEach(window.clearTimeout);
-      window.removeEventListener("load", ready);
       delete document.body.dataset.pageEntrance;
     };
   }, [isLoading, pathname]);

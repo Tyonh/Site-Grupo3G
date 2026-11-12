@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { preload } from "react-dom";
 import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
+import LazyVideo from "@/components/LazyVideo";
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
@@ -21,6 +23,8 @@ interface Door {
   /** Vídeo de fundo em loop — mesmo arquivo já usado na área da marca
    *  (3G: hero da home /3g; EBRON: vídeo próprio; Natal: entrada da árvore) */
   video: string;
+  /** Quadro inicial do vídeo: aparece na hora, antes de o vídeo ser baixado */
+  poster: string;
   /** Cor sólida atrás do vídeo (evita flash em branco/preto no carregamento) */
   bg: string;
   accent: string;
@@ -39,6 +43,7 @@ const doors: Door[] = [
     image: "/natal/foto-arvore.png",
     imageAlt: "Árvore de Natal decorada — produto Grupo 3G",
     video: "/natal/videos/arvore.mp4",
+    poster: "/posters/door-natal.jpg",
     bg: "bg-natal-green",
     accent: "text-natal-gold",
     hoverAccent: "group-hover:text-natal-gold",
@@ -51,6 +56,7 @@ const doors: Door[] = [
     image: "/solar-helios.png",
     imageAlt: "Luminária Solar 3G",
     video: "/landipagevi-web.mp4",
+    poster: "/posters/door-3g.jpg",
     bg: "bg-brand-charcoal",
     accent: "text-brand-red",
     hoverAccent: "group-hover:text-brand-red",
@@ -64,6 +70,7 @@ const doors: Door[] = [
     image: "/ebron-pro.png",
     imageAlt: "Luminária EBRON PRO",
     video: "/ebron-bg-web.mp4",
+    poster: "/posters/door-ebron.jpg",
     bg: "bg-ebron-navy",
     accent: "text-ebron-blue-light",
     hoverAccent: "group-hover:text-ebron-blue-light",
@@ -72,23 +79,27 @@ const doors: Door[] = [
 ];
 
 export default function GroupHome() {
+  // A capa do vídeo do hero é o maior elemento da primeira tela (LCP). Com
+  // preload de alta prioridade ela sai já no começo da carga, em vez de ficar
+  // na fila atrás dos scripts (o servidor ainda fala HTTP/1.1: 6 por vez).
+  preload("/posters/home-hero.jpg", { as: "image", fetchPriority: "high" });
+
   return (
     <>
-      {/* Sinal de prioridade máxima pro vídeo da primeira porta (Natal): sem
-          isso o navegador só começa a baixá-lo quando o parser alcança o
-          <video> no DOM, atrasando o autoplay em relação ao resto da página. */}
-      <link rel="preload" href="/natal/videos/arvore.mp4" as="video" type="video/mp4" />
       <GroupNavbar />
       <main className="flex-1 w-full flex flex-col">
         {/* Hero institucional — horizontal, full-bleed, com vídeo de fundo
             (imagens aéreas) e um véu vermelho/preto por cima pra manter a
             identidade de cor do Grupo 3G e a legibilidade do texto */}
         <section className="relative flex min-h-[calc(100svh-5rem)] w-full items-center overflow-hidden bg-brand-charcoal px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
+          {/* poster: o quadro inicial aparece já no primeiro render e é ele o
+              elemento de maior destaque (LCP), em vez de esperar o vídeo. */}
           <video
             autoPlay
             loop
             muted
             playsInline
+            poster="/posters/home-hero.jpg"
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
           >
@@ -130,20 +141,14 @@ export default function GroupHome() {
                 href={door.href}
                 className={`group relative flex min-h-[min(70svh,48rem)] w-full items-center overflow-hidden px-4 py-12 text-white transition-colors duration-500 focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white sm:px-8 sm:py-16 lg:px-12 ${door.bg}`}
               >
-                {/* Vídeo de fundo — preload="auto" pra começar a rodar já na
-                    carga da página, sem esperar o navegador priorizar
-                    (default seria "metadata", que atrasa o autoplay) */}
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  aria-hidden="true"
+                {/* Vídeo de fundo — só baixa quando chega perto da tela (as portas
+                    ficam abaixo do hero); a capa aparece na hora. Antes todos
+                    baixavam inteiros já na carga e travavam o resto da página. */}
+                <LazyVideo
+                  src={door.video}
+                  poster={door.poster}
                   className="absolute inset-0 h-full w-full object-cover"
-                >
-                  <source src={door.video} type="video/mp4" />
-                </video>
+                />
                 {/* Véu com a cor da marca — cobre o vídeo por padrão e some ao
                     passar o mouse, revelando o vídeo "sem efeito". Alpha em
                     vez de multiply pra tingir de forma consistente mesmo em

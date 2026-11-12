@@ -52,6 +52,9 @@ export default function ThreeGLoaderMark({
             alt=""
             width={1498}
             height={1870}
+            // Aparece com ~100px de largura; sem `sizes` o navegador pedia a
+            // versão de 3840px (centenas de KB) só para o logo do loader.
+            sizes="120px"
             priority
             className="page-loader-core-image"
           />

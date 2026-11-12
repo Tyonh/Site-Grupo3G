@@ -24,7 +24,7 @@
   /* Fundo claro neutro, igual ao miolo do catálogo PDF (branco/cinza claro) */
   --color-natal-cream: #f4f4f4;
 
-  --font-poppins: 'Poppins', sans-serif;
+  --font-poppins: var(--font-poppins-self), 'Poppins', sans-serif;
   --font-fredoka: 'Fredoka', sans-serif;
 
   /* Extra breakpoint below `sm` (640px) for small phones (iPhone SE, etc.) */
@@ -33,7 +33,7 @@
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-poppins);
   background-color: #f3f3f3; /* brand-light */
   overflow-x: hidden;
   /* Trava a UI nativa do navegador (scrollbar, controles de formulário,
@@ -112,7 +112,7 @@ body[data-page-entrance="active"] > :not(.page-loader) {
 
 .page-loader-ring-text {
   fill: #ffffff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-poppins);
   font-size: 17px;
   font-weight: 800;
   letter-spacing: 0;
