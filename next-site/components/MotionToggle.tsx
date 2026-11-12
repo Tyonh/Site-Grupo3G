@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 /**
  * Botão global "Pausar animações e vídeos" (WCAG 2.2.2): movimento que começa
@@ -15,15 +16,12 @@ import { useEffect, useRef, useState } from "react";
  */
 export default function MotionToggle() {
   const pathname = usePathname();
-  const [paused, setPaused] = useState(false);
+  const prefersReduced = usePrefersReducedMotion();
+  // null = o visitante ainda não clicou: vale a preferência do sistema.
+  const [userPaused, setUserPaused] = useState<boolean | null>(null);
+  const paused = userPaused ?? prefersReduced;
   // Vídeos que ESTE botão pausou: só esses voltam a tocar ao retomar.
   const pausedByUs = useRef<Set<HTMLVideoElement>>(new Set());
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setPaused(true);
-    }
-  }, []);
 
   useEffect(() => {
     document.documentElement.dataset.motion = paused ? "paused" : "running";
@@ -54,7 +52,7 @@ export default function MotionToggle() {
   return (
     <button
       type="button"
-      onClick={() => setPaused((value) => !value)}
+      onClick={() => setUserPaused(!paused)}
       aria-pressed={paused}
       aria-label={paused ? "Retomar animações e vídeos" : "Pausar animações e vídeos"}
       className="fixed bottom-4 left-4 z-[9000] flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white ring-1 ring-white/40 backdrop-blur transition-colors hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-6 sm:left-6">

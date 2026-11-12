@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Magnetic from "@/components/natal/Magnetic";
 import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
+import { useHydrated } from "@/hooks/useHydrated";
 
 interface ProductVideoHeroProps {
   videoSrc: string;
@@ -44,12 +45,8 @@ export default function ProductVideoHero({
   secondaryCta,
 }: ProductVideoHeroProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const isLoaded = useHydrated();
   const videoRef = useAutoplayVideo<HTMLVideoElement>();
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   return (
     <section className="relative flex min-h-[calc(100svh-80px)] w-full flex-col overflow-hidden bg-[#f3f3f3] text-black xl:h-[calc(100svh-80px)] xl:min-h-[min(680px,calc(100svh-80px))]">

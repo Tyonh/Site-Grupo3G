@@ -47,9 +47,15 @@ export const ProductModel = ({
   const previousPointerX = useRef(0);
   const previousPointerY = useRef(0);
 
-  // Reset camera initialization and rotation when model changes
-  useEffect(() => {
+  // Ao trocar de modelo: a câmera volta a ser inicializada e a rotação zera.
+  // O estado é zerado durante o render (padrão do React para "resetar estado
+  // quando uma prop muda"); a rotação é de um ref, então fica no efeito.
+  const [initializedForUrl, setInitializedForUrl] = useState(modelUrl);
+  if (initializedForUrl !== modelUrl) {
+    setInitializedForUrl(modelUrl);
     setCameraInitialized(false);
+  }
+  useEffect(() => {
     if (groupRef.current) {
       groupRef.current.rotation.set(0, 0, 0);
     }
@@ -118,9 +124,13 @@ export const ProductModel = ({
       child.castShadow = true;
       child.receiveShadow = true;
 
+      // Materiais do glTF variam (Standard, Physical...): só as propriedades
+      // PBR comuns que este ajuste lê ou escreve, todas opcionais.
+      type NormalizableMaterial = THREE.Material &
+        Partial<Pick<THREE.MeshStandardMaterial, "color" | "emissive" | "emissiveIntensity" | "roughness">>;
       const normalizeMat = (mat: THREE.Material | null) => {
         if (!mat) return;
-        const anyMat = mat as any;
+        const anyMat = mat as NormalizableMaterial;
 
         if (
           anyMat.name &&
