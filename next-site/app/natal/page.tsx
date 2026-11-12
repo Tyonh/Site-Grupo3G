@@ -16,6 +16,15 @@ export const metadata: Metadata = {
   description:
     "Cordões, mangueiras, fitas de LED, árvores gigantes, figuras 3D e infláveis. A linha natalina completa do Grupo 3G.",
   alternates: { canonical: "/natal" },
+  openGraph: {
+    type: "website",
+    title: "Natal 3G - Luz que Transforma",
+    description:
+      "Cordões, mangueiras, fitas de LED, árvores gigantes, figuras 3D e infláveis. A linha natalina completa do Grupo 3G.",
+    url: "/natal",
+    images: [{ url: "/og/og-natal.jpg", width: 1200, height: 630, alt: "Natal 3G — decoração natalina de LED" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og/og-natal.jpg"] },
 };
 
 export default function NatalHomePage() {

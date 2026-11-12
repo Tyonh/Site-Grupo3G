@@ -22,6 +22,15 @@ export const metadata: Metadata = {
   description:
     "Luminária EBRON 2024: eficácia luminosa de 100 lm/W, corpo slim em alumínio, ângulo de projeção de 120°, IP66 e IRC ≥80 para iluminação urbana.",
   alternates: { canonical: "/produtos/ebron" },
+  openGraph: {
+    type: "website",
+    title: "Luminária Ebron",
+    description:
+      "Luminária EBRON 2024: eficácia luminosa de 100 lm/W, corpo slim em alumínio, ângulo de projeção de 120°, IP66 e IRC ≥80 para iluminação urbana.",
+    url: "/produtos/ebron",
+    images: [{ url: "/og/og-ebron.jpg", width: 1200, height: 630, alt: "Luminária EBRON" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og/og-ebron.jpg"] },
 };
 
 export default function EbronLayout({ children }: { children: React.ReactNode }) {

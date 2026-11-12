@@ -23,6 +23,15 @@ export const metadata: Metadata = {
   description:
     "Luminária EBRON PRO 2026: eficácia luminosa de 130 lm/W, IRC ≥80, corpo em alumínio + policarbonato, base para relé embutida, IP66 e ângulo de projeção de até 150°.",
   alternates: { canonical: "/produtos/ebron-pro" },
+  openGraph: {
+    type: "website",
+    title: "Luminária EBRON PRO",
+    description:
+      "Luminária EBRON PRO 2026: eficácia luminosa de 130 lm/W, IRC ≥80, corpo em alumínio + policarbonato, base para relé embutida, IP66 e ângulo de projeção de até 150°.",
+    url: "/produtos/ebron-pro",
+    images: [{ url: "/og/og-ebron.jpg", width: 1200, height: 630, alt: "Luminária EBRON PRO" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og/og-ebron.jpg"] },
 };
 
 export default function EbronProLayout({ children }: { children: React.ReactNode }) {

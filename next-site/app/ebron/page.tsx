@@ -29,6 +29,15 @@ export const metadata: Metadata = {
   description:
     "EBRON, marca do Grupo 3G para iluminação pública: luminárias EBRON e EBRON PRO com alta eficácia luminosa, corpo em alumínio e proteção IP66.",
   alternates: { canonical: "/ebron" },
+  openGraph: {
+    type: "website",
+    title: "EBRON — Iluminação Pública | Grupo 3G",
+    description:
+      "EBRON, marca do Grupo 3G para iluminação pública: luminárias EBRON e EBRON PRO com alta eficácia luminosa, corpo em alumínio e proteção IP66.",
+    url: "/ebron",
+    images: [{ url: "/og/og-ebron.jpg", width: 1200, height: 630, alt: "EBRON — Iluminação pública" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og/og-ebron.jpg"] },
 };
 
 export default function EbronHome() {

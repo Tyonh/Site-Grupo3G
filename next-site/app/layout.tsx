@@ -31,11 +31,14 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
+    // Imagem padrão (1200×630): vale para toda página que não define a sua.
+    images: [{ url: "/og/og-3g.jpg", width: 1200, height: 630, alt: "Grupo 3G — Luz que transforma" }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
+    images: ["/og/og-3g.jpg"],
   },
 };
 
