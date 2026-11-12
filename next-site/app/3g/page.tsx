@@ -6,6 +6,24 @@ import GallerySection from "@/components/GallerySection";
 import VideoFeatureSection from "@/components/VideoFeatureSection";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/lib/siteConfig";
+import JsonLd from "@/components/JsonLd";
+
+const brandJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${siteConfig.url}/3g#page`,
+  url: `${siteConfig.url}/3g`,
+  name: "3G Iluminação",
+  description: siteConfig.description,
+  inLanguage: "pt-BR",
+  isPartOf: { "@id": `${siteConfig.url}/#website` },
+  about: {
+    "@type": "Brand",
+    name: "3G Iluminação",
+    url: `${siteConfig.url}/3g`,
+    logo: `${siteConfig.url}/grupo-3g-logo.png`,
+  },
+};
 
 export const metadata: Metadata = {
   // `absolute` ignora o template `%s — 3G Iluminação` do layout, senão o
@@ -18,6 +36,7 @@ export const metadata: Metadata = {
 export default function ThreeGHome() {
   return (
     <>
+      <JsonLd data={brandJsonLd} />
       <Navbar />
       <main className="flex-1 w-full flex flex-col">
         <HeroSlider />

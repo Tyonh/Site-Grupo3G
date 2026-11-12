@@ -16,6 +16,10 @@ export const dynamic = "force-static";
 
 const url = (path: string) => `${siteConfig.url}${path}`;
 
+// Data do build: como o arquivo é estático, é a data em que o catálogo foi
+// publicado. Mostra à IA se o que ela leu está atualizado.
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
+
 /** Render de uma linha de produto — compartilhado pelos blocos das duas marcas. */
 function pushProductLine(lines: string[], line: ProductLine): void {
   lines.push(
@@ -54,6 +58,8 @@ function buildLlmsFullTxt(): string {
     "# Grupo 3G — catálogo completo",
     "",
     `> ${siteConfig.description}`,
+    "",
+    `Atualizado em ${BUILD_DATE}. Os produtos da linha de Natal, com códigos, tamanhos e cores, estão em ${url("/llms-natal.txt")}.`,
     "",
     "## Sobre a empresa",
     "",

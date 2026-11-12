@@ -1,4 +1,21 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { buildProductJsonLd } from "@/lib/productJsonLd";
+
+const jsonLd = buildProductJsonLd({
+  path: "/produtos/ebron",
+  name: "Luminária EBRON",
+  description:
+    "Luminária EBRON 2024 para iluminação urbana, com corpo slim em alumínio.",
+  brand: { name: "EBRON", path: "/ebron" },
+  specs: [
+    { name: "Eficácia luminosa", value: "100 lm/W" },
+    { name: "Ângulo de projeção", value: "120°" },
+    { name: "Grau de proteção", value: "IP66" },
+    { name: "IRC", value: "≥80" },
+    { name: "Corpo", value: "Alumínio" },
+  ],
+});
 
 export const metadata: Metadata = {
   title: "Luminária Ebron",
@@ -8,5 +25,10 @@ export const metadata: Metadata = {
 };
 
 export default function EbronLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      {children}
+    </>
+  );
 }

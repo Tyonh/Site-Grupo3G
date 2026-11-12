@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node 'D:\\PROJETOS\\Site Principal-FIEC\\.codex\\hooks\\security-guard.js'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node 'D:\\PROJETOS\\Site Principal-FIEC\\.codex\\hooks\\stop-verify.js'"
+          }
+        ]
+      }
+    ]
+  }
+}

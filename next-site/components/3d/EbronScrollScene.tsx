@@ -26,7 +26,7 @@ const mountingAngle = Math.atan2(armDirection.z, armDirection.y);
 type Lighting = { night: number; light: number };
 
 function FinalModel({ lighting, lightSourceRef }: { lighting: RefObject<Lighting>; lightSourceRef: RefObject<THREE.Object3D | null> }) {
-  const { scene } = useGLTF(modelUrl);
+  const { scene } = useGLTF(modelUrl, "/draco/gltf/");
   const emitters = useRef<THREE.MeshStandardMaterial[]>([]);
   const model = useMemo(() => {
     const root = new THREE.Group();

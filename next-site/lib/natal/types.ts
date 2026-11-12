@@ -49,6 +49,8 @@ export interface NatalProduct {
   videos?: NatalProductVideo[];
   /** Fotos por cor — showcase com troca de cor sem vídeo */
   images?: NatalProductImage[];
+  /** Cantos arredondados na foto do produto (sem vídeo) */
+  imageRounded?: boolean;
   /** Vídeo geral do produto, sem seletor de cor (em /public/natal/videos) — toca em loop, mudo */
   video?: string;
   /** Capa do vídeo: imagem mostrada até ele carregar (em /public/natal/videos) */

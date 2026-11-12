@@ -12,6 +12,7 @@ import {
   natalSections,
 } from "@/lib/natalCatalog";
 import { versioned } from "@/lib/natal/assetVersion";
+import { buildNatalSectionJsonLd } from "@/lib/natal/jsonLd";
 
 interface PageProps {
   params: Promise<{ categoria: string }>;
@@ -25,10 +26,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { categoria } = await params;
   const section = getSectionBySlug(categoria);
   if (!section) return { title: "Natal 3G" };
+  const shareImage = section.photo ?? section.categories[0]?.photo;
   return {
     title: `${section.name} — Natal 3G`,
     description: section.blurb,
     alternates: { canonical: `/natal/${section.slug}` },
+    openGraph: {
+      type: "website",
+      title: `${section.name} — Natal 3G`,
+      description: section.blurb,
+      url: `/natal/${section.slug}`,
+      ...(shareImage ? { images: [{ url: shareImage }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${section.name} — Natal 3G`,
+      description: section.blurb,
+      ...(shareImage ? { images: [shareImage] } : {}),
+    },
   };
 }
 
@@ -44,6 +59,12 @@ export default async function NatalCategoryPage({ params }: PageProps) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildNatalSectionJsonLd(section)).replace(/</g, "\\u003c"),
+        }}
+      />
       <Navbar homeHref="/natal" />
 
       <main className="w-full bg-black text-white">
@@ -168,13 +189,30 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                       ) : (
                         <div className="relative w-full aspect-[4/3]">
                           {product.image ? (
-                            <Image
-                              src={versioned(product.image)}
-                              alt={product.name}
-                              fill
-                              sizes="(max-width: 1024px) 90vw, 560px"
-                              className="object-contain p-8"
-                            />
+                            product.imageRounded ? (
+                              // Foto cheia (não recortada): a moldura é que recebe os cantos
+                              // arredondados — arredondar o <Image> não aparece, pois a foto
+                              // fica contida dentro dele
+                              <div className="absolute inset-0 p-8">
+                                <div className="relative isolate h-full w-full overflow-hidden rounded-3xl">
+                                  <Image
+                                    src={versioned(product.image)}
+                                    alt={product.name}
+                                    fill
+                                    sizes="(max-width: 1024px) 90vw, 560px"
+                                    className="object-cover"
+                                  />
+                                </div>
+                              </div>
+                            ) : (
+                              <Image
+                                src={versioned(product.image)}
+                                alt={product.name}
+                                fill
+                                sizes="(max-width: 1024px) 90vw, 560px"
+                                className="object-contain p-8"
+                              />
+                            )
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-30">
                               {cat.icon}

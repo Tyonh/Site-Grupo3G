@@ -4,6 +4,25 @@ import EbronNavbar from "@/components/ebron/EbronNavbar";
 import EbronHeroSlider from "@/components/ebron/EbronHeroSlider";
 import ProductsSection from "@/components/ProductsSection";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { siteConfig } from "@/lib/siteConfig";
+
+const brandJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${siteConfig.url}/ebron#page`,
+  url: `${siteConfig.url}/ebron`,
+  name: "EBRON — Iluminação Pública",
+  description:
+    "EBRON, marca do Grupo 3G para iluminação pública: luminárias EBRON e EBRON PRO.",
+  inLanguage: "pt-BR",
+  isPartOf: { "@id": `${siteConfig.url}/#website` },
+  about: {
+    "@type": "Brand",
+    name: "EBRON",
+    url: `${siteConfig.url}/ebron`,
+  },
+};
 
 export const metadata: Metadata = {
   title: { absolute: "EBRON — Iluminação Pública | Grupo 3G" },
@@ -15,6 +34,7 @@ export const metadata: Metadata = {
 export default function EbronHome() {
   return (
     <>
+      <JsonLd data={brandJsonLd} />
       <EbronNavbar />
       <main className="flex-1 w-full flex flex-col bg-ebron-navy">
         <EbronHeroSlider />

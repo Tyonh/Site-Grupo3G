@@ -66,6 +66,8 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
       {
         name: "Moinho LED com Controle — 5m",
         image: "/natal/arvore-moinho.png",
+        video: "/natal/videos/moinho-led.mp4",
+        videoPoster: "/natal/videos/moinho-led-capa.jpg",
         description:
           "Estrutura de 5m em formato de moinho, com 3.120 LEDs e controle de efeitos.",
         specs: [
@@ -80,7 +82,8 @@ export const arvoresIluminadasCategories: NatalCategory[] = [
       },
       {
         name: "Rena 3D",
-        image: "/natal/rena-3d-foto.jpg",
+        image: "/natal/rena-3d-foto-2.jpg",
+        imageRounded: true,
         description:
           "Rena com trenó em armação 3D iluminada, de 4,2m de largura por 1,6m de altura.",
         specs: [

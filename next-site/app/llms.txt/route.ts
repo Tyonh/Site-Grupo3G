@@ -19,11 +19,17 @@ export const dynamic = "force-static";
 
 const url = (path: string) => `${siteConfig.url}${path}`;
 
+// Data do build: como o arquivo é estático, é a data em que o catálogo foi
+// publicado. Mostra à IA se o que ela leu está atualizado.
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
+
 function buildLlmsTxt(): string {
   const lines: string[] = [
     "# Grupo 3G",
     "",
     `> ${siteConfig.description}`,
+    "",
+    `Atualizado em ${BUILD_DATE}.`,
     "",
     "Indústria e importadora cearense de iluminação LED, pioneira no estado na importação de tecnologia LED há mais de 30 anos. O Grupo 3G reúne duas marcas de iluminação — 3G e EBRON — além da linha completa de decoração natalina.",
     "",
@@ -79,7 +85,8 @@ function buildLlmsTxt(): string {
     "",
     "## Opcional",
     "",
-    `- [llms-full.txt](${url("/llms-full.txt")}): especificações técnicas completas, códigos de catálogo, potências e fluxo luminoso de cada modelo.`,
+    `- [llms-full.txt](${url("/llms-full.txt")}): especificações técnicas completas, códigos de catálogo, potências e fluxo luminoso de cada modelo de iluminação.`,
+    `- [llms-natal.txt](${url("/llms-natal.txt")}): catálogo completo da linha de Natal — todos os produtos, tamanhos, cores e códigos (com e sem plugue).`,
     `- [sitemap.xml](${url("/sitemap.xml")}): lista completa de URLs indexáveis.`,
     "",
   );
