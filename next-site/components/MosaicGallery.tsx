@@ -65,6 +65,13 @@ function TileBody({ tile, sizes }: { tile: MosaicTile; sizes: string }) {
  * No celular os tiles empilham, cada um com a sua proporção.
  */
 export default function MosaicGallery({ rows }: MosaicGalleryProps) {
+  // No celular (2 colunas) os tiles não-largos têm proporção única (3:4), para
+  // a linha nunca ter um tile mais baixo que o vizinho (isso deixava vazio). Se
+  // a quantidade deles for ímpar, o último ocupa a linha inteira, e assim
+  // nenhuma célula da grade fica sem tile.
+  const narrow = rows.flat().filter((tile) => tile.ratio < WIDE_MIN_RATIO);
+  const loneId = narrow.length % 2 === 1 ? narrow[narrow.length - 1].id : null;
+
   return (
     <div className="mx-auto grid w-full max-w-[1800px] grid-flow-dense grid-cols-2 gap-2 md:flex md:flex-col md:gap-3">
       {rows.map((row) => {
@@ -75,11 +82,17 @@ export default function MosaicGallery({ rows }: MosaicGalleryProps) {
             className="contents md:flex md:flex-row md:items-start md:gap-3"
           >
             {row.map((tile) => {
-              const sizes = `(min-width: 768px) ${Math.round((tile.ratio / total) * 100)}vw, 100vw`;
-              // No celular a grade tem 2 colunas: fotos largas ocupam as duas,
-              // as demais (quadradas e verticais) ficam lado a lado.
-              const span = tile.ratio >= WIDE_MIN_RATIO ? "col-span-2 md:col-span-1" : "col-span-1";
-              const className = `mosaic-reveal group relative block ${span} aspect-[var(--r)] w-full overflow-hidden bg-brand-charcoal md:w-auto md:flex-[var(--r)_1_0%] focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white`;
+              const isWide = tile.ratio >= WIDE_MIN_RATIO;
+              const isFullRow = isWide || tile.id === loneId;
+              const sizes = `(min-width: 768px) ${Math.round((tile.ratio / total) * 100)}vw, ${isFullRow ? "100vw" : "50vw"}`;
+              // Celular: largos e o "sobrante" ocupam a linha inteira; os demais
+              // ficam em pares, todos 3:4. De md para cima vale a proporção `--r`.
+              const mobile = isWide
+                ? "col-span-2 aspect-[var(--r)] md:col-span-1"
+                : isFullRow
+                  ? "col-span-2 aspect-[4/3] md:col-span-1"
+                  : "col-span-1 aspect-[3/4]";
+              const className = `mosaic-reveal group relative block ${mobile} md:aspect-[var(--r)] w-full overflow-hidden bg-brand-charcoal md:w-auto md:flex-[var(--r)_1_0%] focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white`;
               const style = { "--r": tile.ratio } as React.CSSProperties;
               return tile.href ? (
                 <Link key={tile.id} href={tile.href} className={className} style={style}>

@@ -32,6 +32,9 @@ interface Door {
   /** Foto do produto principal, em primeiro plano sobre o vídeo */
   image: string;
   imageAlt: string;
+  /** Classes extras da foto do produto (ex.: centralizar uma arte em que o
+   *  objeto não está no meio do arquivo). */
+  imageClass?: string;
   /** Vídeo de fundo em loop — mesmo arquivo já usado na área da marca
    *  (3G: hero da home /3g; EBRON: vídeo próprio; Natal: entrada da árvore) */
   video: string;
@@ -60,6 +63,9 @@ const doors: Door[] = [
     tagline: "Cordões, mangueiras, fitas de LED, árvores gigantes e a decoração natalina completa.",
     image: "/natal/foto-arvore.png",
     imageAlt: "Árvore de Natal decorada — produto Grupo 3G",
+    // No PNG a árvore (com os presentes) está à esquerda: ocupa de 11% a 61% da
+    // largura, centro em 36%. Deslocar 13,9% da largura a leva para o meio.
+    imageClass: "translate-x-[13.9%]",
     video: "/natal/videos/arvore.mp4",
     poster: "/posters/door-natal.jpg",
     // 1.5 = uma vez e meia a velocidade (o vídeo original dura 12,5 s). Ajuste aqui.
@@ -144,7 +150,7 @@ export default function GroupHome() {
               <br />
               transforma.
             </h1>
-            <p className="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg [@media(max-height:520px)]:hidden">
+            <p className="max-w-xl text-base font-medium leading-relaxed text-white [text-shadow:0_0_3px_rgba(0,0,0,0.9),0_1px_10px_rgba(0,0,0,0.85),0_2px_28px_rgba(0,0,0,0.75)] sm:text-lg [@media(max-height:520px)]:hidden">
               <strong className="font-bold text-white">Pioneiros em tecnologia LED no Ceará</strong>. Reunimos duas marcas de iluminação — 3G e
               EBRON — e a linha completa de decoração natalina, cada uma com sua própria
               identidade.
@@ -244,7 +250,7 @@ export default function GroupHome() {
                       alt={door.imageAlt}
                       fill
                       sizes="(min-width: 1280px) 512px, (min-width: 768px) 42vw, (min-width: 640px) 320px, (max-width: 288px) calc(100vw - 32px), 256px"
-                      className="object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105"
+                      className={`object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105 ${door.imageClass ?? ""}`}
                     />
                   </div>
                 </div>
