@@ -48,7 +48,7 @@ export default function NatalHomePage() {
           description="Cordões, mangueiras e fitas de LED prontos para vestir qualquer fachada — do jardim de casa à praça da cidade."
           tagline={
             <>
-              A luz que
+              Luz que
               <br />
               transforma
             </>

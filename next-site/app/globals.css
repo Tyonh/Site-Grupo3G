@@ -43,6 +43,45 @@ body {
   color-scheme: light;
 }
 
+/* Mosaico da home: cada tile se revela por recorte ao entrar na tela. Só onde
+   o navegador suporta animação ligada à rolagem e o visitante não pediu
+   movimento reduzido; fora isso o tile aparece direto. */
+@keyframes mosaic-reveal {
+  from {
+    clip-path: inset(8% 5% 8% 5%);
+    opacity: 0.35;
+  }
+  to {
+    clip-path: inset(0);
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .mosaic-reveal {
+      animation: mosaic-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+/* Barra de progresso da miniatura ativa no reel do hero (transform: roda na
+   GPU, sem recalcular layout). */
+@keyframes reel-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.reel-progress {
+  animation: reel-progress linear forwards;
+}
+
 @keyframes page-loader-rotate {
   to {
     transform: rotate(360deg);

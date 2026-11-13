@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "name": "Grupo 3G - Home (cinematografica industrial)",
+    "description": "DNA da nova home: estrutura e movimento de Anduril, Citadel e Prime, com a paleta ja existente do Grupo 3G. Escopo inicial: somente a pagina inicial.",
+    "source_references": ["https://citadelgroup.org/", "https://www.primes.com.au/", "https://www.anduril.com/"],
+    "created_at": "2026-11-13",
+    "notes": "Referencias analisadas por URL (computed styles + screenshot), nao por arquivo de imagem; cores das referencias NAO foram medidas por script e nao entram no DNA: a paleta e a da empresa (next-site/app/globals.css)."
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "monochromatic neutro com acento vermelho (marca 3G) e um acento secundario por marca",
+      "primary": { "hex": "#b12b30", "role": "vermelho Grupo 3G: CTA, marcadores, blocos de acento (equivale ao vermelho da Prime)" },
+      "secondary": { "hex": "#1f1f1f", "role": "charcoal: fundo dominante das secoes escuras e da navbar" },
+      "accent": { "hex": "#e3b84e", "role": "dourado natalino: so em eyebrows e detalhes da porta Natal; EBRON usa #3f6bb3" },
+      "neutral": {
+        "scale": ["#ffffff", "#f3f3f3", "#6c6c6b", "#1f1f1f", "#000000"],
+        "usage": "texto claro sobre video/charcoal; #f3f3f3 como fundo claro; #6c6c6b para texto secundario"
+      },
+      "semantic": { "success": "#386d24", "warning": "#de981f", "error": "#a62024", "info": "#3f6bb3" },
+      "surface": { "background": "#1f1f1f", "card": "#f3f3f3", "elevated": "#0a1830" },
+      "contrast_strategy": "texto branco sobre video escurecido por veu de gradiente; contraste alto, acento vermelho com parcimonia",
+      "brand_doors": {
+        "3G": { "base": "#1f1f1f", "accent": "#b12b30" },
+        "EBRON": { "base": "#0a1830", "mid": "#123469", "accent": "#3f6bb3" },
+        "Natal": { "base": "#f3f3f3", "accent": "#e3b84e", "support": "#386d24" }
+      }
+    },
+    "typography": {
+      "type_scale": {
+        "display": { "size": "clamp(3.5rem, 2rem + 8vw, 8.5rem)", "weight": "500", "line_height": "0.94", "tracking": "-0.02em" },
+        "heading_1": { "size": "clamp(2.5rem, 1.5rem + 5vw, 6rem)", "weight": "500", "line_height": "1.0", "tracking": "-0.02em" },
+        "heading_2": { "size": "clamp(2rem, 1.4rem + 2.6vw, 3.5rem)", "weight": "500", "line_height": "1.08", "tracking": "-0.02em" },
+        "heading_3": { "size": "1.5rem", "weight": "600", "line_height": "1.2", "tracking": "0" },
+        "body": { "size": "1.0625rem", "weight": "400", "line_height": "1.55", "tracking": "-0.005em" },
+        "body_small": { "size": "0.9375rem", "weight": "400", "line_height": "1.5", "tracking": "0" },
+        "caption": { "size": "0.75rem", "weight": "500", "line_height": "1.4", "tracking": "0.04em" },
+        "overline": { "size": "0.75rem", "weight": "700", "line_height": "1.2", "tracking": "0.2em" }
+      },
+      "font_families": {
+        "heading": "Inter Tight (grotesca neo-helvetica, via next/font; substitui a Poppins na home). Anduril usa Helvetica Now Display e Prime uma grotesca propria, ambas pagas/proprietarias; Inter Tight e a alternativa livre mais proxima",
+        "body": "Inter Tight (mesma familia, pesos 400/500/600)",
+        "mono": "ui-monospace, SFMono-Regular, monospace"
+      },
+      "font_style_notes": "Prime: grotesca peso 500, titulos gigantes, entrelinha menor que 1. Anduril: grotesca limpa, nav em caixa-alta pequena. Citadel: Montserrat caixa-alta com tracking largo. Home: titulo grande peso 500 e eyebrows em caixa-alta tracking largo."
+    },
+    "spacing": {
+      "base_unit": "8px",
+      "scale": ["4", "8", "16", "24", "32", "48", "64", "96", "128", "192"],
+      "content_density": "spacious",
+      "section_rhythm": "secoes full-bleed de altura de viewport alternando com faixas de estatisticas compactas; respiro vertical 96-192px"
+    },
+    "layout": {
+      "grid_system": "12 colunas, conteudo largo com margens laterais pequenas; hero e faixas full-bleed",
+      "max_content_width": "1280px (texto) / 100% (midia)",
+      "columns": 12,
+      "gutter": "24px",
+      "breakpoints": { "xs": "480px", "sm": "640px", "md": "768px", "lg": "1024px", "xl": "1280px" },
+      "alignment_tendency": "asymmetric: titulo embaixo a esquerda, paragrafo de apoio embaixo a direita (Prime)"
+    },
+    "shape": {
+      "border_radius": { "small": "2px", "medium": "4px", "large": "8px", "pill": "999px" },
+      "border_usage": "subtle 1px em branco a 12-20% sobre fundos escuros",
+      "divider_style": "linhas de 1px; bloco vermelho vertical curto como marcador (tab vermelha da Prime)"
+    },
+    "elevation": {
+      "shadow_style": "none na maioria; sombra so em produtos sobre video",
+      "levels": { "low": "none", "medium": "0 10px 25px rgba(0,0,0,0.45)", "high": "0 24px 60px rgba(0,0,0,0.6)" },
+      "depth_cues": "overlapping layers: produto sobre video, veu de gradiente, navbar sobre midia"
+    },
+    "iconography": { "style": "linha fina, geometrica", "stroke_weight": "1.5px", "size_scale": ["16", "20", "24", "32"], "preferred_set": "SVGs proprios simples ou lucide" },
+    "motion": {
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "duration_scale": { "micro": "150ms", "normal": "300ms", "macro": "700-900ms" },
+      "entrance_pattern": "fade-up curto com stagger; titulos revelados por linha",
+      "exit_pattern": "fade rapido",
+      "philosophy": "cinematic: o video e o protagonista, movimento de UI discreto e respeita prefers-reduced-motion"
+    },
+    "components": {
+      "button_style": "CTA retangular de cantos retos: bloco #b12b30 com seta em quadrado; variante fantasma com borda 1px branca",
+      "input_style": "campos com borda 1px ou sublinhado, sem sombra",
+      "card_style": "cards de divisao com video/imagem full e titulo sobreposto, cantos quase retos",
+      "navigation_pattern": "navbar fina e escura sobre o hero: logo a esquerda, links em caixa-alta pequena, CTA a direita",
+      "modal_style": "painel lateral ou overlay escuro",
+      "list_style": "linhas de 1px com indice numerico em vermelho",
+      "component_notes": "Faixa de contadores (Citadel/Prime) usando apenas numeros reais fornecidos pela empresa."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": ["cinematografico", "industrial", "confiante", "tecnico", "premium"],
+      "visual_metaphor": "documentario aereo de infraestrutura iluminada",
+      "era_influence": "corporate-tech contemporaneo",
+      "genre": "corporate industrial editorial",
+      "personality_traits": ["solido", "preciso", "ambicioso", "direto"],
+      "adjectives": ["escuro", "amplo", "nitido", "contido"]
+    },
+    "visual_language": {
+      "complexity": "minimal",
+      "ornamentation": "subtle accents (tab vermelha, linhas finas)",
+      "whitespace_usage": "generoso: o video ocupa o espaco, o texto e curto",
+      "visual_weight_distribution": "no hero de video e no titulo gigante",
+      "focal_strategy": "single hero element por secao, revelacao progressiva ao rolar",
+      "contrast_level": "high",
+      "texture_usage": "nenhuma; video e fotografia fazem a textura"
+    },
+    "composition": {
+      "hierarchy_method": "scale contrast",
+      "balance_type": "asymmetric",
+      "flow_direction": "vertical, secoes full-viewport empilhadas",
+      "grouping_strategy": "uma ideia por secao; marcas como faixas ou cards de video; fotos de obras e produtos em mosaico de tamanhos variados (Anduril), nunca em grade uniforme",
+      "negative_space_role": "deixa o video respirar e destaca o titulo"
+    },
+    "imagery": {
+      "photo_treatment": "video/foto escurecidos por veu de gradiente, levemente dessaturados",
+      "illustration_style": "nenhuma",
+      "graphic_elements": "bloco vermelho vertical, linhas finas, indices numericos",
+      "pattern_usage": "none",
+      "image_shape": "retangulos de cantos retos, full-bleed ou com margem fina (Anduril)"
+    },
+    "interaction_feel": {
+      "feedback_style": "mudanca de cor e deslocamento sutil",
+      "hover_behavior": "veu da marca some e o video 'acorda'; seta do CTA avanca",
+      "transition_personality": "smooth glide",
+      "loading_style": "poster do video na hora, video por lazy-load",
+      "microinteraction_density": "low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "tecnico e seguro, frases curtas",
+      "formality": "profissional",
+      "cta_style": "direct imperative (Conhecer, Explorar, Falar com a 3G)",
+      "empty_state_approach": "mensagem curta com proximo passo",
+      "error_tone": "claro e sem culpa"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "subtle-accent",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "poster estatico com prefers-reduced-motion ou Save-Data",
+      "primary_technology": "CSS + video HTML5 (LazyVideo existente) + IntersectionObserver; GSAP opcional"
+    },
+    "background_effects": {
+      "type": "video-bg",
+      "description": "hero com video de fundo em loop (drone/aereas) e veu de gradiente na cor da marca",
+      "technology": "HTML5 video + CSS gradient",
+      "params": { "color_palette": ["#1f1f1f", "#b12b30"], "speed": "1x", "density": "n/a", "opacity": "veu 0.55-0.75", "blend_mode": "normal" }
+    },
+    "particle_systems": { "enabled": false },
+    "3d_elements": { "enabled": false },
+    "shader_effects": { "enabled": false },
+    "scroll_effects": {
+      "parallax": { "enabled": true, "layers": "2", "depth_range": "leve (5-12%)", "speed_curve": "linear" },
+      "scroll_triggered_animations": { "enabled": true, "trigger_points": "entrada da secao a 20% do viewport", "animation_type": "fade-up", "scrub_behavior": "sem scrub, dispara uma vez" },
+      "scroll_morphing": { "enabled": false, "description": "nao nesta fase" }
+    },
+    "text_effects": {
+      "type": "split-letter-animate",
+      "description": "titulo do hero revelado por linha, com mascara de corte",
+      "technology": "CSS transform + overflow",
+      "params": { "split_strategy": "by-line", "animation_per_unit": "translateY(100%) para 0, 700ms", "stagger": "80ms", "effect_style": "reveal" }
+    },
+    "cursor_effects": { "enabled": false },
+    "image_effects": {
+      "type": "reveal-clip",
+      "description": "midia dos cards revela por clip-path ao entrar na tela",
+      "technology": "CSS clip-path",
+      "params": { "filter_pipeline": "none", "hover_transform": "scale(1.03)", "reveal_animation": "clip-path inset 8% para 0", "distortion_type": "none" }
+    },
+    "glassmorphism_neumorphism": { "enabled": false, "style": "none" },
+    "canvas_drawings": { "enabled": false, "description": "Citadel e Anduril usam canvas; nao adotado agora" },
+    "svg_animations": { "enabled": false, "description": "Prime anima SVGs nos icones das divisoes; opcional depois" },
+    "composite_notes": "Anduril: Lenis (rolagem suave) e hero com video emoldurado por margem preta. Citadel: hero aereo centrado, CTA laranja na nav, contadores, slider de cases. Prime: titulo gigante embaixo a esquerda, bloco vermelho vertical, paragrafo a direita, 2 videos. Para a 3G: efeitos leves para preservar LCP e orcamento de JS."
+  },
+  "homepage_plan": {
+    "scope": "apenas app/page.tsx e componentes novos da home; demais paginas intocadas nesta fase",
+    "sections": [
+      "Hero: video em tela cheia, titulo gigante embaixo a esquerda, paragrafo de apoio a direita, bloco vermelho vertical, CTA retangular",
+      "Faixa de numeros (contadores) com dados reais da empresa",
+      "Mosaico de fotos estilo Anduril: grade de imagens em larguras e proporcoes diferentes (largas, quadradas, verticais) lado a lado, cantos retos, gap pequeno (8-12px), cada tile com legenda curta em caixa-alta e link; entrada com clip-path ao rolar",
+      "Tres portas 3G / EBRON / Natal com video em tela cheia, mantendo as cores de cada marca",
+      "Galeria cinematografica com os videos extras (drone, Arco, Estadio do Junco, ciclista)",
+      "Chamada final para contato"
+    ],
+    "extra_videos": {
+      "folder": "C:\\Users\\3G\\Desktop\\videos para agregar na homepage",
+      "files": [
+        { "name": "Arco Nossa Senhora_6.MP4", "size_mb": 170 },
+        { "name": "DJI_20250901183751_0049_D 2.MP4", "size_mb": 507 },
+        { "name": "DJI_20250901185016_0059_D.MP4", "size_mb": 2280 },
+        { "name": "DJI_20250916182740_0011_D.MP4", "size_mb": 470 },
+        { "name": "Estadio do Junco - Noite (Macro).MP4", "size_mb": 2874 },
+        { "name": "Take Completo Seguindo Ciclista.MP4", "size_mb": 695 }
+      ],
+      "requirement": "Total ~7 GB: recortar trechos de 8-15 s, converter para H.264 1080p ~3-6 MB, sem audio, com poster .jpg, antes de entrar em public/. Nao commitar os originais."
+    }
+  }
+}

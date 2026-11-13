@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
+import { Inter_Tight } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { preload } from "react-dom";
 import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import LazyVideo from "@/components/LazyVideo";
+import HeroReel, { type HeroClip } from "@/components/HeroReel";
+import MosaicGallery from "@/components/MosaicGallery";
+import { mosaicRows } from "@/lib/homeMosaic";
 import { siteConfig } from "@/lib/siteConfig";
+
+// Grotesca da home (mesma família de estilo dos sites de referência). Declarada
+// aqui, e não no layout, para só ser baixada na página inicial.
+const grotesk = Inter_Tight({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: { absolute: "Grupo 3G - Luz que Transforma" },
@@ -92,55 +104,88 @@ const doors: Door[] = [
   },
 ];
 
+/**
+ * Vídeos do hero, na ordem em que passam: os 3 escolhidos pela empresa na
+ * pasta "video pra entrada da pagina". Horizontais (16:9), em Full HD
+ * (1920×1080) a partir dos originais em 4K, para preencher a tela toda sem
+ * perder nitidez.
+ */
+const heroClips: HeroClip[] = [
+  { src: "/mosaico/hero-arco.mp4", poster: "/mosaico/hero-arco.jpg", label: "Arco Nossa Senhora" },
+  { src: "/mosaico/hero-estadio.mp4", poster: "/mosaico/hero-estadio.jpg", label: "Estádio do Junco" },
+  { src: "/mosaico/hero-estrada.mp4", poster: "/mosaico/hero-estrada.jpg", label: "Seguindo o ciclista" },
+];
+
 export default function GroupHome() {
   // A capa do vídeo do hero é o maior elemento da primeira tela (LCP). Com
   // preload de alta prioridade ela sai já no começo da carga, em vez de ficar
   // na fila atrás dos scripts (o servidor ainda fala HTTP/1.1: 6 por vez).
-  preload("/posters/home-hero.jpg", { as: "image", fetchPriority: "high" });
+  preload(heroClips[0].poster, { as: "image", fetchPriority: "high" });
 
   return (
-    <>
+    <div className={`${grotesk.className} relative flex flex-1 flex-col`}>
       <GroupNavbar />
       <main className="flex-1 w-full flex flex-col">
-        {/* Hero institucional — horizontal, full-bleed, com vídeo de fundo
-            (imagens aéreas) e um véu vermelho/preto por cima pra manter a
-            identidade de cor do Grupo 3G e a legibilidade do texto */}
-        <section className="relative flex min-h-[calc(100svh-5rem)] w-full items-center overflow-hidden bg-brand-charcoal px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
-          {/* poster: o quadro inicial aparece já no primeiro render e é ele o
-              elemento de maior destaque (LCP), em vez de esperar o vídeo. */}
-          <LazyVideo
-            src="/grupo3g-hero-bg.mp4"
-            poster="/posters/home-hero.jpg"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(100deg, rgba(122,21,24,0.72) 0%, rgba(122,21,24,0.58) 28%, rgba(20,8,8,0.42) 60%, rgba(20,8,8,0.22) 100%)",
-            }}
-          />
+        {/* Hero — vários vídeos em sequência (método da Citadel), com uma
+            miniatura de cada um embaixo e a frase centralizada. O Natal abre
+            a sequência por conta da época. Sem filtro por cima dos vídeos: a
+            leitura do texto fica por conta da sombra leve nas letras. */}
+        <section className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-brand-charcoal px-6 pb-28 pt-24 text-center sm:px-10">
+          <HeroReel clips={heroClips} />
 
-          <div className="relative z-10 mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-5 text-left">
-            <span className="max-w-xl text-xs font-extrabold uppercase leading-relaxed tracking-[0.18em] text-natal-gold sm:text-sm sm:tracking-[0.3em]">
-              Iluminando cidades e indústrias há mais de 30 anos
+          <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-6 [text-shadow:0_2px_28px_rgba(0,0,0,0.6)]">
+            <span className="text-xs font-semibold uppercase leading-relaxed tracking-[0.2em] text-white/80 sm:text-sm">
+              Iluminando cidades e indústrias há mais de{" "}
+              <strong className="font-extrabold text-white">30 anos</strong>
             </span>
-            <h1 className="text-[clamp(2.5rem,7vw,5.5rem)] font-black uppercase leading-[1.05] tracking-tight text-white">
-              Grupo 3G
+            <h1 className="text-[clamp(2.75rem,1.2rem+7vw,7.5rem)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
+              <span className="sr-only">Grupo 3G — </span>
+              Luz que
+              <br />
+              transforma.
             </h1>
-            <p className="max-w-xl text-base font-light leading-relaxed text-white/85 sm:text-lg">
-              Pioneiros em tecnologia LED no Ceará. Reunimos duas marcas de
-              iluminação — 3G e EBRON — e a linha completa de decoração
-              natalina, cada uma com sua própria identidade.
+            <p className="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+              <strong className="font-bold text-white">Pioneiros em tecnologia LED no Ceará</strong>. Reunimos duas marcas de iluminação — 3G e
+              EBRON — e a linha completa de decoração natalina, cada uma com sua própria
+              identidade.
+            </p>
+            <Link
+              href="#aplicacoes"
+              className="group mt-2 inline-flex items-center gap-5 bg-white pl-5 text-sm font-semibold uppercase tracking-[0.12em] text-brand-charcoal [text-shadow:none] transition-colors hover:bg-brand-light focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Ver aplicações
+              <span className="flex h-12 w-12 items-center justify-center bg-brand-red text-white transition-transform duration-300 group-hover:translate-x-0.5">
+                <ArrowRight aria-hidden="true" size={20} strokeWidth={2} />
+              </span>
+            </Link>
+          </div>
+        </section>
+        {/* Aplicações — mosaico de fotos e vídeos em formatos variados (estilo
+            Anduril): campos de futebol, estradas e decoração natalina. */}
+        <section id="aplicacoes" className="scroll-mt-4 bg-brand-charcoal px-2 pb-2 pt-20 sm:px-3 sm:pb-3 sm:pt-28">
+          <div className="mx-auto mb-10 flex w-full flex-col gap-6 px-4 sm:mb-14 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-11">
+            <div>
+              <span className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                <span aria-hidden="true" className="h-3 w-3 bg-brand-red" />
+                Aplicações
+              </span>
+              <h2 className="mt-5 text-[clamp(2.25rem,1.2rem+4.2vw,5rem)] font-medium leading-[1] tracking-[-0.03em] text-white">
+                Onde a nossa luz trabalha.
+              </h2>
+            </div>
+            <p className="max-w-sm text-base leading-relaxed text-white/70">
+              Campos esportivos, estradas e decoração natalina: a mesma tecnologia LED em escalas
+              e usos diferentes.
             </p>
           </div>
+          <MosaicGallery rows={mosaicRows} />
         </section>
 
         {/* Portas de entrada — 3G, EBRON, Natal. Cada marca ganha sua própria
             faixa horizontal (full-bleed), empilhadas na página: vídeo em loop
             no fundo (o mesmo já usado na área de cada marca), produto
             principal de um lado, texto do outro — alternando lado a cada porta. */}
-        <section className="flex w-full flex-col">
+        <section className="mt-2 flex w-full flex-col sm:mt-3">
           {doors.map((door) => {
             const imageFirst = Boolean(door.reverse);
             return (
@@ -178,17 +223,15 @@ export default function GroupHome() {
                       imageFirst ? "md:items-end md:text-right" : "md:items-start md:text-left"
                     }`}
                   >
-                    <span className={`text-xs font-extrabold uppercase tracking-[0.3em] ${door.accent}`}>
+                    <span className={`text-xs font-semibold uppercase tracking-[0.25em] ${door.accent}`}>
                       Grupo 3G
                     </span>
-                    <h2 className="text-3xl font-black uppercase tracking-tight sm:text-4xl lg:text-5xl">
+                    <h2 className="text-5xl font-medium tracking-[-0.03em] sm:text-6xl lg:text-7xl">
                       {door.name}
                     </h2>
-                    <p className="max-w-sm text-base font-light leading-relaxed opacity-90">
-                      {door.tagline}
-                    </p>
+                    <p className="max-w-sm text-base leading-relaxed opacity-90">{door.tagline}</p>
                     <span
-                      className={`mt-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-colors ${door.hoverAccent}`}
+                      className={`mt-2 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest transition-colors ${door.hoverAccent}`}
                     >
                       Explorar
                       <span className="inline-block h-[1px] w-8 bg-current transition-[width] group-hover:w-12" />
@@ -209,8 +252,28 @@ export default function GroupHome() {
             );
           })}
         </section>
+
+        {/* Chamada final */}
+        <section className="bg-brand-red px-6 py-20 text-white sm:px-10 sm:py-28 lg:px-14">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+            <h2 className="max-w-3xl text-[clamp(2.5rem,1.4rem+4.6vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.03em]">
+              Vamos iluminar o seu projeto?
+            </h2>
+            <a
+              href={`https://wa.me/${siteConfig.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex w-fit items-center gap-5 bg-white pl-5 text-sm font-semibold uppercase tracking-[0.12em] text-brand-charcoal transition-colors hover:bg-brand-light focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Falar no WhatsApp
+              <span className="flex h-12 w-12 items-center justify-center bg-brand-charcoal text-white transition-transform duration-300 group-hover:translate-x-0.5">
+                <ArrowRight aria-hidden="true" size={20} strokeWidth={2} />
+              </span>
+            </a>
+          </div>
+        </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
