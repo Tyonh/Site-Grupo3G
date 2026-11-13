@@ -66,7 +66,7 @@ function TileBody({ tile, sizes }: { tile: MosaicTile; sizes: string }) {
  */
 export default function MosaicGallery({ rows }: MosaicGalleryProps) {
   return (
-    <div className="grid grid-flow-dense grid-cols-2 gap-2 md:flex md:flex-col md:gap-3">
+    <div className="mx-auto grid w-full max-w-[1800px] grid-flow-dense grid-cols-2 gap-2 md:flex md:flex-col md:gap-3">
       {rows.map((row) => {
         const total = sumRatios(row);
         return (

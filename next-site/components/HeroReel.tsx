@@ -109,7 +109,7 @@ export default function HeroReel({ clips }: HeroReelProps) {
               onClick={() => setActive(index)}
               aria-label={`Mostrar vídeo ${index + 1} de ${count}: ${clip.label}`}
               aria-current={isActive}
-              className={`group relative h-7 w-10 shrink-0 cursor-pointer overflow-hidden border transition-[border-color,opacity] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-11 sm:w-[4.5rem] ${
+              className={`group relative h-11 w-16 shrink-0 cursor-pointer overflow-hidden border transition-[border-color,opacity] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-[4.5rem] ${
                 isActive ? "border-white opacity-100" : "border-white/30 opacity-70 hover:opacity-100"
               }`}
             >

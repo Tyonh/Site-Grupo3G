@@ -130,21 +130,21 @@ export default function GroupHome() {
             miniatura de cada um embaixo e a frase centralizada. O Natal abre
             a sequência por conta da época. Sem filtro por cima dos vídeos: a
             leitura do texto fica por conta da sombra leve nas letras. */}
-        <section className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-brand-charcoal px-6 pb-28 pt-24 text-center sm:px-10">
+        <section className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-brand-charcoal px-6 pb-28 pt-24 text-center sm:px-10 [@media(max-height:520px)]:pb-20 [@media(max-height:520px)]:pt-16">
           <HeroReel clips={heroClips} />
 
-          <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-6 [text-shadow:0_2px_28px_rgba(0,0,0,0.6)]">
+          <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-6 [text-shadow:0_2px_28px_rgba(0,0,0,0.6)] [@media(max-height:520px)]:gap-3">
             <span className="text-xs font-semibold uppercase leading-relaxed tracking-[0.2em] text-white/80 sm:text-sm">
               Iluminando cidades e indústrias há mais de{" "}
               <strong className="font-extrabold text-white">30 anos</strong>
             </span>
-            <h1 className="text-[clamp(2.75rem,1.2rem+7vw,7.5rem)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
+            <h1 className="text-[clamp(2.5rem,min(1.2rem+7vw,16svh),7.5rem)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
               <span className="sr-only">Grupo 3G — </span>
               Luz que
               <br />
               transforma.
             </h1>
-            <p className="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+            <p className="max-w-xl text-base leading-relaxed text-white/90 sm:text-lg [@media(max-height:520px)]:hidden">
               <strong className="font-bold text-white">Pioneiros em tecnologia LED no Ceará</strong>. Reunimos duas marcas de iluminação — 3G e
               EBRON — e a linha completa de decoração natalina, cada uma com sua própria
               identidade.
@@ -163,7 +163,7 @@ export default function GroupHome() {
         {/* Aplicações — mosaico de fotos e vídeos em formatos variados (estilo
             Anduril): campos de futebol, estradas e decoração natalina. */}
         <section id="aplicacoes" className="scroll-mt-4 bg-brand-charcoal px-2 pb-2 pt-20 sm:px-3 sm:pb-3 sm:pt-28">
-          <div className="mx-auto mb-10 flex w-full flex-col gap-6 px-4 sm:mb-14 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-11">
+          <div className="mx-auto mb-10 flex w-full max-w-[1800px] flex-col gap-6 px-4 sm:mb-14 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-11">
             <div>
               <span className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
                 <span aria-hidden="true" className="h-3 w-3 bg-brand-red" />

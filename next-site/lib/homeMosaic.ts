@@ -55,6 +55,16 @@ export const mosaicRows: MosaicTile[][] = [
       href: "/natal",
     },
     {
+      id: "natal-neon",
+      ratio: PORTRAIT,
+      image: "/mosaico/natal-neon.jpg",
+      alt: "",
+      video: "/mosaico/natal-neon.mp4",
+      category: NATAL,
+      title: "Fita de LED neon",
+      href: "/natal",
+    },
+    {
       id: "story-arvore-dourada",
       ratio: TALL,
       image: "/mosaico/story-arvore-dourada.jpg",
