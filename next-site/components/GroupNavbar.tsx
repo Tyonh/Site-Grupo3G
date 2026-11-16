@@ -47,6 +47,9 @@ const contact: NavLink = {
 
 const isExternal = (href: string): boolean => href.startsWith("http");
 
+const MOBILE_LINK_CLASS =
+  "hover-underline-animation flex min-h-12 items-center justify-center px-4 py-3 uppercase text-white transition-colors duration-300 hover:text-natal-gold focus-visible:text-natal-gold focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-white";
+
 /** Cor da barra quando ela tem fundo: vermelho do Grupo 3G ou azul da EBRON. */
 export type NavbarTone = "red" | "navy";
 
