@@ -11,24 +11,24 @@ export function getProductTheme(theme: ProductTheme) {
   const isEbron = theme === "ebron";
 
   const cardClass = isEbron
-    ? "w-full max-w-[500px] bg-ebron-navy/90 p-6 sm:p-8 md:p-10 rounded-3xl border border-ebron-blue-light/30 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
+    ? "w-full max-w-[500px] bg-ebron-navy/90 p-6 sm:p-8 md:p-10 rounded-3xl border border-ebron-blue-light/30 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
-    ? "w-full max-w-[500px] bg-black/85 p-6 sm:p-8 md:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
-    : "w-full max-w-[500px] bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
+    ? "w-full max-w-[500px] bg-black/85 p-6 sm:p-8 md:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
+    : "w-full max-w-[500px] bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-[background-color,border-color,color,box-shadow,opacity] duration-500";
 
   const cardWideClass = isEbron
-    ? "w-full max-w-[550px] bg-ebron-navy/90 p-6 sm:p-8 md:p-10 rounded-3xl border border-ebron-blue-light/30 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
+    ? "w-full max-w-[550px] bg-ebron-navy/90 p-6 sm:p-8 md:p-10 rounded-3xl border border-ebron-blue-light/30 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
-    ? "w-full max-w-[550px] bg-black/85 p-6 sm:p-8 md:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
-    : "w-full max-w-[550px] bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
+    ? "w-full max-w-[550px] bg-black/85 p-6 sm:p-8 md:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
+    : "w-full max-w-[550px] bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-[background-color,border-color,color,box-shadow,opacity] duration-500";
 
   // Normalized to a single value across all product pages (was 700px on
   // ebron/homologada/solar and 600px on modulo).
   const cardTableClass = isEbron
-    ? "w-full max-w-[650px] bg-ebron-navy/90 p-6 sm:p-8 md:p-10 rounded-3xl border border-ebron-blue-light/30 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
+    ? "w-full max-w-[650px] bg-ebron-navy/90 p-6 sm:p-8 md:p-10 rounded-3xl border border-ebron-blue-light/30 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
-    ? "w-full max-w-[650px] bg-black/85 p-6 sm:p-8 md:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-all duration-500"
-    : "w-full max-w-[650px] bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-all duration-500";
+    ? "w-full max-w-[650px] bg-black/85 p-6 sm:p-8 md:p-10 rounded-3xl border border-white/10 text-white flex flex-col gap-4 pointer-events-auto shadow-2xl shadow-black/60 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
+    : "w-full max-w-[650px] bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-slate-200 text-slate-900 flex flex-col gap-4 pointer-events-auto shadow-xl shadow-slate-300/40 transition-[background-color,border-color,color,box-shadow,opacity] duration-500";
 
   const titleClass = isEbron || isDark
     ? "text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black leading-tight uppercase text-white transition-colors duration-500"
@@ -51,28 +51,28 @@ export function getProductTheme(theme: ProductTheme) {
     : "text-slate-600 font-normal text-xs sm:text-sm leading-relaxed mb-1 transition-colors duration-500";
 
   const subCardClass = isEbron
-    ? "bg-ebron-blue/35 p-4 rounded-2xl border border-ebron-blue-light/25 shadow-sm text-center transition-all duration-500"
+    ? "bg-ebron-blue/35 p-4 rounded-2xl border border-ebron-blue-light/25 shadow-sm text-center transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
-    ? "bg-white/5 p-4 rounded-2xl border border-white/10 shadow-sm text-center transition-all duration-500"
-    : "bg-slate-50 p-4 rounded-2xl border border-slate-200/60 shadow-sm text-center transition-all duration-500";
+    ? "bg-white/5 p-4 rounded-2xl border border-white/10 shadow-sm text-center transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
+    : "bg-slate-50 p-4 rounded-2xl border border-slate-200/60 shadow-sm text-center transition-[background-color,border-color,color,box-shadow,opacity] duration-500";
 
   const subTextMutedClass = isEbron
-    ? "text-ebron-light/70 text-xs mt-1 uppercase font-semibold tracking-wider transition-all duration-500"
+    ? "text-ebron-light/70 text-xs mt-1 uppercase font-semibold tracking-wider transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
     ? "text-gray-400 text-xs mt-1 uppercase font-semibold tracking-wider transition-colors duration-500"
     : "text-slate-500 text-xs mt-1 uppercase font-semibold tracking-wider transition-colors duration-500";
 
   const listTextClass = isEbron
-    ? "flex flex-col gap-2.5 font-medium text-ebron-light/85 mt-2 text-sm transition-all duration-500"
+    ? "flex flex-col gap-2.5 font-medium text-ebron-light/85 mt-2 text-sm transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
     ? "flex flex-col gap-2.5 font-medium text-gray-300 mt-2 text-sm transition-colors duration-500"
     : "flex flex-col gap-2.5 font-medium text-slate-700 mt-2 text-sm transition-colors duration-500";
 
   const detailItemClass = isEbron
-    ? "flex justify-between border-b border-white/15 py-1.5 transition-all duration-500"
+    ? "flex justify-between border-b border-white/15 py-1.5 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
-    ? "flex justify-between border-b border-white/10 py-1.5 transition-all duration-500"
-    : "flex justify-between border-b border-slate-200 py-1.5 transition-all duration-500";
+    ? "flex justify-between border-b border-white/10 py-1.5 transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
+    : "flex justify-between border-b border-slate-200 py-1.5 transition-[background-color,border-color,color,box-shadow,opacity] duration-500";
 
   const detailLabelClass = isEbron ? "text-ebron-light/65" : isDark ? "text-gray-400" : "text-slate-500";
   const detailValClass = isEbron
@@ -82,10 +82,10 @@ export function getProductTheme(theme: ProductTheme) {
     : "font-bold text-slate-800";
 
   const tableWrapperClass = isEbron
-    ? "overflow-x-auto w-full border border-ebron-blue-light/25 rounded-2xl bg-ebron-blue/25 shadow-sm transition-all duration-500"
+    ? "overflow-x-auto w-full border border-ebron-blue-light/25 rounded-2xl bg-ebron-blue/25 shadow-sm transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
     : isDark
-    ? "overflow-x-auto w-full border border-white/10 rounded-2xl bg-white/5 shadow-sm transition-all duration-500"
-    : "overflow-x-auto w-full border border-slate-200/80 rounded-2xl bg-slate-50 shadow-sm transition-all duration-500";
+    ? "overflow-x-auto w-full border border-white/10 rounded-2xl bg-white/5 shadow-sm transition-[background-color,border-color,color,box-shadow,opacity] duration-500"
+    : "overflow-x-auto w-full border border-slate-200/80 rounded-2xl bg-slate-50 shadow-sm transition-[background-color,border-color,color,box-shadow,opacity] duration-500";
 
   const theadClass = isEbron
     ? "bg-ebron-blue/60 text-white font-bold border-b border-ebron-blue-light/25"
@@ -110,7 +110,7 @@ export function getProductTheme(theme: ProductTheme) {
   // gets the whole screen instead of splitting it with the text panel below
   // (that split made the model too small to see well on phones). From `lg`
   // up it goes back to the card look, unchanged from before.
-  const showcasePanelClass = `relative w-full max-w-6xl min-h-svh lg:min-h-[480px] lg:h-[650px] lg:max-h-[700px] overflow-hidden transition-all duration-500 flex flex-col lg:flex-row pointer-events-auto rounded-none border-0 shadow-none lg:rounded-3xl lg:border lg:shadow-2xl ${
+  const showcasePanelClass = `relative w-full max-w-6xl min-h-svh lg:min-h-[480px] lg:h-[650px] lg:max-h-[700px] overflow-hidden transition-[background-color,border-color,color,box-shadow,opacity] duration-500 flex flex-col lg:flex-row pointer-events-auto rounded-none border-0 shadow-none lg:rounded-3xl lg:border lg:shadow-2xl ${
     isEbron ? "bg-ebron-navy lg:border-ebron-blue-light/25" : isDark ? "bg-zinc-950 lg:border-white/10" : "bg-slate-50 lg:border-slate-200"
   }`;
 
@@ -119,7 +119,7 @@ export function getProductTheme(theme: ProductTheme) {
   const showcaseCanvasClass =
     "w-full lg:w-7/12 h-[70vh] min-h-[320px] lg:h-full relative overflow-hidden";
 
-  const showcaseInfoPanelClass = `w-full lg:w-5/12 h-auto lg:h-full flex flex-col justify-center p-6 sm:p-8 md:p-12 gap-5 border-t lg:border-t-0 lg:border-l transition-all duration-500 ${
+  const showcaseInfoPanelClass = `w-full lg:w-5/12 h-auto lg:h-full flex flex-col justify-center p-6 sm:p-8 md:p-12 gap-5 border-t lg:border-t-0 lg:border-l transition-[background-color,border-color,color,box-shadow,opacity] duration-500 ${
     isEbron
       ? "bg-ebron-navy/95 border-ebron-blue-light/25 text-white"
       : isDark

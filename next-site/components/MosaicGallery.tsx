@@ -47,7 +47,7 @@ function TileBody({ tile, sizes }: { tile: MosaicTile; sizes: string }) {
       ) : null}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
       <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-3 text-white sm:p-5">
-        <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/70 sm:text-[0.7rem] sm:tracking-[0.2em]">
+        <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/85 sm:text-xs sm:tracking-[0.2em]">
           {tile.category}
         </span>
         <span className="text-sm font-medium leading-tight tracking-[-0.01em] sm:text-lg">

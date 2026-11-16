@@ -6,7 +6,7 @@ export default function VideoFeatureSection() {
         {/* Video Wrapper with Premium Shadow Glow */}
         <div className="w-full lg:w-[42%] max-w-[450px] shadow-premium-glow rounded-2xl overflow-hidden leading-none bg-gray-50 border border-gray-100 hover:border-brand-red/20 transform hover:scale-[1.01]">
           <video controls className="w-full h-auto rounded-2xl block" poster="/3G VETOR branco.png">
-            <source src="/qualidade de produto.mov" type="video/mp4" />
+            <source src="/qualidade de produto.mov" />
             Seu navegador não suporta vídeos.
           </video>
         </div>

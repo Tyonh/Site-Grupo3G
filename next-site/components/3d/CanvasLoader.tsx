@@ -26,7 +26,7 @@ export const CanvasLoader = ({
       <div
         className={`flex flex-col items-center justify-center ${bgClass} backdrop-blur-md p-6 rounded-2xl border border-white/10 w-[85vw] max-w-[240px] text-center shadow-2xl`}
       >
-        <div className="w-12 h-12 border-4 border-brand-red border-t-transparent rounded-full animate-spin mb-4" />
+        <div className="w-12 h-12 border-4 border-brand-red border-t-transparent rounded-full motion-safe:animate-spin mb-4" />
         <span className="text-white font-bold tracking-widest uppercase text-xs mb-1">
           {label}
         </span>

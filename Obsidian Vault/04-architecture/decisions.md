@@ -139,3 +139,8 @@ Um único componente, `components/GroupNavbar.tsx`, com:
 ### Consequências
 - **Positivas**: navegação consistente em todo o site; um só lugar para manter links e acessibilidade.
 - **Pendências**: `components/Navbar.tsx` e `components/ebron/EbronNavbar.tsx` ficaram sem uso e podem ser removidos; para o `/natal` usar `overlay`, o hero precisa deixar de ser cinza-claro.
+
+### Atualização (revisão Web Interface Guidelines)
+- Links internos da barra usam `next/link` (sem recarregar a página); só o CONTATO é `<a target="_blank">`.
+- O fechamento do menu do celular ficou no próprio link, e os links têm estilo de foco visível.
+- `app/layout.tsx` exporta `viewport` com `themeColor: "#b12b30"` (brand-red) e `viewportFit: "cover"`, necessário para `env(safe-area-inset-*)` funcionar.

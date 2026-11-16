@@ -107,7 +107,7 @@ export default function NatalHomePage() {
                   {String(i + 1).padStart(2, "0")} — Coleção Natal
                 </span>
                 <h2
-                  className={`text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none max-w-xl ${titleClass}`}>
+                  className={`text-balance text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none max-w-xl ${titleClass}`}>
                   {sec.name}
                 </h2>
                 <p
@@ -146,7 +146,7 @@ export default function NatalHomePage() {
             <span className="text-natal-gold font-bold tracking-[0.35em] text-xs uppercase">
               Fale com a gente
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight">
+            <h2 className="text-balance text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight">
               Seu projeto, nossa luz
             </h2>
             <p className="text-white/60 text-sm sm:text-base max-w-xl font-light">

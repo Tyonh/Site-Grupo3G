@@ -55,7 +55,7 @@ export default function MotionToggle() {
       onClick={() => setUserPaused(!paused)}
       aria-pressed={paused}
       aria-label={paused ? "Retomar animações e vídeos" : "Pausar animações e vídeos"}
-      className="fixed bottom-4 left-4 z-[9000] flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white ring-1 ring-white/40 backdrop-blur transition-colors hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-6 sm:left-6">
+      className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-[9000] flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-black/70 text-white ring-1 ring-white/40 backdrop-blur transition-colors hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:left-[max(1.5rem,env(safe-area-inset-left))]">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
         {paused ? (
           <path d="M8 5v14l11-7z" />

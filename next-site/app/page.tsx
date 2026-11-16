@@ -146,7 +146,7 @@ export default function GroupHome() {
               Iluminando cidades e indústrias há mais de{" "}
               <strong className="font-extrabold text-white">30 anos</strong>
             </span>
-            <h1 className="text-[clamp(2.5rem,min(1.2rem+7vw,16svh),7.5rem)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
+            <h1 className="text-balance text-[clamp(2.5rem,min(1.2rem+7vw,16svh),7.5rem)] font-medium leading-[0.95] tracking-[-0.035em] text-white">
               <span className="sr-only">Grupo 3G — </span>
               Luz que
               <br />
@@ -177,7 +177,7 @@ export default function GroupHome() {
                 <span aria-hidden="true" className="h-3 w-3 bg-brand-red" />
                 Aplicações
               </span>
-              <h2 className="mt-5 text-[clamp(2.25rem,1.2rem+4.2vw,5rem)] font-medium leading-[1] tracking-[-0.03em] text-white">
+              <h2 className="text-balance mt-5 text-[clamp(2.25rem,1.2rem+4.2vw,5rem)] font-medium leading-[1] tracking-[-0.03em] text-white">
                 Onde a nossa luz trabalha.
               </h2>
             </div>
@@ -234,7 +234,7 @@ export default function GroupHome() {
                     <span className={`text-xs font-semibold uppercase tracking-[0.25em] ${door.accent}`}>
                       Grupo 3G
                     </span>
-                    <h2 className="text-5xl font-medium tracking-[-0.03em] sm:text-6xl lg:text-7xl">
+                    <h2 className="text-balance text-5xl font-medium tracking-[-0.03em] sm:text-6xl lg:text-7xl">
                       {door.name}
                     </h2>
                     <p className="max-w-sm text-base leading-relaxed opacity-90">{door.tagline}</p>
@@ -264,7 +264,7 @@ export default function GroupHome() {
         {/* Chamada final */}
         <section className="bg-brand-red px-6 py-20 text-white sm:px-10 sm:py-28 lg:px-14">
           <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-            <h2 className="max-w-3xl text-[clamp(2.5rem,1.4rem+4.6vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.03em]">
+            <h2 className="text-balance max-w-3xl text-[clamp(2.5rem,1.4rem+4.6vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.03em]">
               Vamos iluminar o seu projeto?
             </h2>
             <a

@@ -139,7 +139,7 @@ export default function SobrePage() {
                   </div>
                   <div
                     className={`w-24 h-12 flex items-center justify-center font-black text-white bg-brand-red rounded-lg shadow-md mb-3 text-lg ${
-                      item.isCurrent ? "animate-pulse" : ""
+                      item.isCurrent ? "motion-safe:animate-pulse" : ""
                     }`}
                   >
                     {item.year}

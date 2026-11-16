@@ -77,3 +77,26 @@ Criar o endpoint de API interna no Next.js para sanitização e validação de l
 - [ ] Trocar o hero do `/natal` (fundo cinza-claro) por um hero escuro com vídeo (ex.: drone de Natal) e passar a barra dele para `variant="overlay"`.
 - [ ] Revisar o ritmo claro/escuro das seções do `/natal` (as luzes de LED aparecem melhor no escuro).
 - [ ] Remover `components/Navbar.tsx` e `components/ebron/EbronNavbar.tsx`, hoje sem uso.
+
+---
+
+## TASK-006: Revisão contra as Web Interface Guidelines (Vercel)
+
+<!-- Origem: revisão de 2026-11 (buscas por regra no projeto todo + leitura dos componentes principais). Não cobriu linha a linha components/3d/* nem lib/natal/*. -->
+
+### Feito
+- [x] **Altura de viewport**: `h-screen`/`min-h-screen` → `h-svh`/`min-h-svh` (páginas de produto, `sobre`, `SolarBackground`, `Product3DScene`, `ProductFamilyHero`, `productTheme`).
+- [x] **Barra**: links internos com `next/link`, `onClick` movido do `<li>` para o link, foco visível.
+- [x] **Animação**: `transition-all` → lista de propriedades em `lib/productTheme.tsx`; `motion-safe:` em `animate-pulse` (`modulo`, `sobre`) e no spinner (`CanvasLoader`).
+- [x] **Tipografia**: `text-balance` nos títulos da home, do hero e dos h2 do `/natal`.
+- [x] **Área segura**: botões fixos (`FloatingWhatsApp`, `MotionToggle`) usam `env(safe-area-inset-*)`; `viewport` com `viewportFit: "cover"` e `themeColor`.
+- [x] **Mosaico**: categoria do tile de 10,4 px/`white/70` → 11,2 px (12 px em `sm`)/`white/85`.
+- [x] **Vídeo**: removido o `type="video/mp4"` incorreto do `.mov` em `VideoFeatureSection`.
+
+### Pendente
+- [ ] **Legendas** do vídeo de `VideoFeatureSection` (`<track kind="captions">`): precisa do arquivo `.vtt` com a fala real do vídeo — não inventar.
+- [ ] **Poster** do mesmo vídeo usa a logo (`/3G VETOR branco.png`); trocar por um quadro do próprio vídeo, se a empresa aprovar.
+- [ ] `HomologadaInstallScene.tsx:123` usa `100vh` dentro de `calc` (enquadramento da foto); testar `100svh` em aparelho real.
+- [ ] `alt` das imagens do mosaico repete o título visível (`MosaicGallery.tsx`); decidir se vira `alt=""`.
+- [ ] Movimento infinito que ignora o `MotionToggle` (ver TASK-004).
+- [ ] Revisar `components/3d/*` e `lib/natal/*`, que não foram lidos linha a linha.

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import PageTransitionLoader from "@/components/PageTransitionLoader";
@@ -15,6 +15,12 @@ const poppins = Poppins({
   display: "swap",
   variable: "--font-poppins-self",
 });
+
+// viewportFit "cover" libera env(safe-area-inset-*) nos botões fixos (iPhone com notch).
+export const viewport: Viewport = {
+  themeColor: "#b12b30",
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

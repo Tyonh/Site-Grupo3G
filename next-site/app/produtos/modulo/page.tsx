@@ -353,7 +353,7 @@ export default function ModuloProductPage() {
 
             {/* Right Column: Premium Control Overlay Panel */}
             <div className={showcaseInfoPanelClass}>
-              <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase animate-pulse">
+              <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase motion-safe:animate-pulse">
                 SIMULAÇÃO DE ENGENHARIA 3D
               </span>
               <h2 className="text-2xl sm:text-3xl font-black uppercase leading-tight">

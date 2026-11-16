@@ -140,7 +140,7 @@ export default function ProductVideoHero({
           transition={{ duration: 0.7, delay: 0.15 }}
           className="flex max-w-md flex-col gap-6 text-center xl:absolute xl:bottom-14 xl:left-16 xl:text-left"
         >
-          <h1 className="text-4xl xs:text-5xl sm:text-6xl font-black uppercase leading-[0.95] tracking-tight text-black">
+          <h1 className="text-balance text-4xl xs:text-5xl sm:text-6xl font-black uppercase leading-[0.95] tracking-tight text-black">
             {title}
           </h1>
           <p className="hidden text-sm sm:text-base text-black/70 font-light leading-relaxed xl:block xl:text-black/60">
