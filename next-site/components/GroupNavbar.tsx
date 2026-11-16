@@ -2,15 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 /**
- * Header da página institucional do Grupo 3G ("/"). Fica transparente por
- * cima do vídeo do hero (como na Citadel), com links pequenos no centro e o
- * contato como único botão, para a navegação não competir com o vídeo.
- * Concentra os links que não são de uma marca só (Contato, Sobre), além das
- * portas de entrada 3G/EBRON/Natal.
+ * Header único do site, com dois modos:
+ * - "overlay": fixo e transparente por cima de um hero escuro (vídeo ou foto,
+ *   como na Citadel); ao rolar ganha fundo sólido para o texto não sumir.
+ * - "solid": fundo sólido desde o início, para páginas que abrem com fundo
+ *   claro ou conteúdo logo abaixo da barra.
+ * Links pequenos no centro e o contato como único botão, para a navegação não
+ * competir com a mídia.
  */
+export type NavbarVariant = "overlay" | "solid";
+
+/** Rolagem (px) a partir da qual o modo overlay ganha fundo. */
+const SCROLL_THRESHOLD = 24;
+
+const subscribeToScroll = (callback: () => void): (() => void) => {
+  window.addEventListener("scroll", callback, { passive: true });
+  return () => window.removeEventListener("scroll", callback);
+};
+const getScrolled = (): boolean => window.scrollY > SCROLL_THRESHOLD;
+const getServerScrolled = (): boolean => false;
+
 const TEXT_SHADOW = "[text-shadow:0_1px_14px_rgba(0,0,0,0.65)]";
 
 interface NavLink {
@@ -19,6 +33,7 @@ interface NavLink {
 }
 
 const links: NavLink[] = [
+  { href: "/", label: "INÍCIO" },
   { href: "/natal", label: "NATAL" },
   { href: "/3g", label: "3G" },
   { href: "/ebron", label: "EBRON" },
@@ -32,17 +47,42 @@ const contact: NavLink = {
 
 const isExternal = (href: string): boolean => href.startsWith("http");
 
-const GroupNavbar = () => {
+/** Cor da barra quando ela tem fundo: vermelho do Grupo 3G ou azul da EBRON. */
+export type NavbarTone = "red" | "navy";
+
+const TONE_BACKGROUND: Record<NavbarTone, string> = {
+  red: "bg-brand-red shadow-lg",
+  navy: "bg-ebron-navy shadow-lg",
+};
+const TONE_CONTACT: Record<NavbarTone, string> = {
+  red: "bg-white text-brand-red hover:bg-brand-charcoal hover:text-white",
+  navy: "bg-white text-ebron-navy hover:bg-brand-charcoal hover:text-white",
+};
+
+interface GroupNavbarProps {
+  variant?: NavbarVariant;
+  tone?: NavbarTone;
+}
+
+const GroupNavbar = ({ variant = "overlay", tone = "red" }: GroupNavbarProps) => {
   const [open, setOpen] = useState(false);
+  const scrolled = useSyncExternalStore(subscribeToScroll, getScrolled, getServerScrolled);
 
   const toggleMenu = () => setOpen(!open);
+
+  const isOverlay = variant === "overlay";
+  const hasBackground = !isOverlay || scrolled || open;
+  const position = isOverlay ? "fixed inset-x-0 top-0" : "sticky top-0";
+  const background = hasBackground
+    ? TONE_BACKGROUND[tone]
+    : "bg-transparent";
 
   return (
     <header
       onKeyDown={(event) => {
         if (event.key === "Escape") setOpen(false);
       }}
-      className="absolute inset-x-0 top-0 z-50 flex h-16 w-full items-center px-4 text-white sm:px-6 md:h-20 md:px-10"
+      className={`${position} z-50 flex h-16 w-full items-center px-4 text-white transition-[background-color,box-shadow] duration-300 sm:px-6 md:h-20 md:px-10 ${background}`}
     >
       <nav
         className="grid w-full grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]"
@@ -66,12 +106,12 @@ const GroupNavbar = () => {
         <ul className={`hidden items-center gap-7 text-sm font-medium tracking-[0.16em] md:flex lg:gap-12 lg:text-base ${TEXT_SHADOW}`}>
           {links.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
-                className="hover-underline-animation py-2 uppercase text-white/90 transition-colors duration-300 hover:text-white"
+                className="hover-underline-animation py-2 uppercase text-white/90 transition-colors duration-300 hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -82,7 +122,11 @@ const GroupNavbar = () => {
             href={contact.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-brand-red px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-white hover:text-brand-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:text-base"
+            className={`px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:text-base ${
+              hasBackground
+                ? TONE_CONTACT[tone]
+                : "bg-brand-red text-white hover:bg-white hover:text-brand-charcoal"
+            }`}
           >
             {contact.label}
           </a>
@@ -124,15 +168,22 @@ const GroupNavbar = () => {
       >
         <ul className="flex flex-col gap-1 px-4 py-4 text-center text-lg font-medium tracking-[0.18em]">
           {[...links, contact].map((link) => (
-            <li key={link.href} onClick={() => setOpen(false)} className="transform transition-transform duration-300 active:scale-95">
-              <a
-                href={link.href}
-                className="hover-underline-animation flex min-h-12 items-center justify-center px-4 py-3 uppercase text-white transition-colors duration-300 hover:text-natal-gold"
-                target={isExternal(link.href) ? "_blank" : undefined}
-                rel="noopener noreferrer"
-              >
-                {link.label}
-              </a>
+            <li key={link.href} className="transform transition-transform duration-300 active:scale-95">
+              {isExternal(link.href) ? (
+                <a
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={MOBILE_LINK_CLASS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link href={link.href} onClick={() => setOpen(false)} className={MOBILE_LINK_CLASS}>
+                  {link.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

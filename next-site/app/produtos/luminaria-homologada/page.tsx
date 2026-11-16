@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowUpRight, Cpu, ShieldCheck, Sun, Timer } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import HomologadaScrollExperience from "@/components/HomologadaScrollExperience";
 import styles from "./homologada.module.css";
@@ -35,7 +35,7 @@ const models = [
 
 export default function LuminariaHomologadaPage() {
   return <div className={styles.page}>
-    <Navbar />
+    <GroupNavbar variant="solid" />
     <main>
       <HomologadaScrollExperience />
       <section className={styles.performance} aria-labelledby="performance-title">

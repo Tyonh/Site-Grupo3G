@@ -117,9 +117,11 @@ const doors: Door[] = [
  * perder nitidez.
  */
 const heroClips: HeroClip[] = [
+  { src: "/mosaico/hero-natal-drone.mp4", poster: "/mosaico/hero-natal-drone.jpg", label: "Natal visto do alto" },
   { src: "/mosaico/hero-arco.mp4", poster: "/mosaico/hero-arco.jpg", label: "Arco Nossa Senhora" },
   { src: "/mosaico/hero-estadio.mp4", poster: "/mosaico/hero-estadio.jpg", label: "Estádio do Junco" },
   { src: "/mosaico/hero-estrada.mp4", poster: "/mosaico/hero-estrada.jpg", label: "Seguindo o ciclista" },
+  { src: "/mosaico/hero-dji.mp4", poster: "/mosaico/hero-dji.jpg", label: "Vista aérea" },
 ];
 
 export default function GroupHome() {

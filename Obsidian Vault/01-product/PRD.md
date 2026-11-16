@@ -12,7 +12,8 @@ Este PRD estabelece os requisitos de escopo, comportamento e desempenho para o d
 - **Para** entender a especialidade técnica do Grupo 3G no mercado nacional.
 - **Detalhes Técnicos**: 
   - Grid interativo de produtos com navegação direta para suas páginas de detalhe.
-  - Carrossel Hero animado e responsivo com autoplay, pausando no hover.
+  - Hero em sequência de vídeos em tela cheia (5 s cada, miniaturas clicáveis) e mosaico de aplicações com fotos e vídeos de tamanhos variados, começando pelo Natal; cada tile leva à página da marca (`[[decisions#ADR 005: Home cinematográfica — hero em sequência de vídeos e mosaico de aplicações|ADR 005]]`).
+  - Barra de navegação única, transparente sobre o hero e sólida ao rolar (`[[decisions#ADR 006: Barra de navegação única com dois modos|ADR 006]]`).
   - Galeria de projetos organizados em layout de 2 linhas horizontais com scroll snap (`[[tasks#TASK-001: Correção e Refatoração de Estilos Globais e Layout Semântico|TASK-001]]`).
 
 ### RF002 - Catálogo Interativo 3D (Scrollytelling)

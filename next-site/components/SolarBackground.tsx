@@ -41,7 +41,7 @@ const SolarBackground = ({ theme }: SolarBackgroundProps) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none overflow-hidden">
+    <div className="fixed top-0 left-0 w-full h-svh z-0 pointer-events-none overflow-hidden">
       {/* Base video: Solar Day */}
       <video
         ref={dayVideoRef}

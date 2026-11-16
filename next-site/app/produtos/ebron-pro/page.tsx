@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import EbronNavbar from "@/components/ebron/EbronNavbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import { getProductCheckMark, getProductTheme } from "@/lib/productTheme";
 
@@ -46,7 +46,7 @@ export default function EbronProPage() {
 
   return (
     <>
-      <EbronNavbar />
+      <GroupNavbar variant="solid" tone="navy" />
 
       {/* Fundo fixo com a foto do produto — a linha PRO ainda não tem modelo
           3D próprio (só EBRON, Homologada e Módulo têm .glb), então a foto
@@ -73,7 +73,7 @@ export default function EbronProPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 1: HERO
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20">
+        <section className="min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               Linha Profissional 2026
@@ -97,7 +97,7 @@ export default function EbronProPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 2: DIFERENCIAIS
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20">
+        <section className="min-h-svh flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               Construção Reforçada
@@ -132,7 +132,7 @@ export default function EbronProPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 3: SPECIFICATIONS — KEY HIGHLIGHTS
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20">
+        <section className="min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               Performance Pro
@@ -166,7 +166,7 @@ export default function EbronProPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 4: DETAILED CHARACTERISTICS GRID
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20">
+        <section className="min-h-svh flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20">
           <div className={cardWideClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               Ficha Completa
@@ -220,7 +220,7 @@ export default function EbronProPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 5: MODELS & DIMENSIONS TABLE
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20">
+        <section className="min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20">
           <div className={cardTableClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               Potência & Fluxo
@@ -282,7 +282,7 @@ export default function EbronProPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 6: APLICAÇÕES
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20">
+        <section className="min-h-svh flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20">
           <div className={cardWideClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               Onde Usar
@@ -309,7 +309,7 @@ export default function EbronProPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 7: SHOWCASE (foto — sem modelo 3D ainda para este produto)
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="min-h-screen flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20">
+        <section className="min-h-svh flex items-center justify-center px-4 sm:px-10 lg:px-20 py-20">
           <div className={showcasePanelClass}>
             <div className={`${showcaseCanvasClass} bg-slate-100`}>
               <Image

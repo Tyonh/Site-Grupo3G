@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import NatalOrcamentoForm from "@/components/natal/NatalOrcamentoForm";
 import ProductVideoHero from "@/components/natal/ProductVideoHero";
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default function NatalHomePage() {
   return (
     <>
-      <Navbar homeHref="/natal" />
+      <GroupNavbar variant="solid" />
 
       <main className="w-full bg-black text-white">
         {/* ═══════════ ABERTURA — PRODUTO EM VÍDEO SOBRE FUNDO BRANCO ═══════════ */}

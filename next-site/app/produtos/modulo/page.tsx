@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import Navbar from "@/components/Navbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import { getProductTheme } from "@/lib/productTheme";
 import { useInView } from "@/hooks/useInView";
@@ -65,7 +65,7 @@ export default function ModuloProductPage() {
 
   return (
     <>
-      <Navbar />
+      <GroupNavbar variant="solid" />
 
       {/* 3D Background Canvas with Dual-Model transition */}
       <Product3DScene
@@ -87,7 +87,7 @@ export default function ModuloProductPage() {
         {/* Conteúdo principal: o Footer fica fora do <main> (landmark próprio) */}
         <main className="w-full flex flex-col">
         {/* SECTION 1: HERO */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               EFICIÊNCIA ABSOLUTA
@@ -109,7 +109,7 @@ export default function ModuloProductPage() {
         </section>
 
         {/* SECTION 2: ARCHITECTURE & STRUCTURE */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               ENGENHARIA AVANÇADA
@@ -138,7 +138,7 @@ export default function ModuloProductPage() {
         </section>
 
         {/* SECTION 3: SPECIFICATIONS */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               ESPECIFICAÇÕES TÉCNICAS
@@ -162,7 +162,7 @@ export default function ModuloProductPage() {
         </section>
 
         {/* SECTION 4: DETAILED CHARACTERISTICS GRID (Aligned to the Right) */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardWideClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               FICHA TÉCNICA
@@ -232,7 +232,7 @@ export default function ModuloProductPage() {
         </section>
 
         {/* SECTION 5: MODULAR POWER & DIMENSIONS TABLE (Aligned to the Left) */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardTableClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               ESCALABILIDADE
@@ -336,7 +336,7 @@ export default function ModuloProductPage() {
         {/* SECTION 6: DEDICATED INTERACTIVE SIMULATOR (Only at the end of the page) */}
         <section
           ref={showcaseRef}
-          className="min-h-screen flex items-center justify-center px-0 lg:px-20 py-0 lg:py-20 pointer-events-none select-none">
+          className="min-h-svh flex items-center justify-center px-0 lg:px-20 py-0 lg:py-20 pointer-events-none select-none">
           <div className={showcasePanelClass}>
             {/* Left Column: Local 3D Canvas rendering the heavyweight Modulo Prime.glb — deferred until the section nears the viewport to avoid running a second WebGL context for the whole scroll */}
             <div className={showcaseCanvasClass}>

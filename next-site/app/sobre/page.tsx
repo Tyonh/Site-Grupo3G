@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 
 const cardClass =
@@ -66,10 +66,10 @@ const TIMELINE = [
 export default function SobrePage() {
   return (
     <>
-      <Navbar homeHref="/" />
+      <GroupNavbar variant="solid" />
 
       {/* Fundo — degradê claro fixo, sem variante escura */}
-      <div className="fixed top-0 left-0 w-full h-screen z-0 pointer-events-none bg-radial from-slate-50 via-slate-100 to-slate-200" />
+      <div className="fixed top-0 left-0 w-full h-svh z-0 pointer-events-none bg-radial from-slate-50 via-slate-100 to-slate-200" />
 
       <main className="relative z-10 w-full flex flex-col bg-transparent items-center px-4 sm:px-6 lg:px-20 py-16 sm:py-20 lg:py-28 gap-10 sm:gap-16">
         {/* Section 1: Hero & Philosophy */}

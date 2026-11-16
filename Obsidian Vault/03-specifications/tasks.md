@@ -52,3 +52,28 @@ Criar o endpoint de API interna no Next.js para sanitização e validação de l
 - [ ] **Fluxo de Fallback de Rede**: Caso a chamada da API do formulário falhe, o frontend deve reter os dados e redirecionar o usuário para o WhatsApp comercial com uma mensagem de fallback pré-preenchida para evitar perda do lead.
 - [ ] **Monitoramento**: Inclusão de disparos de rastreamento de evento no Google Analytics/Vercel Analytics ao clicar no botão "Enviar/WhatsApp" (`[[observability#1. Métricas de Negócio e Conversão|Métricas de Conversão]]`).
 - [ ] **Testes de Integração**: Teste automatizado simulando requisições com dados válidos (sucesso 200) e inválidos (erro 400).
+
+---
+
+## TASK-004: Acessibilidade da página `/natal`
+
+<!-- Origem: auditoria de acessibilidade feita em 2026-11 (código + navegador). -->
+
+### Definition of Done (DoD)
+- [ ] **Pausar movimento (WCAG 2.2.2)**: o `MotionToggle` também deve parar as estrelinhas e a seta "Rolar" do hero e o anel pulsante do WhatsApp flutuante (hoje só pausa vídeos).
+- [ ] **Sem JavaScript**: hero e link "Pular para o conteúdo" não podem depender da hidratação para aparecer.
+- [ ] **Nome dos links dos painéis**: nomear o link só pelo título da categoria, não pelo texto inteiro.
+- [ ] **`prefers-reduced-motion`**: os painéis com animação por rolagem (`ScrollScrubPanel`) devem respeitar a preferência.
+- [ ] **Texto pequeno**: kickers de 10 px e descrições `font-light` de 12 px devem ser aumentados.
+- [ ] **Foco e menu**: botões fixos não podem cobrir o elemento focado (2.4.11); avisar links `target="_blank"`; rotular os `nav`.
+- [ ] **Contraste sobre vídeo/gradiente**: medir manualmente (só o texto sobre fundo sólido foi medido: pior caso 6,45:1).
+
+---
+
+## TASK-005: Unificar tipografia e linguagem visual entre home e `/natal`
+
+### Definition of Done (DoD)
+- [ ] Decidir a fonte única do site (hoje: Poppins no site, Inter Tight só na home).
+- [ ] Trocar o hero do `/natal` (fundo cinza-claro) por um hero escuro com vídeo (ex.: drone de Natal) e passar a barra dele para `variant="overlay"`.
+- [ ] Revisar o ritmo claro/escuro das seções do `/natal` (as luzes de LED aparecem melhor no escuro).
+- [ ] Remover `components/Navbar.tsx` e `components/ebron/EbronNavbar.tsx`, hoje sem uso.

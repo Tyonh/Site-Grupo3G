@@ -111,7 +111,7 @@ export default function ProductFamilyHero({
   return (
     <section
       ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`relative flex min-h-screen w-full flex-col justify-center overflow-hidden border-b px-6 py-24 sm:px-10 lg:px-16 ${theme.sectionBg} ${theme.sectionBorder}`}>
+      className={`relative flex min-h-svh w-full flex-col justify-center overflow-hidden border-b px-6 py-24 sm:px-10 lg:px-16 ${theme.sectionBg} ${theme.sectionBorder}`}>
       {/* Nome da categoria fixo no canto superior esquerdo */}
       <div className="absolute top-8 left-6 z-10 sm:top-10 sm:left-10 lg:top-12 lg:left-16">
         <span className={`text-xs font-extrabold uppercase tracking-widest ${theme.kicker}`}>

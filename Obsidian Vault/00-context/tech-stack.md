@@ -6,7 +6,7 @@ Este documento define e justifica a stack tecnológica adotada para o **Site Pri
 A arquitetura de software é dividida nas seguintes camadas principais:
 
 ### Frontend & Core Framework
-- **Next.js 14/15 (App Router)**: Adotado para permitir `[[decisions#ADR 001: Arquitetura Next.js App Router e Server Components|React Server Components (RSC)]]` nativos, garantindo que toda a página institucional e dados estruturados de SEO sejam renderizados no servidor, deixando para o cliente apenas a interatividade pesada do canvas 3D.
+- **Next.js 16.4.1 (App Router, Turbopack) + React 19 + Tailwind v4** (versões lidas de `next-site/package.json`; esta versão do Next tem mudanças incompatíveis, ver `next-site/AGENTS.md`). Adotado para permitir `[[decisions#ADR 001: Arquitetura Next.js App Router e Server Components|React Server Components (RSC)]]` nativos, garantindo que toda a página institucional e dados estruturados de SEO sejam renderizados no servidor, deixando para o cliente apenas a interatividade pesada do canvas 3D.
 - **TypeScript**: Tipagem estática estrita em todo o ciclo de vida do projeto, eliminando runtime exceptions durante manipulações de matrizes WebGL e renderização de dados de produtos.
 - **Tailwind CSS**: Estilização baseada em utilitários de alto desempenho, eliminando CSS extra desnecessário e permitindo a rápida replicação da identidade visual institucional.
 

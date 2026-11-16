@@ -93,3 +93,49 @@ Estabelecer um padrão unificado de arquitetura e aplicação de vídeos (`[[vid
   - Requer que vídeos para o modo `mix-blend-multiply` tenham fundo branco perfeitamente estourado (#FFFFFF).
   - Vídeos volumosos devem ser transferidos manualmente para a VPS em diretório ignorado pelo Git.
 
+
+---
+
+## ADR 005: Home cinematográfica — hero em sequência de vídeos e mosaico de aplicações
+
+<!-- AUTO-GENERATED: baseado em app/page.tsx, components/HeroReel.tsx, components/MosaicGallery.tsx, lib/homeMosaic.ts -->
+
+### Contexto
+A home precisava ficar mais próxima das referências escolhidas (Citadel, Prime, Anduril): hero imersivo, mosaico de fotos e vídeos em tamanhos diferentes e navegação discreta, mantendo a paleta da empresa. A empresa vende **somente iluminação** (nunca estrutura) e, na época de Natal, a linha natalina tem prioridade.
+
+### Decisão
+1. **Hero em sequência de vídeos** (`HeroReel`): vários vídeos horizontais em tela cheia, 5 s cada, com miniaturas clicáveis e barra de progresso. Só o vídeo atual e o próximo são baixados. Com `prefers-reduced-motion` fica só a capa, sem troca automática.
+2. **Mosaico de aplicações** (`MosaicGallery` + `lib/homeMosaic.ts`): cada linha tem tiles de proporções diferentes com a mesma altura (desktop); no celular a grade tem 2 colunas, tiles largos ocupam a linha toda e os verticais usam 3:4, para não haver lacunas. A primeira linha é a do Natal.
+3. **Cada tile leva à marca do produto**: tiles de Natal vão para `/natal`; iluminação pública e campos de futebol vão para `/3g`.
+4. **Tipografia da home**: `Inter Tight` aplicada só na home (as demais páginas ainda usam Poppins — ver pendência abaixo).
+
+### Regras de mídia (decididas pelo responsável do site)
+- Só entra na página a mídia que a empresa escolheu; nada de fotos de outras pastas.
+- Não extrair quadros de vídeo para usar como foto (quadro só como capa do próprio vídeo).
+- Hero: somente vídeos horizontais que preenchem a tela, em Full HD (1920×1080, H.264, `crf 20`, `faststart`, sem áudio). Mosaico: clipes de 1600 px, `crf 23`.
+- Vídeos longos são cortados (o hero só toca o começo de cada um).
+- Não inventar nomes de obras nem legendas; títulos dos tiles são descrições genéricas até a empresa informar os reais.
+
+### Consequências
+- **Positivas**: home imersiva e leve (poucos vídeos baixados por vez); layout sem lacunas em celular e desktop.
+- **Negativas/pendências**: legendas reais dos tiles; revisão de legibilidade do texto do hero sobre o vídeo claro do estádio; imagens de "story" com texto embutido.
+
+---
+
+## ADR 006: Barra de navegação única com dois modos
+
+<!-- AUTO-GENERATED: baseado em components/GroupNavbar.tsx e nas páginas que o usam -->
+
+### Contexto
+Havia três barras diferentes (`GroupNavbar` na home, `Navbar` vermelha nas páginas 3G/Natal/Sobre/produtos e `EbronNavbar` azul na EBRON), o que dava a impressão de sites separados.
+
+### Decisão
+Um único componente, `components/GroupNavbar.tsx`, com:
+- `variant="overlay"`: fixa e transparente sobre um hero escuro; ao rolar mais de 24 px ganha fundo sólido. Usado na home.
+- `variant="solid"`: fundo sólido e fixa no topo (`sticky`). Usado em `/3g`, `/natal`, `/natal/[categoria]`, `/sobre`, `/produtos/*` e nas páginas da EBRON.
+- `tone="red" | "navy"`: cor do fundo (vermelho do Grupo 3G ou azul-marinho da EBRON). O botão CONTATO inverte para branco quando a barra tem fundo.
+- Links: INÍCIO, NATAL, 3G, EBRON, SOBRE e o botão CONTATO (WhatsApp). A logo leva sempre para `/`. O menu do celular fecha com Esc.
+
+### Consequências
+- **Positivas**: navegação consistente em todo o site; um só lugar para manter links e acessibilidade.
+- **Pendências**: `components/Navbar.tsx` e `components/ebron/EbronNavbar.tsx` ficaram sem uso e podem ser removidos; para o `/natal` usar `overlay`, o hero precisa deixar de ser cinza-claro.

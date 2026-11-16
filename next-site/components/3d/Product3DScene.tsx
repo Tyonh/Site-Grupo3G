@@ -41,7 +41,7 @@ export const Product3DScene = ({
   const isMobile = useIsMobile();
 
   return (
-    <div className={`fixed top-0 left-0 w-full h-screen z-0 pointer-events-none transition-colors duration-700 ${
+    <div className={`fixed top-0 left-0 w-full h-svh z-0 pointer-events-none transition-colors duration-700 ${
       theme === "ebron"
         ? "bg-radial from-ebron-blue via-ebron-navy to-[#060f20]"
         : theme === "dark"

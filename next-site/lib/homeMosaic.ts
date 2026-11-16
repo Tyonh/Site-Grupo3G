@@ -76,6 +76,26 @@ export const mosaicRows: MosaicTile[][] = [
   ],
   [
     {
+      id: "natal-praca",
+      ratio: WIDE,
+      image: "/mosaico/natal-praca.jpg",
+      alt: "Vista aérea noturna de uma praça com decoração de Natal iluminada: árvores, bonecos e luzes de LED",
+      category: NATAL,
+      title: "Praça iluminada",
+      href: "/natal",
+    },
+    {
+      id: "campo-aereo",
+      ratio: WIDE,
+      image: "/mosaico/campo-aereo.jpg",
+      alt: "Vista aérea de cima de um campo de grama sintética iluminado à noite pelos postes",
+      category: CAMPOS,
+      title: "Campo visto de cima",
+      href: "/3g",
+    },
+  ],
+  [
+    {
       id: "clip-arco",
       ratio: WIDE,
       image: "/mosaico/clip-arco.jpg",

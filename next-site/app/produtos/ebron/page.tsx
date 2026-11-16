@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight, Focus, ShieldCheck, Sun, Timer } from "lucide-react";
-import EbronNavbar from "@/components/ebron/EbronNavbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import EbronScrollExperience from "@/components/EbronScrollExperience";
 import styles from "./ebron.module.css";
@@ -30,7 +30,7 @@ const models = [
 
 export default function LuminariaEbronPage() {
   return <div className={styles.page}>
-    <EbronNavbar />
+    <GroupNavbar variant="solid" tone="navy" />
     <main>
       <EbronScrollExperience />
       <section className={styles.performance} aria-labelledby="ebron-performance-title">

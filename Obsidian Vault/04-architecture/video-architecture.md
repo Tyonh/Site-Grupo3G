@@ -97,3 +97,14 @@ Ao produzir e cadastrar novos arquivos de vídeo no repositório ou servidor:
 3. **Localização de Arquivos**:
    - Os arquivos de vídeo residem em `public/` (ex: `public/natal/videos/`, `public/models/`).
    - Arquivos muito pesados devem ser ignorados no `.gitignore` e enviados diretamente para o diretório `/var/www/3giluminacao/public/` na VPS Ubuntu.
+
+---
+
+## 7. Hero em sequência e mosaico da home
+
+<!-- AUTO-GENERATED: baseado em components/HeroReel.tsx, components/LazyVideo.tsx e lib/homeMosaic.ts -->
+
+- **`HeroReel`**: troca o vídeo de fundo a cada `CLIP_SECONDS = 5`. Carrega apenas o vídeo ativo e o próximo (`preload="none"`, `src` definido sob demanda); sem autoplay com movimento reduzido.
+- **`LazyVideo`** (tiles do mosaico): só baixa quando o tile chega perto da tela (IntersectionObserver), usando a imagem do tile como `poster`.
+- **Codificação** (ffmpeg): hero em 1920×1080, `libx264 -preset slow -crf 20 -movflags +faststart -an`; mosaico em 1600 px, `crf 23`. Vídeos longos são cortados (por exemplo, 20 s do drone de Natal e o DJI a partir de 0:10) — como o hero só toca os primeiros 5 s, não vale manter o arquivo inteiro.
+- **Arquivos**: ficam em `public/mosaico/` (`hero-*.mp4/.jpg`, `clip-*`, `natal-*`, `campo-*`).

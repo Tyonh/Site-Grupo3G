@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import SolarBackground from "@/components/SolarBackground";
 import { getProductTheme, productCheckMark } from "@/lib/productTheme";
@@ -35,7 +35,7 @@ export default function LuminariaSolarPage() {
 
   return (
     <>
-      <Navbar />
+      <GroupNavbar variant="solid" />
 
       {/* Floating Theme Switcher */}
       <button
@@ -90,7 +90,7 @@ export default function LuminariaSolarPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 1: HERO
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex flex-col lg:flex-row items-center justify-center lg:justify-between px-4 sm:px-10 lg:px-20 py-20 gap-10 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex flex-col lg:flex-row items-center justify-center lg:justify-between px-4 sm:px-10 lg:px-20 py-20 gap-10 pointer-events-none select-none">
           {/* Left Side: Card */}
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
@@ -127,7 +127,7 @@ export default function LuminariaSolarPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 2: ARCHITECTURE — ALL-IN-ONE SOLAR
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               TECNOLOGIA INTEGRADA
@@ -163,7 +163,7 @@ export default function LuminariaSolarPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 3: SPECIFICATIONS — KEY HIGHLIGHTS
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               ESPECIFICAÇÕES TÉCNICAS
@@ -199,7 +199,7 @@ export default function LuminariaSolarPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 4: DETAILED CHARACTERISTICS GRID
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-end px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardWideClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               FICHA TÉCNICA
@@ -279,7 +279,7 @@ export default function LuminariaSolarPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 5: MODELS & DIMENSIONS TABLE
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="scroll-section min-h-screen flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
+        <section className="scroll-section min-h-svh flex items-center justify-center lg:justify-start px-4 sm:px-10 lg:px-20 py-20 pointer-events-none select-none">
           <div className={cardTableClass}>
             <span className="text-brand-red font-extrabold tracking-widest text-xs uppercase">
               LINHA COMPLETA

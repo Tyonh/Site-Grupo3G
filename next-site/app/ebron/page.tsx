@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import EbronNavbar from "@/components/ebron/EbronNavbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import EbronHeroSlider from "@/components/ebron/EbronHeroSlider";
 import ProductsSection from "@/components/ProductsSection";
 import Footer from "@/components/Footer";
@@ -44,7 +44,7 @@ export default function EbronHome() {
   return (
     <>
       <JsonLd data={brandJsonLd} />
-      <EbronNavbar />
+      <GroupNavbar variant="solid" tone="navy" />
       <main className="flex-1 w-full flex flex-col bg-ebron-navy">
         <EbronHeroSlider />
 

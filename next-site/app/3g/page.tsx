@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import HeroSlider from "@/components/HeroSlider";
 import ProductsSection from "@/components/ProductsSection";
 import GallerySection from "@/components/GallerySection";
@@ -40,7 +40,7 @@ export default function ThreeGHome() {
   return (
     <>
       <JsonLd data={brandJsonLd} />
-      <Navbar />
+      <GroupNavbar variant="solid" />
       <main className="flex-1 w-full flex flex-col">
         <HeroSlider />
         <ProductsSection brand="3g" />

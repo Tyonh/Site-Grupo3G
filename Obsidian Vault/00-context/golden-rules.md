@@ -21,3 +21,12 @@ Este documento estabelece as regras fundamentais de desenvolvimento e manutenç�
 
 - **Integração com o Vault**: Qualquer nova funcionalidade adicionada deve ser precedida por sua definição no `[[PRD|PRD]]`, mapeamento de entidades no `[[domain-model|Modelo de Domínio]]` e registro de decisões em `[[decisions|decisions.md]]`.
 - **Definition of Done (DoD)**: Nenhuma tarefa é considerada concluída sem passar por todos os critérios de aceitação descritos na sua respectiva `TASK` em `[[tasks|tasks.md]]`.
+
+---
+
+## 3. Regra da Mídia Escolhida pela Empresa
+
+- Fotos e vídeos exibidos no site são **escolhidos pela empresa**. Usar apenas as pastas e arquivos indicados pelo responsável (ver `[[decisions#ADR 005: Home cinematográfica — hero em sequência de vídeos e mosaico de aplicações|ADR 005]]`).
+- Não extrair quadros de vídeos para servirem de foto; quadro só como capa (`poster`) do próprio vídeo.
+- Não inventar nomes de obras, locais ou legendas.
+- Não reduzir muito a qualidade dos vídeos: Full HD no hero, compressão leve.

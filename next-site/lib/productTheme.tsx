@@ -110,7 +110,7 @@ export function getProductTheme(theme: ProductTheme) {
   // gets the whole screen instead of splitting it with the text panel below
   // (that split made the model too small to see well on phones). From `lg`
   // up it goes back to the card look, unchanged from before.
-  const showcasePanelClass = `relative w-full max-w-6xl min-h-screen lg:min-h-[480px] lg:h-[650px] lg:max-h-[700px] overflow-hidden transition-all duration-500 flex flex-col lg:flex-row pointer-events-auto rounded-none border-0 shadow-none lg:rounded-3xl lg:border lg:shadow-2xl ${
+  const showcasePanelClass = `relative w-full max-w-6xl min-h-svh lg:min-h-[480px] lg:h-[650px] lg:max-h-[700px] overflow-hidden transition-all duration-500 flex flex-col lg:flex-row pointer-events-auto rounded-none border-0 shadow-none lg:rounded-3xl lg:border lg:shadow-2xl ${
     isEbron ? "bg-ebron-navy lg:border-ebron-blue-light/25" : isDark ? "bg-zinc-950 lg:border-white/10" : "bg-slate-50 lg:border-slate-200"
   }`;
 

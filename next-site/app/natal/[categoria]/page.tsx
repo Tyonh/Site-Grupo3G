@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import GroupNavbar from "@/components/GroupNavbar";
 import Footer from "@/components/Footer";
 import ProductColorVideo from "@/components/natal/ProductColorVideo";
 import ProductColorImage from "@/components/natal/ProductColorImage";
@@ -83,7 +83,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
           __html: JSON.stringify(buildNatalSectionJsonLd(section)).replace(/</g, "\\u003c"),
         }}
       />
-      <Navbar homeHref="/natal" />
+      <GroupNavbar variant="solid" />
 
       <main className="w-full bg-black text-white">
         {/* ═══════════ HERO FULL-BLEED — GRUPO ═══════════ */}
