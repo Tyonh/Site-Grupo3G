@@ -9,13 +9,16 @@ const csp = [
   // three.js still spins up a blob: worker for it.
   // 'wasm-unsafe-eval' compiles WebAssembly only (Draco decoder) — much narrower than 'unsafe-eval'.
   // 'unsafe-eval' is only needed in dev mode (React Refresh / debugging) — never shipped to production.
-  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:${isDev ? " 'unsafe-eval'" : ""}`,
+  // googletagmanager.com: Google Analytics 4 (gtag.js), carregado só depois do
+  // aceite no banner de cookies (components/CookieConsent.tsx).
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://www.googletagmanager.com${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com",
   "media-src 'self'",
   // blob: is required because GLTFLoader fetches embedded GLB textures via fetch() on blob: URLs.
-  "connect-src 'self' blob:",
+  // Os domínios do Google recebem as medições do GA4.
+  "connect-src 'self' blob: https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
   "worker-src 'self' blob:",
   "frame-src 'none'",
   "object-src 'none'",

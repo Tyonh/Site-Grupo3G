@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/produtos/luminaria-homologada",
     "/produtos/luminaria-solar",
     "/natal",
+    "/politica-de-privacidade",
   ].map((path) => ({
     url: `${siteConfig.url}${path}`,
   }));

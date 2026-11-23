@@ -4,6 +4,8 @@ import "./globals.css";
 import PageTransitionLoader from "@/components/PageTransitionLoader";
 import SkipLink from "@/components/SkipLink";
 import MotionToggle from "@/components/MotionToggle";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import CookieConsent from "@/components/CookieConsent";
 import { siteConfig } from "@/lib/siteConfig";
 
 // Fonte servida pelo próprio site (baixada no build), sem o CSS externo do
@@ -149,6 +151,8 @@ export default function RootLayout({
         <PageTransitionLoader />
         {children}
         <MotionToggle />
+        <FloatingWhatsApp />
+        <CookieConsent />
       </body>
     </html>
   );
