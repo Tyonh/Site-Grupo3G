@@ -7,6 +7,8 @@ import type { NatalProductImage } from "@/lib/natalCatalog";
 interface ProductColorImageProps {
   images: NatalProductImage[];
   productName: string;
+  /** Página de fundo escuro: etiquetas de cor com texto claro. */
+  escuro?: boolean;
 }
 
 /**
@@ -17,6 +19,7 @@ interface ProductColorImageProps {
 export default function ProductColorImage({
   images,
   productName,
+  escuro = false,
 }: ProductColorImageProps) {
   const [active, setActive] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -84,7 +87,10 @@ export default function ProductColorImage({
         {`Exibindo ${productName} na cor ${images[active].color}`}
       </span>
 
-      <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-500">
+      <span
+        className={`text-[10px] font-bold uppercase tracking-[0.3em] ${
+          escuro ? "text-white/50" : "text-neutral-500"
+        }`}>
         Toque em uma cor para ver a foto
       </span>
 
@@ -110,8 +116,12 @@ export default function ProductColorImage({
             onKeyDown={(e) => handleKeyDown(e, i)}
             className={`inline-flex items-center gap-2 min-h-11 pl-2.5 pr-4 py-2.5 text-[11px] font-bold uppercase tracking-wider border-2 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-natal-red ${
               i === active
-                ? "bg-black text-white border-black"
-                : "bg-white text-neutral-700 border-neutral-300 hover:border-black"
+                ? escuro
+                  ? "bg-white text-black border-white"
+                  : "bg-black text-white border-black"
+                : escuro
+                  ? "bg-white/5 text-white/75 border-white/20 hover:border-white"
+                  : "bg-white text-neutral-700 border-neutral-300 hover:border-black"
             }`}
           >
             <span

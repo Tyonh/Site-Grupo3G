@@ -13,6 +13,11 @@ import {
 } from "@/lib/natalCatalog";
 import { versioned } from "@/lib/natal/assetVersion";
 import { buildNatalSectionJsonLd } from "@/lib/natal/jsonLd";
+import { cutoutImageSrc, cutoutVideoSrc } from "@/lib/natal/cutouts";
+import ArvoreLed3D from "@/components/natal/ArvoreLed3D";
+
+/** Fundo grafite das páginas de Natal (atrás da árvore 3D). */
+const FUNDO_GRAFITE = "#16171b";
 
 interface PageProps {
   params: Promise<{ categoria: string }>;
@@ -72,6 +77,24 @@ export default async function NatalCategoryPage({ params }: PageProps) {
 
   const heroPhoto = section.photo ?? section.categories[0]?.photo;
 
+  // Mídias sem fundo (lib/natal/cutouts.ts) onde existirem; o resto é o original.
+  const mediaVideo = (src: string) => versioned(cutoutVideoSrc(src));
+  const mediaImage = (src: string) => versioned(cutoutImageSrc(src));
+  // Todas as páginas de Natal usam o fundo grafite com a árvore 3D na praça,
+  // fixo atrás da página: a seção de produtos é transparente para ele aparecer
+  // e as demais seções ficam em preto sólido.
+  const fundoSolido = "bg-black";
+  const tema = {
+    secao: "text-white",
+    kicker: "text-natal-gold",
+    sub: "text-white/60",
+    linha: "border-white/10",
+    rotulo: "text-white/45",
+    nota: "text-emerald-300",
+    chip: "bg-white/5 border-white/15 text-white/80",
+    codigo: "text-white/35",
+  };
+
   const idx = natalSections.findIndex((s) => s.slug === section.slug);
   const nextSection = natalSections[(idx + 1) % natalSections.length];
 
@@ -83,11 +106,23 @@ export default async function NatalCategoryPage({ params }: PageProps) {
           __html: JSON.stringify(buildNatalSectionJsonLd(section)).replace(/</g, "\\u003c"),
         }}
       />
-      <GroupNavbar variant="solid" />
+      {/* Navbar transparente sobre o fundo escuro das páginas de Natal. */}
+      <GroupNavbar variant="clear" />
 
-      <main className="w-full bg-black text-white">
+      <main className="w-full text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+          style={{ background: FUNDO_GRAFITE }}
+        >
+          {/* Árvore de LED em 3D (modelada em código) numa praça, ocupando a
+              tela toda, centralizada. */}
+          <ArvoreLed3D className="absolute inset-0" />
+          {/* vidro fosco leve por cima da cena, para o conteúdo ler bem */}
+          <div className="absolute inset-0 bg-black/35 backdrop-blur-[3px]" />
+        </div>
         {/* ═══════════ HERO FULL-BLEED — GRUPO ═══════════ */}
-        <section className="relative h-[85vh] min-h-[520px] w-full overflow-hidden">
+        <section className={`relative h-[85vh] min-h-[520px] w-full overflow-hidden ${fundoSolido}`}>
           {heroPhoto && (
             <Image
               src={versioned(heroPhoto)}
@@ -138,7 +173,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
           return (
             <div key={cat.slug} id={cat.slug} className="scroll-mt-16 border-t border-white/10">
               {/* Por que essa subcategoria */}
-              <section className="border-b border-white/10">
+              <section className={`${fundoSolido} border-b border-white/10`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8">
                   <div className="lg:col-span-4">
                     <span className="text-natal-gold font-bold tracking-[0.3em] text-xs uppercase">
@@ -170,10 +205,10 @@ export default async function NatalCategoryPage({ params }: PageProps) {
               </section>
 
               {/* Linha de produtos — estilo "versões" */}
-              <section className="bg-brand-light text-black">
+              <section className={tema.secao}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-16 sm:py-24 flex flex-col gap-16 sm:gap-24">
                   <div>
-                    <span className="text-natal-red font-bold tracking-[0.3em] text-xs uppercase">
+                    <span className={`${tema.kicker} font-bold tracking-[0.3em] text-xs uppercase`}>
                       A linha
                     </span>
                     <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight mt-3">
@@ -190,17 +225,19 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                     >
                       {product.videos ? (
                         <ProductColorVideo
-                          videos={product.videos.map((v) => ({ ...v, src: versioned(v.src) }))}
+                          videos={product.videos.map((v) => ({ ...v, src: mediaVideo(v.src) }))}
                           productName={product.name}
+                          escuro
                         />
                       ) : product.images ? (
                         <ProductColorImage
-                          images={product.images.map((img) => ({ ...img, src: versioned(img.src) }))}
+                          images={product.images.map((img) => ({ ...img, src: mediaImage(img.src) }))}
                           productName={product.name}
+                          escuro
                         />
                       ) : product.video ? (
                         <ProductSingleVideo
-                          src={versioned(product.video)}
+                          src={mediaVideo(product.video)}
                           poster={product.videoPoster ? versioned(product.videoPoster) : undefined}
                           productName={product.name}
                         />
@@ -214,7 +251,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                               <div className="absolute inset-0 p-8">
                                 <div className="relative isolate h-full w-full overflow-hidden rounded-3xl">
                                   <Image
-                                    src={versioned(product.image)}
+                                    src={mediaImage(product.image)}
                                     alt={product.name}
                                     fill
                                     sizes="(max-width: 1024px) 90vw, 560px"
@@ -224,7 +261,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                               </div>
                             ) : (
                               <Image
-                                src={versioned(product.image)}
+                                src={mediaImage(product.image)}
                                 alt={product.name}
                                 fill
                                 sizes="(max-width: 1024px) 90vw, 560px"
@@ -243,23 +280,23 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                         <h4 className="text-xl sm:text-2xl font-black uppercase tracking-tight">
                           {product.name}
                         </h4>
-                        <p className="text-sm text-neutral-600 font-light leading-relaxed">
+                        <p className={`text-sm ${tema.sub} font-light leading-relaxed`}>
                           {product.description}
                         </p>
 
-                        <dl className="border-t border-neutral-200">
+                        <dl className={`border-t ${tema.linha}`}>
                           {product.specs.map((spec) => (
                             <div
                               key={spec.label}
-                              className="flex justify-between gap-6 border-b border-neutral-200 py-3 text-sm"
+                              className={`flex justify-between gap-6 border-b ${tema.linha} py-3 text-sm`}
                             >
-                              <dt className="text-neutral-500 uppercase tracking-wider text-xs pt-0.5">
+                              <dt className={`${tema.rotulo} uppercase tracking-wider text-xs pt-0.5`}>
                                 {spec.label}
                               </dt>
                               <dd className="font-bold text-right">
                                 {spec.value}
                                 {spec.plain && (
-                                  <span className="block font-normal text-[11px] text-natal-green mt-0.5">
+                                  <span className={`block font-normal text-[11px] ${tema.nota} mt-0.5`}>
                                     {spec.plain}
                                   </span>
                                 )}
@@ -269,14 +306,14 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                         </dl>
 
                         <div>
-                          <h5 className="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-500 mb-3">
+                          <h5 className={`text-[10px] font-bold uppercase tracking-[0.3em] ${tema.rotulo} mb-3`}>
                             {product.optionsTitle ?? "Cores disponíveis"}
                           </h5>
                           <div className="flex flex-wrap gap-2">
                             {product.variants.map((v) => (
                               <span
                                 key={`${v.code}-${v.label ?? v.ledColor}`}
-                                className="inline-flex items-center gap-2 bg-white border border-neutral-200 pl-2 pr-3 py-1.5 text-[11px] font-medium text-neutral-700"
+                                className={`inline-flex items-center gap-2 border ${tema.chip} pl-2 pr-3 py-1.5 text-[11px] font-medium`}
                                 title={v.wireColor ? `Fio: ${v.wireColor}` : undefined}
                               >
                                 <span
@@ -286,10 +323,10 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                                 />
                                 {v.label ?? v.ledColor}
                                 {v.code && (
-                                  <span className="text-neutral-400 font-mono">{v.code}</span>
+                                  <span className={`${tema.codigo} font-mono`}>{v.code}</span>
                                 )}
                                 {v.plugCode && (
-                                  <span className="text-neutral-400 font-mono">
+                                  <span className={`${tema.codigo} font-mono`}>
                                     <span aria-hidden> · </span>
                                     <span className="sr-only">com plugue </span>
                                     {v.plugCode}
@@ -304,30 +341,6 @@ export default async function NatalCategoryPage({ params }: PageProps) {
                   ))}
                 </div>
               </section>
-
-              {/* Instalação da subcategoria */}
-              <section className="border-b border-white/10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-16 sm:py-20">
-                  <span className="text-natal-gold font-bold tracking-[0.3em] text-xs uppercase">
-                    Instalação
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mt-3 mb-10">
-                    Do unboxing ao brilho
-                  </h3>
-                  <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
-                    {cat.installSteps.map((step, i) => (
-                      <li key={step} className="bg-black p-6 flex flex-col gap-3">
-                        <span className="text-natal-gold font-black text-3xl">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-sm text-white/65 font-light leading-relaxed">
-                          {step}
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </section>
             </div>
           );
         })}
@@ -335,7 +348,7 @@ export default async function NatalCategoryPage({ params }: PageProps) {
         {/* ═══════════ PRÓXIMO GRUPO ═══════════ */}
         <Link
           href={`/natal/${nextSection.slug}`}
-          className="group relative block h-[40vh] min-h-[280px] w-full overflow-hidden border-t border-white/10"
+          className={`group relative block h-[40vh] min-h-[280px] w-full overflow-hidden border-t border-white/10 ${fundoSolido}`}
         >
           {(nextSection.photo ?? nextSection.categories[0]?.photo) && (
             <Image

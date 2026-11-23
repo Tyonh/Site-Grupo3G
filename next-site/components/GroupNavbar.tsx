@@ -5,15 +5,18 @@ import Image from "next/image";
 import { useState, useSyncExternalStore } from "react";
 
 /**
- * Header único do site, com dois modos:
+ * Header único do site, com três modos:
  * - "overlay": fixo e transparente por cima de um hero escuro (vídeo ou foto,
  *   como na Citadel); ao rolar ganha fundo sólido para o texto não sumir.
  * - "solid": fundo sólido desde o início, para páginas que abrem com fundo
  *   claro ou conteúdo logo abaixo da barra.
+ * - "clear": fixo e SEMPRE transparente, também depois de rolar (só ganha fundo
+ *   com o menu do celular aberto). Para páginas inteiras escuras, onde o texto
+ *   branco com sombra continua legível.
  * Links pequenos no centro e o contato como único botão, para a navegação não
  * competir com a mídia.
  */
-export type NavbarVariant = "overlay" | "solid";
+export type NavbarVariant = "overlay" | "solid" | "clear";
 
 /** Rolagem (px) a partir da qual o modo overlay ganha fundo. */
 const SCROLL_THRESHOLD = 24;
@@ -73,9 +76,10 @@ const GroupNavbar = ({ variant = "overlay", tone = "red" }: GroupNavbarProps) =>
 
   const toggleMenu = () => setOpen(!open);
 
-  const isOverlay = variant === "overlay";
-  const hasBackground = !isOverlay || scrolled || open;
-  const position = isOverlay ? "fixed inset-x-0 top-0" : "sticky top-0";
+  const isFloating = variant !== "solid";
+  const hasBackground =
+    variant === "solid" || (variant === "overlay" && scrolled) || open;
+  const position = isFloating ? "fixed inset-x-0 top-0" : "sticky top-0";
   const background = hasBackground
     ? TONE_BACKGROUND[tone]
     : "bg-transparent";
